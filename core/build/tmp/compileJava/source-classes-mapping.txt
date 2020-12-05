@@ -1,2 +1,4 @@
-com/mygdx/game/MyGdxGame.java
- com.mygdx.game.MyGdxGame
+com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
+ com.mygdx.escapefromlannioncity.EscapeFromLannionCity
+com/mygdx/escapefromlannioncity/screens/EnssatScreen.java
+ com.mygdx.escapefromlannioncity.screens.EnssatScreen

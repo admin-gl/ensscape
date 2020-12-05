@@ -1,2 +1,2 @@
-com/mygdx/game/desktop/DesktopLauncher.java
- com.mygdx.game.desktop.DesktopLauncher
+com/mygdx/escapefromlannioncity/desktop/DesktopLauncher.java
+ com.mygdx.escapefromlannioncity.desktop.DesktopLauncher

@@ -3,6 +3,24 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="6230a2b3-e2f2-4586-ae88-bdf91734f1a7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +35,30 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="projet-gl" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,9 +80,28 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/core/assets" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.DesktopLauncher (1)">
+    <configuration name="DesktopLauncher (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mygdx.escapefromlannioncity.desktop.DesktopLauncher" />
+      <module name="projet-gl.desktop.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mygdx.escapefromlannioncity.desktop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DesktopLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.mygdx.game.desktop.DesktopLauncher" />
       <module name="projet-gl.desktop.main" />
@@ -56,6 +117,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DesktopLauncher (1)" />
         <item itemvalue="Application.DesktopLauncher" />
       </list>
     </recent_temporary>
@@ -70,5 +132,50 @@
       <updated>1607122373167</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser" timestamp="1607125673562">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1607125673562" />
+    <state width="1323" height="182" key="GridCell.Tab.0.bottom" timestamp="1607132473393">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1607132473393" />
+    <state width="1323" height="182" key="GridCell.Tab.0.center" timestamp="1607132473392">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1607132473392" />
+    <state width="1323" height="182" key="GridCell.Tab.0.left" timestamp="1607132473392">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1607132473392" />
+    <state width="1323" height="182" key="GridCell.Tab.0.right" timestamp="1607132473392">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1607132473392" />
+    <state x="478" y="116" key="refactoring.ChangeSignatureDialog" timestamp="1607126658295">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="478" y="116" key="refactoring.ChangeSignatureDialog/0.0.1366.738@0.0.1366.738" timestamp="1607126658295" />
+    <state x="339" y="165" key="run.anything.popup" timestamp="1607130496988">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1607130496988" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1607128150963">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1607128150963" />
   </component>
 </project>
