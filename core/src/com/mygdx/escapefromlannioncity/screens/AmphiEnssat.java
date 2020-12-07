@@ -3,6 +3,7 @@ package com.mygdx.escapefromlannioncity.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,6 +26,7 @@ public class AmphiEnssat implements Screen {
     private final AnimatedGameObject ledPc;
     private final AnimatedGameObject pinpon;
     private final OrthographicCamera camera;
+    private Sound pcOn;
     private float elapsed;
 
     public AmphiEnssat(final EscapeFromLannionCity game){
@@ -57,6 +59,9 @@ public class AmphiEnssat implements Screen {
         tableauBlanc = new GameObject(Gdx.files.internal("image/tableauBlanc.jpg"), viewport.getWorldWidth()/2f, viewport.getWorldHeight()*3/4f, 400, 150);
         tableauElectrique = new GameObject(Gdx.files.internal("image/tableauElectrique.jpg"),32, 200 , 64, 64);
         zonePc = new GameObject(Gdx.files.internal("image/zonePc.jpg"), 200, 200);
+
+        // initialise un effet sonore avec un fichier audio
+        pcOn = Gdx.audio.newSound(Gdx.files.internal("sound/pcOn.wav"));
 
         // prend le temps écouler pour les animations
         elapsed = Gdx.graphics.getDeltaTime();
@@ -105,6 +110,25 @@ public class AmphiEnssat implements Screen {
             if(ledPc.contains(touched)){
                 ledPc.changeStat(true);
             }
+            // si dans la hitbox, on joue l'effet sonore
+            if(zonePc.contains(touched)){
+                pcOn.play();
+            }
+        }
+
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+            // prend les coordonnees du clic et les convertis en coordonnees du monde
+            Vector2 touched = new Vector2();
+            touched.set(Gdx.input.getX(), Gdx.input.getY());
+            viewport.unproject(touched);
+
+            if(ledPc.contains(touched)){
+                ledPc.setCenterPos(touched);
+            }
+        }
+
+        if(tableauBlanc.contains(ledPc.hitbox)){
+            System.out.println("touching");
         }
     }
 
@@ -134,5 +158,6 @@ public class AmphiEnssat implements Screen {
         // dispose des textures utilises par la scene
         background.dispose();
         ledPc.dispose();
+        pcOn.dispose();
     }
 }

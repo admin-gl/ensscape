@@ -39,8 +39,8 @@ public class GameObject {
 
     /**
      * Permet de savoir si il y a collision entre un point et le GameObject
-     * @param point : point à teste
-     * @return vrai si il y a contenance, faux sinon
+     * @param point : point a tester
+     * @return vrai si il y a collision, faux sinon
      */
     public boolean contains(Vector2 point){
         return hitbox.contains(point);
@@ -48,17 +48,17 @@ public class GameObject {
 
     /**
      * Permet de savoir si il y a collision entre un point et le GameObject
-     * @param x : absice du point
+     * @param x : absisse du point
      * @param y : ordonne du point
-     * @return vrai si il y a contenance, faux sinon
+     * @return vrai si il y a collision, faux sinon
      */
     public boolean contains(float x, float y){
         return hitbox.contains(x,y);
     }
 
     /**
-     * Permet de savoir si il y a collision entre un Rectangle et le GameObject
-     * @param object : rectangle à teste
+     * Permet de savoir si il y a un Rectangle dans le GameObject
+     * @param object : rectangle a tester
      * @return vrai si il y a contenance, faux sinon
      */
     public boolean contains(Rectangle object){
@@ -66,13 +66,23 @@ public class GameObject {
     }
 
     /**
-     * Permet de savoir si il y a collision entre un cercle et le GameObject
-     * @param object : cercle à teste
+     * Permet de savoir si il y a un cercle dans le GameObject
+     * @param object : cercle a tester
      * @return vrai si il y a contenance, faux sinon
      */
     public boolean contains(Circle object){
         return hitbox.contains(object);
     }
+
+    /**
+     * Permet de savoir si il y a une intersection entre un rectangle et le GameObject
+     * @param object rectangle a tester
+     * @return vrai si il y a intersection, faux sinon
+     */
+    public boolean overlaps(Rectangle object){
+        return hitbox.overlaps(object);
+    }
+
 
     /**
      * Permet de changer la position du centre d'un GameObject
