@@ -1,4 +1,8 @@
+com/mygdx/escapefromlannioncity/utility/GameObject.java
+ com.mygdx.escapefromlannioncity.utility.GameObject
 com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
  com.mygdx.escapefromlannioncity.EscapeFromLannionCity
-com/mygdx/escapefromlannioncity/screens/EnssatScreen.java
- com.mygdx.escapefromlannioncity.screens.EnssatScreen
+com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
+ com.mygdx.escapefromlannioncity.screens.AmphiEnssat
+com/mygdx/escapefromlannioncity/utility/AnimatedGameObject.java
+ com.mygdx.escapefromlannioncity.utility.AnimatedGameObject
