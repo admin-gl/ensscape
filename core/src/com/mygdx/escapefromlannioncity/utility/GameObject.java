@@ -1,16 +1,25 @@
 package com.mygdx.escapefromlannioncity.utility;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class GameObject {
 
     public Texture sprite;
     public Rectangle hitbox;
+    float scaleX = 1;
+    float scaleY = 1;
 
     public GameObject(){
         hitbox = new Rectangle();
@@ -118,6 +127,24 @@ public class GameObject {
         batch.draw(sprite, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
 
+    /**
+     * permet d'affecter un facteur d'echelle a un GameObject
+     * pour qu'il soit coherent avec la taille de l'ecran
+     * NE PAS APPELER DANS resize() !
+     */
+    public void resize(){
+        int baseWorldWidth = 256;
+        int baseWorldHeight = 144;
+        int actualWorldWidth = Gdx.graphics.getWidth();
+        int actualWorldHeight = Gdx.graphics.getHeight();
+
+        scaleX = actualWorldWidth/(baseWorldWidth*scaleX);
+        scaleY = actualWorldHeight/(baseWorldHeight*scaleY);
+
+        hitbox.setSize(hitbox.width*scaleX, hitbox.height*scaleY);
+        hitbox.setPosition(hitbox.x*scaleX, hitbox.y*scaleY);
+
+    }
 
     public void dispose(){
         sprite.dispose();

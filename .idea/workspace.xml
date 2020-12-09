@@ -91,6 +91,9 @@
       <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets\animation\pinpon" />
       <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets\animation" />
     </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.mygdx.escapefromlannioncity.utility" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets" />
     </key>
@@ -165,26 +168,26 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1607279672564" />
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1607334927359">
-      <screen x="1366" y="-313" width="1920" height="1050" />
+    <state width="1323" height="176" key="GridCell.Tab.0.bottom" timestamp="1607539901949">
+      <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1877" height="284" key="GridCell.Tab.0.bottom/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607334927359" />
-    <state width="1323" height="182" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1607303543309" />
-    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1607334927358">
-      <screen x="1366" y="-313" width="1920" height="1050" />
+    <state width="1323" height="176" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1607539901949" />
+    <state width="1323" height="176" key="GridCell.Tab.0.center" timestamp="1607539901949">
+      <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1877" height="284" key="GridCell.Tab.0.center/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607334927358" />
-    <state width="1323" height="182" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1607303543309" />
-    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1607334927358">
-      <screen x="1366" y="-313" width="1920" height="1050" />
+    <state width="1323" height="176" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1607539901949" />
+    <state width="1323" height="176" key="GridCell.Tab.0.left" timestamp="1607539901948">
+      <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1877" height="284" key="GridCell.Tab.0.left/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607334927358" />
-    <state width="1323" height="182" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1607303543309" />
-    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1607334927358">
-      <screen x="1366" y="-313" width="1920" height="1050" />
+    <state width="1323" height="176" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1607539901948" />
+    <state width="1323" height="176" key="GridCell.Tab.0.right" timestamp="1607539901949">
+      <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1877" height="284" key="GridCell.Tab.0.right/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607334927358" />
-    <state width="1323" height="182" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1607303543309" />
+    <state width="1323" height="176" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1607539901949" />
     <state x="478" y="116" key="refactoring.ChangeSignatureDialog" timestamp="1607126658295">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -193,9 +196,9 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1607130496988" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1607303401681">
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1607517420435">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1607303401681" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1607517420435" />
   </component>
 </project>

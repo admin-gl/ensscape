@@ -1,3 +1,5 @@
+com/mygdx/escapefromlannioncity/utility/Inventory.java
+ com.mygdx.escapefromlannioncity.utility.Inventory
 com/mygdx/escapefromlannioncity/utility/GameObject.java
  com.mygdx.escapefromlannioncity.utility.GameObject
 com/mygdx/escapefromlannioncity/utility/AnimatedGameObject.java

@@ -11,6 +11,7 @@ public class AnimatedGameObject extends GameObject{
 
     private final Animation<Texture> object;
     private float increment;
+    private int stat = 0;
 
     public AnimatedGameObject(Texture[] keyFrames){
         object = new Animation<>(0.5f, keyFrames);
@@ -64,9 +65,19 @@ public class AnimatedGameObject extends GameObject{
 
         if(plus) {
             increment += object.getFrameDuration();
+            stat += 1;
         } else {
             increment -= object.getFrameDuration();
+            stat -= 1;
         }
+    }
+
+    /**
+     * Accede au numero de la frame actuellement en affichage
+     * @return entier numero de frame
+     */
+    public int getState(){
+        return stat % object.getKeyFrames().length;
     }
 
 
@@ -82,4 +93,5 @@ public class AnimatedGameObject extends GameObject{
             keyFrame.dispose();
         }
     }
+
 }
