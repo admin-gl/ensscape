@@ -25,7 +25,7 @@ public class AmphiEnssat implements Screen {
 
     private final Texture brightPlace;
     private final Texture darkPlace;
-    //private final Texture zoomElec;
+    private final Texture zoomElec;
 
     private final GameObject zonePc;
     private final GameObject zoneTableau;
@@ -55,38 +55,37 @@ public class AmphiEnssat implements Screen {
 
         darkPlace = new Texture(Gdx.files.internal("image/Amphi137c-piece1_sombre.jpg"));
         brightPlace = new Texture(Gdx.files.internal("image/Amphi137c-piece1.jpg"));
-        //zoomElec = new Texture(Gdx.files.internal("image/tableauElectrique.jpg"));
-                // set les textures utilise dans la scene
+        zoomElec = new Texture(Gdx.files.internal("image/tableauelec.png"));
+
         background = new Sprite(darkPlace);
 
-        zonePc = new GameObject(Gdx.files.internal("image/empty.png"), 8, 82, 16, 22);
+        zoneElec = new GameObject(Gdx.files.internal("image/empty.png"), 8, 82, 16, 22);
         zoneTableau = new GameObject(Gdx.files.internal("image/empty.png"), 156, 87 ,156 , 46);
-        zoneElec = new GameObject(Gdx.files.internal("image/empty.png"),48, 63, 54, 32);
+        zonePc = new GameObject(Gdx.files.internal("image/empty.png"),48, 63, 54, 32);
 
-        quitZoom = new GameObject(Gdx.files.internal("image/empty.png"), 248, 126, 16, 16);
+        quitZoom = new GameObject(Gdx.files.internal("image/quitZoom.png"), 219, 123, 9, 9);
 
         Interrupteurs = new AnimatedGameObject[11];
         Texture[] spritesInter = new Texture[2];
-        spritesInter[0] = new Texture(Gdx.files.internal("animation/pinpon/1.jpg"));
-        spritesInter[1] = new Texture(Gdx.files.internal("animation/pinpon/2.jpg"));
+        spritesInter[0] = new Texture(Gdx.files.internal("animation/interrupteur/1.png"));
+        spritesInter[1] = new Texture(Gdx.files.internal("animation/interrupteur/2.png"));
         for(int i=0; i<11; i++){
             Interrupteurs[i]= new AnimatedGameObject(spritesInter);
             Interrupteurs[i].setPlayMode(Animation.PlayMode.LOOP);
-            Interrupteurs[i].setSize(16, 64);
-            Interrupteurs[i].setCenterPos( 80+i*16, 72);
+            Interrupteurs[i].setSize(13, 37);
+            Interrupteurs[i].setCenterPos( 57+i*14, 76);
             Interrupteurs[i].resize();
         }
-        spritesInter[0].dispose();
-        spritesInter[1].dispose();
 
         game.inventory.resize();
         zonePc.resize();
         zoneElec.resize();
         zoneTableau.resize();
+        quitZoom.resize();
 
         zoomed = false;
 
-        code = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        code = new int[]{1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0};
     }
 
     @Override
@@ -105,11 +104,13 @@ public class AmphiEnssat implements Screen {
 
         // update la vue les dernieres updates sont au dessus des premieres
         game.batch.setProjectionMatrix(camera.combined);
+
         game.batch.begin();
         // affiche le background sur toute la vue
         game.batch.draw(background.getTexture(), 0,0, viewport.getWorldWidth(), viewport.getWorldHeight());
-        // affiche une frame d'une animation
-        if(background.getTexture().toString().contentEquals("image/tableauElectrique.jpg")){
+
+        if(background.getTexture().toString().contentEquals("image/tableauelec.png")){
+            quitZoom.drawFix(game.batch);
             for(AnimatedGameObject inter: Interrupteurs){
                 inter.drawFix(game.batch);
             }
@@ -123,21 +124,21 @@ public class AmphiEnssat implements Screen {
             Vector2 touched = new Vector2();
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
+
             if (!zoomed) {
                 if (zoneTableau.contains(touched)) {
-                    System.out.println(background.getTexture().toString());
+                    System.out.println("well");
                 }
 
                 if (zoneElec.contains(touched) && background.getTexture().toString().matches("image/Amphi137c-piece1_sombre.*")) {
-                    //zoomed = true;
-                    //background.setRegion(zoomElec);
-                    System.out.println(background.getTexture().toString());
+                    zoomed = true;
+                    background.setRegion(zoomElec);
                 }
 
                 if (zonePc.contains(touched)) {
-                    System.out.println(background.getTexture().toString());
+                    System.out.println("no");
                 }
-            } else if(background.getTexture().toString().contentEquals("image/tableauElectrique.jpg")) {
+            } else if(background.getTexture().toString().matches("image/tableauelec.*")) {
                 if(quitZoom.contains(touched)){
                     zoomed = false;
                     background.setRegion(darkPlace);
@@ -157,11 +158,9 @@ public class AmphiEnssat implements Screen {
                     }
                     i++;
                 }
-                if(i==11){
+                if(i==11 && !interupt){
                     zoomed = false;
                     background.setRegion(brightPlace);
-                } else {
-                    background.setRegion(darkPlace);
                 }
             }
         }
@@ -191,12 +190,13 @@ public class AmphiEnssat implements Screen {
     @Override
     public void dispose() {
         // dispose des textures utilises par la scene
+        // IMPORTANT !
         darkPlace.dispose();
         brightPlace.dispose();
         zonePc.dispose();
         zoneElec.dispose();
         zoneTableau.dispose();
-        //zoomElec.dispose();
+        zoomElec.dispose();
         quitZoom.dispose();
         for(AnimatedGameObject inter : Interrupteurs){
             inter.dispose();
