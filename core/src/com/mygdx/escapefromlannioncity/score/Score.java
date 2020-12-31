@@ -78,7 +78,7 @@ public class Score implements Serializable {
     public static void Serialize(List<Score> table, String name){
    XMLEncoder encoder =null;
    try {
-       encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("./Score/" + name + ".xml")));
+       encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("./" + name + ".xml")));
 
    }catch(Exception e){
        System.out.println("serialization a echoue"+e);
@@ -97,7 +97,7 @@ public class Score implements Serializable {
     public static List<Score> Deserialize(String name) throws FileNotFoundException {
     XMLDecoder decoder = null;
     try {
-        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("./Score/" + name + ".xml")));
+        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("./" + name + ".xml")));
         List<Score> table = (List<Score>) decoder.readObject();
         System.out.println("deserialization reeussie");
         return table;
