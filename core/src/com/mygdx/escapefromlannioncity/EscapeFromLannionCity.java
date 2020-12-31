@@ -1,5 +1,7 @@
 package com.mygdx.escapefromlannioncity;
 
+import com.mygdx.escapefromlannioncity.score.TestMain;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -22,6 +24,10 @@ public class EscapeFromLannionCity extends Game {
 		mainFont.setColor(Color.WHITE);
 		// au lancement du jeu, affiche l'EnssatScreen
 		this.setScreen(new AmphiEnssat(this));
+
+		// teste la création de fichiers de scores
+		TestMain.TestScore();
+
 	}
 
 	@Override
