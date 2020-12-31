@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="EscapeFromLannionCity.java:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -22,7 +27,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6230a2b3-e2f2-4586-ae88-bdf91734f1a7" name="Default Changelist" comment="" />
+    <list default="true" id="6230a2b3-e2f2-4586-ae88-bdf91734f1a7" name="Default Changelist" comment="Fichiers pour lesscores locaux" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,9 +86,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/core/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/core/src" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
@@ -100,7 +110,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.DesktopLauncher (1)">
-    <configuration name="DesktopLauncher (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="DesktopLauncher (1)" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.mygdx.escapefromlannioncity.desktop.DesktopLauncher" />
       <module name="projet-gl.desktop.main" />
       <extension name="coverage">
@@ -126,9 +136,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DesktopLauncher (1)" />
         <item itemvalue="Application.DesktopLauncher" />
       </list>
     </recent_temporary>
@@ -142,7 +164,26 @@
       <option name="presentableId" value="Default" />
       <updated>1607122373167</updated>
       <workItem from="1607442395019" duration="112000" />
+      <workItem from="1609411272262" duration="1225000" />
+      <workItem from="1609413646126" duration="8988000" />
+      <workItem from="1609426839346" duration="6965000" />
+      <workItem from="1609435128291" duration="8644000" />
     </task>
+    <task id="LOCAL-00001" summary="Fichiers pour lesscores locaux">
+      <created>1609446944125</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1609446944125</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fichiers pour lesscores locaux">
+      <created>1609447371462</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1609447371462</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,46 +201,8 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser" timestamp="1607278780695">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1607278780695" />
-    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607279672564">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1607279672564" />
-    <state width="1323" height="174" key="GridCell.Tab.0.bottom" timestamp="1607609118059">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607334927359" />
-    <state width="1323" height="174" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1607609118059" />
-    <state width="1323" height="174" key="GridCell.Tab.0.center" timestamp="1607609118057">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.center/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607334927358" />
-    <state width="1323" height="174" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1607609118057" />
-    <state width="1323" height="174" key="GridCell.Tab.0.left" timestamp="1607609118053">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.left/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607334927358" />
-    <state width="1323" height="174" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1607609118053" />
-    <state width="1323" height="174" key="GridCell.Tab.0.right" timestamp="1607609118058">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.right/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607334927358" />
-    <state width="1323" height="174" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1607609118058" />
-    <state x="478" y="116" key="refactoring.ChangeSignatureDialog" timestamp="1607126658295">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="478" y="116" key="refactoring.ChangeSignatureDialog/0.0.1366.738@0.0.1366.738" timestamp="1607126658295" />
-    <state x="339" y="165" key="run.anything.popup" timestamp="1607130496988">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1607130496988" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1607517420435">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1607517420435" />
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fichiers pour lesscores locaux" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fichiers pour lesscores locaux" />
   </component>
 </project>
