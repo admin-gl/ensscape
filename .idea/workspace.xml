@@ -27,9 +27,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6230a2b3-e2f2-4586-ae88-bdf91734f1a7" name="Default Changelist" comment="Fichiers pour lesscores locaux">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="6230a2b3-e2f2-4586-ae88-bdf91734f1a7" name="Default Changelist" comment="Fichiers pour lesscores locaux" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -169,7 +167,7 @@
       <workItem from="1609411272262" duration="1225000" />
       <workItem from="1609413646126" duration="8988000" />
       <workItem from="1609426839346" duration="6965000" />
-      <workItem from="1609435128291" duration="8324000" />
+      <workItem from="1609435128291" duration="8644000" />
     </task>
     <task id="LOCAL-00001" summary="Fichiers pour lesscores locaux">
       <created>1609446944125</created>
@@ -178,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609446944125</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fichiers pour lesscores locaux">
+      <created>1609447371462</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1609447371462</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
