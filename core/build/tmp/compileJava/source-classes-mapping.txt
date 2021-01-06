@@ -1,30 +1,18 @@
-<<<<<<< HEAD
-=======
-com/mygdx/escapefromlannioncity/utility/GameObject.java
- com.mygdx.escapefromlannioncity.utility.GameObject
->>>>>>> d211fb4a33c6507e2e1c49e623ac594b290767f2
 com/mygdx/escapefromlannioncity/utility/Inventory.java
  com.mygdx.escapefromlannioncity.utility.Inventory
 com/mygdx/escapefromlannioncity/utility/GameObject.java
  com.mygdx.escapefromlannioncity.utility.GameObject
-com/mygdx/escapefromlannioncity/score/Score.java
- com.mygdx.escapefromlannioncity.score.Score
-com/mygdx/escapefromlannioncity/score/TestMain.java
- com.mygdx.escapefromlannioncity.score.TestMain
 com/mygdx/escapefromlannioncity/menu/ButtonOpenMenu.java
  com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu
-com/mygdx/escapefromlannioncity/score/Score.java
- com.mygdx.escapefromlannioncity.score.Score
+com/mygdx/escapefromlannioncity/score/TestMain.java
+ com.mygdx.escapefromlannioncity.score.TestMain
+com/mygdx/escapefromlannioncity/menu/Menu.java
+ com.mygdx.escapefromlannioncity.menu.Menu
 com/mygdx/escapefromlannioncity/utility/AnimatedGameObject.java
  com.mygdx.escapefromlannioncity.utility.AnimatedGameObject
+com/mygdx/escapefromlannioncity/score/Score.java
+ com.mygdx.escapefromlannioncity.score.Score
 com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
  com.mygdx.escapefromlannioncity.screens.AmphiEnssat
 com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
  com.mygdx.escapefromlannioncity.EscapeFromLannionCity
-<<<<<<< HEAD
-=======
-com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
- com.mygdx.escapefromlannioncity.screens.AmphiEnssat
-com/mygdx/escapefromlannioncity/menu/Menu.java
- com.mygdx.escapefromlannioncity.menu.Menu
->>>>>>> d211fb4a33c6507e2e1c49e623ac594b290767f2

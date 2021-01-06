@@ -194,15 +194,12 @@ public class AmphiEnssat implements Screen {
         game.batch.begin();
         // affiche le background sur toute la vue
         game.batch.draw(background.getTexture(), 0,0, viewport.getWorldWidth(), viewport.getWorldHeight());
-
-        if(background.getTexture().toString().contentEquals("image/tableauelec.png") || background.getTexture().toString().contentEquals("image/tableauelecsombre.png")){
-            //quitZoom.drawFix(game.batch); //plus besoin de ça si la croix est dessinée sur le bkg
         /* Affiche le bouton "flottant" de Menu */
         buttonMenu.initButtonMenu(game);
+        if(background.getTexture().toString().contentEquals("image/tableauelec.png") || background.getTexture().toString().contentEquals("image/tableauelecsombre.png")) {
+            //quitZoom.drawFix(game.batch); //plus besoin de ça si la croix est dessinée sur le bkg
 
-        if(background.getTexture().toString().contentEquals("image/tableauelec.png")){
-            quitZoom.drawFix(game.batch);
-            for(AnimatedGameObject inter: Interrupteurs){
+            for (AnimatedGameObject inter : Interrupteurs) {
                 inter.drawFix(game.batch);
             }
         }
@@ -404,7 +401,7 @@ public class AmphiEnssat implements Screen {
     }
 
     @Override
-    public void dispose() {
+    public void dispose(){
         // dispose des textures utilises par la scene
         // IMPORTANT !
         darkPlace.dispose();
