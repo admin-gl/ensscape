@@ -12,12 +12,16 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
+import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;         // Bouton de Menu
+import com.mygdx.escapefromlannioncity.menu.Menu;                   // Menu in game
 import com.mygdx.escapefromlannioncity.utility.AnimatedGameObject;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
 
 public class AmphiEnssat implements Screen {
 
     private final EscapeFromLannionCity game;
+
+    private final Menu menu;
 
     private final Viewport viewport;
 
@@ -32,6 +36,8 @@ public class AmphiEnssat implements Screen {
     private final GameObject zoneElec;
     private final GameObject quitZoom;
 
+    private final ButtonOpenMenu buttonMenu;  /* Concerne le Bouton d'affichage du Menu */
+
     private final AnimatedGameObject[] Interrupteurs;
 
     private final int[] code;
@@ -40,10 +46,13 @@ public class AmphiEnssat implements Screen {
 
     private boolean zoomed;
 
-    public AmphiEnssat(final EscapeFromLannionCity game){
+    public AmphiEnssat(final EscapeFromLannionCity game) {
+
         this.game = game;
 
-        // peut etre inutile, a verifier...
+        this.menu = new Menu(game);
+
+        // peut etre inutile, à verifier...
         Screen precedent = game.getScreen();
         if(precedent != null) precedent.dispose();
 
@@ -64,6 +73,9 @@ public class AmphiEnssat implements Screen {
         zonePc = new GameObject(Gdx.files.internal("image/empty.png"),48, 63, 54, 32);
 
         quitZoom = new GameObject(Gdx.files.internal("image/quitZoom.png"), 219, 123, 9, 9);
+
+        /* Initialise le Bouton de Menu */
+        buttonMenu = new ButtonOpenMenu();
 
         Interrupteurs = new AnimatedGameObject[11];
         Texture[] spritesInter = new Texture[2];
@@ -86,6 +98,7 @@ public class AmphiEnssat implements Screen {
         zoomed = false;
 
         code = new int[]{1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0};
+
     }
 
     @Override
@@ -109,6 +122,9 @@ public class AmphiEnssat implements Screen {
         // affiche le background sur toute la vue
         game.batch.draw(background.getTexture(), 0,0, viewport.getWorldWidth(), viewport.getWorldHeight());
 
+        /* Affiche le bouton "flottant" de Menu */
+        buttonMenu.initButtonMenu(game);
+
         if(background.getTexture().toString().contentEquals("image/tableauelec.png")){
             quitZoom.drawFix(game.batch);
             for(AnimatedGameObject inter: Interrupteurs){
@@ -124,6 +140,9 @@ public class AmphiEnssat implements Screen {
             Vector2 touched = new Vector2();
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
+
+            /* Lance le Menu si on clique sur le Bouton correspondant */
+            menu.goGoGadgettoMenu(touched, buttonMenu);
 
             if (!zoomed) {
                 if (zoneTableau.contains(touched)) {
@@ -198,6 +217,7 @@ public class AmphiEnssat implements Screen {
         zoneTableau.dispose();
         zoomElec.dispose();
         quitZoom.dispose();
+        buttonMenu.dispose();
         for(AnimatedGameObject inter : Interrupteurs){
             inter.dispose();
         }
