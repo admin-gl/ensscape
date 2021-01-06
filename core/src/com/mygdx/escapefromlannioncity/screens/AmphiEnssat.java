@@ -1,5 +1,6 @@
 package com.mygdx.escapefromlannioncity.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -25,20 +26,44 @@ public class AmphiEnssat implements Screen {
 
     private final Texture brightPlace;
     private final Texture darkPlace;
-    private final Texture zoomElec;
+    private final Texture zoomElecClair;
+    private final Texture zoomElecSombre;
+    private final Texture zoomOrdiAllume;
+    private final Texture zoomOrdiEteint;
+    private final Texture zoomTableau;
+    private final Texture amphiPorte;
+    private final Texture fondAmphi;
+    private final Texture fondAmphiSansCarte;
+
+
 
     private final GameObject zonePc;
     private final GameObject zoneTableau;
     private final GameObject zoneElec;
     private final GameObject quitZoom;
+    private final GameObject zoneGauche;
+    private final GameObject zoneDroite;
+    private final GameObject zoneCarte;
+    private final GameObject carteEtu;
+    private final GameObject zoneBadge;
+    private final GameObject porteSortie;
+    private final GameObject[] zoneInv = new GameObject[10];
+
 
     private final AnimatedGameObject[] Interrupteurs;
+    private final AnimatedGameObject[] Numbers;
 
     private final int[] code;
+    private final int[] codeOrdi;
 
     private final OrthographicCamera camera;
 
     private boolean zoomed;
+    private boolean lights;
+    private boolean zoomObj;
+    private boolean carteValide;
+    private boolean porteVerr;
+    private int pos;
 
     public AmphiEnssat(final EscapeFromLannionCity game){
         this.game = game;
@@ -54,16 +79,32 @@ public class AmphiEnssat implements Screen {
         viewport.apply(true);
 
         darkPlace = new Texture(Gdx.files.internal("image/Amphi137c-piece1_sombre.jpg"));
-        brightPlace = new Texture(Gdx.files.internal("image/Amphi137c-piece1.jpg"));
-        zoomElec = new Texture(Gdx.files.internal("image/tableauelec.png"));
+        brightPlace = new Texture(Gdx.files.internal("image/Amphi137c-piece1.png"));
+        zoomElecSombre = new Texture(Gdx.files.internal("image/tableauelecsombre.png"));
+        zoomElecClair =  new Texture(Gdx.files.internal("image/tableauelec.png"));
+        zoomOrdiAllume = new Texture(Gdx.files.internal("image/ordiallume.png"));
+        zoomOrdiEteint = new Texture(Gdx.files.internal("image/ordipasallume.png"));
+        zoomTableau = new Texture(Gdx.files.internal("image/zoomtableau.png"));
+        amphiPorte = new Texture(Gdx.files.internal("image/amphiporte.png"));
+        fondAmphi = new Texture(Gdx.files.internal("image/fondAmphi.png"));
+        fondAmphiSansCarte = new Texture(Gdx.files.internal("image/fondamphi_sanscarte.png"));
 
         background = new Sprite(darkPlace);
 
         zoneElec = new GameObject(Gdx.files.internal("image/empty.png"), 8, 82, 16, 22);
         zoneTableau = new GameObject(Gdx.files.internal("image/empty.png"), 156, 87 ,156 , 46);
         zonePc = new GameObject(Gdx.files.internal("image/empty.png"),48, 63, 54, 32);
+        zoneDroite = new GameObject(Gdx.files.internal("image/empty.png"),250, 0, 36, 70);
+        zoneGauche = new GameObject(Gdx.files.internal("image/empty.png"),0, 0, 36, 70);
+        zoneCarte = new GameObject(Gdx.files.internal("image/empty.png"), 48, 33, 54, 32);
+        carteEtu = new GameObject(Gdx.files.internal("image/carteEtu.png"), 65, 7, 10,9);
+        quitZoom = new GameObject(Gdx.files.internal("image/quitZoom.png"), 222, 126, 5, 5);
+        zoneBadge = new GameObject(Gdx.files.internal("image/empty.png"), 230, 63, 15, 15);
+        porteSortie = new GameObject(Gdx.files.internal("image/empty.png"), 200, 71, 30, 140);
+        for (int i = 0; i<10 ; i++){
+            zoneInv[i] = new GameObject(Gdx.files.internal("image/empty.png"), 254+i*44, 33, 40, 40);
+        }
 
-        quitZoom = new GameObject(Gdx.files.internal("image/quitZoom.png"), 219, 123, 9, 9);
 
         Interrupteurs = new AnimatedGameObject[11];
         Texture[] spritesInter = new Texture[2];
@@ -77,15 +118,47 @@ public class AmphiEnssat implements Screen {
             Interrupteurs[i].resize();
         }
 
+        Numbers = new AnimatedGameObject[4];
+
+        Texture[] spritesNumbers = new Texture[9];
+        spritesNumbers[0] = new Texture(Gdx.files.internal("animation/number/1.png"));
+        spritesNumbers[1] = new Texture(Gdx.files.internal("animation/number/2.png"));
+        spritesNumbers[2] = new Texture(Gdx.files.internal("animation/number/3.png"));
+        spritesNumbers[3] = new Texture(Gdx.files.internal("animation/number/4.png"));
+        spritesNumbers[4] = new Texture(Gdx.files.internal("animation/number/5.png"));
+        spritesNumbers[5] = new Texture(Gdx.files.internal("animation/number/6.png"));
+        spritesNumbers[6] = new Texture(Gdx.files.internal("animation/number/7.png"));
+        spritesNumbers[7] = new Texture(Gdx.files.internal("animation/number/8.png"));
+        spritesNumbers[8] = new Texture(Gdx.files.internal("animation/number/9.png"));
+        for (int i = 0; i<4 ; i++){
+            Numbers[i] = new AnimatedGameObject(spritesNumbers);
+            Numbers[i].setPlayMode(Animation.PlayMode.LOOP);
+            Numbers[i].setSize(12, 11);
+            Numbers[i].setCenterPos(75+i*16, 72);
+            Numbers[i].resize();
+        }
+
+
         game.inventory.resize();
         zonePc.resize();
         zoneElec.resize();
         zoneTableau.resize();
         quitZoom.resize();
+        zoneDroite.resize();
+        zoneGauche.resize();
+        zoneCarte.resize();
+        carteEtu.resize();
+        zoneBadge.resize();
+        porteSortie.resize();
 
         zoomed = false;
-
+        zoomObj = false;
+        lights = false;
+        carteValide = false;
+        porteVerr = true;
         code = new int[]{1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0};
+        codeOrdi = new int[]{3, 1, 2, 6};
+        pos = 0;
     }
 
     @Override
@@ -109,14 +182,25 @@ public class AmphiEnssat implements Screen {
         // affiche le background sur toute la vue
         game.batch.draw(background.getTexture(), 0,0, viewport.getWorldWidth(), viewport.getWorldHeight());
 
-        if(background.getTexture().toString().contentEquals("image/tableauelec.png")){
-            quitZoom.drawFix(game.batch);
+        if(background.getTexture().toString().contentEquals("image/tableauelec.png") || background.getTexture().toString().contentEquals("image/tableauelecsombre.png")){
+            //quitZoom.drawFix(game.batch); //plus besoin de ça si la croix est dessinée sur le bkg
             for(AnimatedGameObject inter: Interrupteurs){
                 inter.drawFix(game.batch);
             }
         }
+
+        if(background.getTexture().toString().contentEquals("image/ordiallume.png")){
+            for(AnimatedGameObject num: Numbers){
+                num.drawFix(game.batch);
+            }
+        }
         game.inventory.drawFix(game.batch);
-        game.batch.end();
+        if(game.inventory.hasIn(carteEtu)){
+            carteEtu.drawFix(game.batch);
+        }
+
+
+
 
         // check pour un clic gauche de la souris
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
@@ -126,23 +210,75 @@ public class AmphiEnssat implements Screen {
             viewport.unproject(touched);
 
             if (!zoomed) {
-                if (zoneTableau.contains(touched)) {
-                    System.out.println("well");
+                if (zoneTableau.contains(touched) && background.getTexture().toString().matches("image/Amphi137c.piece1.*") && lights) {
+                    zoomed = true;
+                    background.setRegion(zoomTableau);
+                } else if (zoneTableau.contains(touched) && !lights){
+                    System.out.println("On ne voit rien");
                 }
 
                 if (zoneElec.contains(touched) && background.getTexture().toString().matches("image/Amphi137c-piece1_sombre.*")) {
                     zoomed = true;
-                    background.setRegion(zoomElec);
+                    background.setRegion(zoomElecSombre);
+                }
+                if (zoneElec.contains(touched) && background.getTexture().toString().matches("image/Amphi137c-piece1.*")) {
+                    zoomed = true;
+                    background.setRegion(zoomElecClair);
                 }
 
-                if (zonePc.contains(touched)) {
-                    System.out.println("no");
+                if (zonePc.contains(touched) && background.getTexture().toString().matches("image/Amphi137c-piece1_sombre.*")) {
+                    zoomed = true;
+                    background.setRegion(zoomOrdiEteint);
+                } else if (zonePc.contains(touched) && background.getTexture().toString().matches("image/Amphi137c-piece1.*")) {
+                    zoomed = true;
+                    background.setRegion(zoomOrdiAllume);
                 }
+
+                if (zoneCarte.contains(touched) && background.getTexture().toString().matches("image/fondAmphi.*")){
+                    background.setRegion(fondAmphiSansCarte);
+                    game.inventory.add(carteEtu);
+                }
+
+                if ((zoneDroite.contains(touched) || zoneGauche.contains(touched)) && !lights){
+                    System.out.println("Il fait trop noir");
+                }
+                if (zoneGauche.contains(touched) && lights && pos == 1 && !game.inventory.hasIn(carteEtu)){
+                    background.setRegion(fondAmphi);
+                    pos = 2;
+                } else if (zoneGauche.contains(touched) && lights && pos == 1 && game.inventory.hasIn(carteEtu)){
+                    background.setRegion(fondAmphiSansCarte);
+                    pos = 2;
+                }
+                if (zoneGauche.contains(touched) && lights && pos == 0){
+                    background.setRegion(amphiPorte);
+                    pos = 1;
+                }
+
+                if (zoneDroite.contains(touched) && lights && pos == 1) {
+                    background.setRegion(brightPlace);
+                    pos = 0;
+                }
+                if (zoneDroite.contains(touched) && lights && pos == 2) {
+                    background.setRegion(amphiPorte);
+                    pos = 1;
+                }
+                if (zoneInv[0].contains(touched) && !zoomObj && game.inventory.hasIn(carteEtu)){
+                    carteEtu.zoom(game.batch);
+                    zoomObj = true;
+                } else if (zoneInv[0].contains(touched) && zoomObj && game.inventory.hasIn(carteEtu)){
+                    zoomObj = false;
+                    carteEtu.unzoom(game.batch);
+                    //background.setRegion(fondAmphiSansCarte);
+                }
+                if (carteValide && game.inventory.hasIn(carteEtu) && zoneBadge.contains(touched)){
+                    porteVerr = false;
+                    game.inventory.remove(carteEtu);
+                }
+                if (!porteVerr && porteSortie.contains(touched)){
+                    System.out.println("Fin Niveau 1");
+                }
+
             } else if(background.getTexture().toString().matches("image/tableauelec.*")) {
-                if(quitZoom.contains(touched)){
-                    zoomed = false;
-                    background.setRegion(darkPlace);
-                }
 
                 for(AnimatedGameObject inter: Interrupteurs){
                     if(inter.contains(touched)){
@@ -159,11 +295,70 @@ public class AmphiEnssat implements Screen {
                     i++;
                 }
                 if(i==11 && !interupt){
+                    zoomed = true;
+                    lights = true;
+                    background.setRegion(zoomElecClair);
+                } else {
+                    zoomed = true;
+                    lights = false;
+                    background.setRegion(zoomElecSombre);
+                }
+
+                if(quitZoom.contains(touched) && !lights){
+                    zoomed = false;
+                    background.setRegion(darkPlace);
+                } else if(quitZoom.contains(touched) && lights){
+                    zoomed = false;
+                    background.setRegion(brightPlace);
+                }
+
+
+            }
+
+
+            else if(background.getTexture().toString().matches("image/ordipasallume.*")) {
+
+                if(quitZoom.contains(touched) && !lights){
+                    zoomed = false;
+                    background.setRegion(darkPlace);
+                } else if(quitZoom.contains(touched) && lights){
+                    zoomed = false;
+                    background.setRegion(brightPlace);
+                }
+            }
+            else if(background.getTexture().toString().matches("image/ordiallume.*")) {
+
+                for(AnimatedGameObject num: Numbers){
+                    if(num.contains(touched)){
+                        num.changeStat(true);
+                        System.out.println(num.getState());
+                    }
+                }
+
+                if (Numbers[0].getState()+1 == codeOrdi[0] &&
+                        Numbers[1].getState()+1 == codeOrdi[1] &&
+                        Numbers[2].getState()+1 == codeOrdi[2] &&
+                        Numbers[3].getState()+1 == codeOrdi[3]){
+                    carteValide = true;
+                }
+
+                if(quitZoom.contains(touched) && !lights){
+                    zoomed = false;
+                    background.setRegion(darkPlace);
+                } else if(quitZoom.contains(touched) && lights){
+                    zoomed = false;
+                    background.setRegion(brightPlace);
+                }
+            }
+            else if(background.getTexture().toString().matches("image/zoomtableau.*")) {
+
+                if(quitZoom.contains(touched)){
                     zoomed = false;
                     background.setRegion(brightPlace);
                 }
             }
         }
+        game.batch.end();
     }
 
     @Override
@@ -194,12 +389,25 @@ public class AmphiEnssat implements Screen {
         darkPlace.dispose();
         brightPlace.dispose();
         zonePc.dispose();
-        zoneElec.dispose();
         zoneTableau.dispose();
-        zoomElec.dispose();
+        zoomElecSombre.dispose();
         quitZoom.dispose();
+        zoneBadge.dispose();
+        zoneGauche.dispose();
+        zoomOrdiAllume.dispose();
+        zoneDroite.dispose();
+        zoomElecClair.dispose();
+        zoneCarte.dispose();
+        zoomOrdiEteint.dispose();
+        porteSortie.dispose();
+        fondAmphi.dispose();
+        fondAmphiSansCarte.dispose();
+        amphiPorte.dispose();
         for(AnimatedGameObject inter : Interrupteurs){
             inter.dispose();
+        }
+        for(AnimatedGameObject num : Numbers){
+            num.dispose();
         }
     }
 }

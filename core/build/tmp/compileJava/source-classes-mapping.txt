@@ -1,14 +1,14 @@
-com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
- com.mygdx.escapefromlannioncity.screens.AmphiEnssat
-com/mygdx/escapefromlannioncity/utility/GameObject.java
- com.mygdx.escapefromlannioncity.utility.GameObject
 com/mygdx/escapefromlannioncity/utility/Inventory.java
  com.mygdx.escapefromlannioncity.utility.Inventory
+com/mygdx/escapefromlannioncity/utility/GameObject.java
+ com.mygdx.escapefromlannioncity.utility.GameObject
+com/mygdx/escapefromlannioncity/score/Score.java
+ com.mygdx.escapefromlannioncity.score.Score
 com/mygdx/escapefromlannioncity/score/TestMain.java
  com.mygdx.escapefromlannioncity.score.TestMain
 com/mygdx/escapefromlannioncity/utility/AnimatedGameObject.java
  com.mygdx.escapefromlannioncity.utility.AnimatedGameObject
+com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
+ com.mygdx.escapefromlannioncity.screens.AmphiEnssat
 com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
  com.mygdx.escapefromlannioncity.EscapeFromLannionCity
-com/mygdx/escapefromlannioncity/score/Score.java
- com.mygdx.escapefromlannioncity.score.Score
