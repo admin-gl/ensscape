@@ -1,7 +1,7 @@
 package com.mygdx.escapefromlannioncity.utility;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,13 @@ public class Inventory extends GameObject{
      * @param object objet a ajouter
      */
     public void add(GameObject object){
+
         container.add(object);
+
+        int len = container.toArray().length;
+        Vector2 pos = new Vector2(this.getX(), this.getCenterPos().y);
+        Vector2 offset = new Vector2(2*scaleX + object.getWidth()/2 + (len-1)*(4*scaleX + object.getWidth()), 0);
+        object.setCenterPos(pos.add(offset));
     }
 
     /**

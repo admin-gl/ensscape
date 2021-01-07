@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_275" class="java.beans.XMLDecoder">
+<java version="15.0.1" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -20,7 +20,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -36,7 +36,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -52,7 +52,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -68,7 +68,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -84,7 +84,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -100,7 +100,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -116,7 +116,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -132,7 +132,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -148,7 +148,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-06</string>
+     <string>2021-01-07</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
