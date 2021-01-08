@@ -46,8 +46,6 @@ public class AmphiEnssat implements Screen {
     private final GameObject carteEtu;
     private final GameObject zoneBadge;
     private final GameObject porteSortie;
-    private final GameObject[] zoneInv = new GameObject[10];
-
 
     private final ButtonOpenMenu buttonMenu;  /* Concerne le Bouton d'affichage du Menu */
 
@@ -61,7 +59,6 @@ public class AmphiEnssat implements Screen {
 
     private boolean zoomed;
     private boolean lights;
-    private boolean zoomObj;
     private boolean carteValide;
     private boolean porteVerr;
     private int pos;
@@ -104,9 +101,6 @@ public class AmphiEnssat implements Screen {
         quitZoom = new GameObject(Gdx.files.internal("image/Utilitaire/quitZoom.png"), 222, 126, 5, 5);
         zoneBadge = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 230, 63, 15, 15);
         porteSortie = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 200, 71, 30, 140);
-        for (int i = 0; i<10 ; i++){
-            zoneInv[i] = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 254+i*44, 33, 40, 40);
-        }
 
 
         /* Initialise le Bouton de Menu */
@@ -156,12 +150,11 @@ public class AmphiEnssat implements Screen {
         porteSortie.resize();
 
         zoomed = false;
-        zoomObj = false;
         lights = false;
         carteValide = false;
         porteVerr = true;
         code = new int[]{1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0};
-        codeOrdi = new int[]{3, 1, 2, 6};
+        codeOrdi = new int[]{7, 1, 2, 6};
         pos = 0;
 
     }
@@ -189,8 +182,7 @@ public class AmphiEnssat implements Screen {
         game.batch.draw(background.getTexture(), 0,0, viewport.getWorldWidth(), viewport.getWorldHeight());
         /* Affiche le bouton "flottant" de Menu */
         buttonMenu.initButtonMenu(game);
-        if(background.getTexture().toString().contentEquals("image/Amphi_Enssat/tableauelec.png") || background.getTexture().toString().contentEquals("image/tableauelecsombre.png")) {
-            //quitZoom.drawFix(game.batch); //plus besoin de ça si la croix est dessinée sur le bkg
+        if(background.getTexture().toString().contentEquals("image/Amphi_Enssat/tableauelec.png") || background.getTexture().toString().contentEquals("image/Amphi_Enssat/tableauelecsombre.png")) {
 
             for (AnimatedGameObject inter : Interrupteurs) {
                 inter.drawFix(game.batch);
@@ -275,14 +267,7 @@ public class AmphiEnssat implements Screen {
                     background.setRegion(amphiPorte);
                     pos = 1;
                 }
-                if (zoneInv[0].contains(touched) && !zoomObj && game.inventory.hasIn(carteEtu)){
-                    carteEtu.zoom(game.batch);
-                    zoomObj = true;
-                } else if (zoneInv[0].contains(touched) && zoomObj && game.inventory.hasIn(carteEtu)){
-                    zoomObj = false;
-                    carteEtu.unzoom(game.batch);
-                    //background.setRegion(fondAmphiSansCarte);
-                }
+
                 if (carteValide && game.inventory.hasIn(carteEtu) && zoneBadge.contains(touched)){
                     porteVerr = false;
                     game.inventory.remove(carteEtu);
@@ -370,6 +355,7 @@ public class AmphiEnssat implements Screen {
                     background.setRegion(brightPlace);
                 }
             }
+            game.inventory.checkZoom(touched, game.batch);
         }
         game.batch.end();
     }

@@ -40,7 +40,7 @@ public class Menu implements Screen {
         viewport.setCamera(camera);
         viewport.apply(true);
 
-        Texture menuing = new Texture(Gdx.files.internal("image/Utilitaire/empty.png"));
+        Texture menuing = new Texture(Gdx.files.internal("image/Utilitaire/blacksquare.png"));
 
         background = new Sprite(menuing);
 
@@ -110,7 +110,7 @@ public class Menu implements Screen {
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
 
-            if (background.getTexture().toString().matches("image/Utilitaire/empty.png")) {
+            if (background.getTexture().toString().matches("image/Utilitaire/blacksquare.png")) {
 
                 if (afficherScore.contains(touched)) {
                     System.out.println("J'affiche le score");

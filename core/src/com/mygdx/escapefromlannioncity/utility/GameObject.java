@@ -179,17 +179,6 @@ public class GameObject {
         sprite.getTexture().dispose();
     }
 
-    public void zoom(SpriteBatch batch) {
-        setCenterPos(350, 150);
-        setSize(300, 300);
-        drawFix(batch);
-    }
-    public void unzoom(SpriteBatch batch) {
-        setCenterPos(384, 160);
-        setSize(40, 40);
-        drawFix(batch);
-    }
-
     public void hide(){
         this.sprite.setRegion(emptyTexture);
     }

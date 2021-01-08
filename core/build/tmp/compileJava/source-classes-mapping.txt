@@ -6,13 +6,13 @@ com/mygdx/escapefromlannioncity/utility/Inventory.java
  com.mygdx.escapefromlannioncity.utility.Inventory
 com/mygdx/escapefromlannioncity/utility/GameObject.java
  com.mygdx.escapefromlannioncity.utility.GameObject
-com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
- com.mygdx.escapefromlannioncity.screens.AmphiEnssat
+com/mygdx/escapefromlannioncity/menu/ButtonOpenMenu.java
+ com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu
 com/mygdx/escapefromlannioncity/menu/Menu.java
  com.mygdx.escapefromlannioncity.menu.Menu
 com/mygdx/escapefromlannioncity/utility/AnimatedGameObject.java
  com.mygdx.escapefromlannioncity.utility.AnimatedGameObject
+com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
+ com.mygdx.escapefromlannioncity.screens.AmphiEnssat
 com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
  com.mygdx.escapefromlannioncity.EscapeFromLannionCity
-com/mygdx/escapefromlannioncity/menu/ButtonOpenMenu.java
- com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu

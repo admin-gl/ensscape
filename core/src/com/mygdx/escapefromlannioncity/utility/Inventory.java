@@ -1,18 +1,26 @@
 package com.mygdx.escapefromlannioncity.utility;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 
 public class Inventory extends GameObject{
 
-    ArrayList<GameObject> container;
+    public ArrayList<GameObject> container;
+    public boolean zoomObj;
+    private final GameObject[] zoneInv = new GameObject[10];
 
     public Inventory(FileHandle t){
         super(t, 128, 7, 140, 14);
-
+        zoomObj = false;
         container = new ArrayList<>();
+        for (int i = 0; i<10 ; i++){
+            zoneInv[i] = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 65+i*14, 7, 10, 10);
+            zoneInv[i].resize();
+        }
 
     }
 
@@ -37,6 +45,34 @@ public class Inventory extends GameObject{
         Vector2 pos = new Vector2(this.getX(), this.getCenterPos().y);
         Vector2 offset = new Vector2(2*scaleX + object.getWidth()/2 + (len-1)*(4*scaleX + object.getWidth()), 0);
         object.setCenterPos(pos.add(offset));
+    }
+
+    public void zoom(int i, SpriteBatch batch) {
+        GameObject object = container.get(i);
+        object.setSize(object.getWidth()*4, object.getHeight()*4);
+        object.setCenterPos(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f);
+        drawFix(batch);
+    }
+    public void unzoom(int i, SpriteBatch batch) {
+        GameObject object = container.get(i);
+        object.setSize(object.getWidth()/4, object.getHeight()/4);
+        Vector2 pos = new Vector2(this.getX(), this.getCenterPos().y);
+        Vector2 offset = new Vector2(2*scaleX + object.getWidth()/2 + i*(4*scaleX + object.getWidth()), 0);
+        object.setCenterPos(pos.add(offset));
+        drawFix(batch);
+    }
+
+    public void checkZoom(Vector2 touched, SpriteBatch batch){
+        int i;
+        for(i=0;i<10;i++){
+            if (zoneInv[i].contains(touched) && !zoomObj){
+                this.zoom(i, batch);
+                zoomObj = true;
+            } else if (zoneInv[i].contains(touched) && zoomObj){
+                zoomObj = false;
+                this.unzoom(i, batch);
+            }
+        }
     }
 
     /**
