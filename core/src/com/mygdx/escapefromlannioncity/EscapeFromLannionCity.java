@@ -1,5 +1,7 @@
 package com.mygdx.escapefromlannioncity;
 
+import com.badlogic.gdx.Screen;
+import com.mygdx.escapefromlannioncity.menu.Menu;
 import com.mygdx.escapefromlannioncity.score.TestMain;
 
 import com.badlogic.gdx.Game;
@@ -15,15 +17,20 @@ public class EscapeFromLannionCity extends Game {
 	public SpriteBatch batch;
 	public Inventory inventory;
 	public BitmapFont mainFont;
+	public Screen[] menuEtTableau = new Screen[2];
+	public float volume = 0.25f;
 
 	@Override
 	public void create () {
+		menuEtTableau[0] = new Menu(this);
+		menuEtTableau[1] = new AmphiEnssat(this);
 		batch = new SpriteBatch();
-		inventory = new Inventory(Gdx.files.internal("image/barreInventaire.jpg"));
+		inventory = new Inventory(Gdx.files.internal("image/Utilitaire/barreInventaire.jpg"));
+		inventory.resize();
 		mainFont = new BitmapFont(Gdx.files.internal("MainFont.fnt"));
 		mainFont.setColor(Color.WHITE);
 		// au lancement du jeu, affiche l'EnssatScreen
-		this.setScreen(new AmphiEnssat(this));
+		this.setScreen(menuEtTableau[1]);
 
 		// teste la création de fichiers de scores
 		TestMain.TestScore();
@@ -41,7 +48,8 @@ public class EscapeFromLannionCity extends Game {
 		batch.dispose();
 		inventory.clear();
 		inventory.dispose();
-		this.getScreen().dispose();
+		menuEtTableau[0].dispose();
+		menuEtTableau[1].dispose();
 	}
 
 }
