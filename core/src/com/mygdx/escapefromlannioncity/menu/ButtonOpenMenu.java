@@ -11,7 +11,7 @@ public class ButtonOpenMenu extends GameObject {
     public ButtonOpenMenu(){
 
         /* Création d'un GameObject */
-        super(Gdx.files.internal("image/Menu GL.png"), 20, 136, 30, 9);
+        super(Gdx.files.internal("image/Utilitaire/Menu GL.png"), 20, 136, 30, 9);
 
         /* */
         super.resize();

@@ -1,6 +1,6 @@
 package com.mygdx.escapefromlannioncity.desktop;
 
-import com.badlogic.gdx.Files;
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;

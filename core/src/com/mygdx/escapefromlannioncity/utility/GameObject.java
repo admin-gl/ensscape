@@ -2,48 +2,77 @@ package com.mygdx.escapefromlannioncity.utility;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class GameObject {
 
-    public Texture sprite;
+    public Sprite sprite;
+    private Texture texture;
+    private final Texture emptyTexture = new Texture(Gdx.files.internal("image/Utilitaire/empty.png"));
     public Rectangle hitbox;
     float scaleX = 1;
     float scaleY = 1;
 
     public GameObject(){
+        this.sprite = new Sprite(this.emptyTexture);
         hitbox = new Rectangle();
     }
 
     public GameObject(FileHandle sprite, float width, float height){
+        this.texture = new Texture(sprite);
         hitbox = new Rectangle();
-        this.sprite = new Texture(sprite);
+        this.sprite = new Sprite(this.texture);
         hitbox.setSize(width, height);
         hitbox.setPosition(0, 0);
     }
 
     public GameObject(FileHandle sprite, Vector2 centerPos, float width, float height){
         hitbox = new Rectangle();
-        this.sprite = new Texture(sprite);
+        this.sprite = new Sprite(new Texture(sprite));
         hitbox.setSize(width, height);
         hitbox.setCenter(centerPos);
     }
 
     public GameObject(FileHandle sprite, float x, float y, float width, float height){
         hitbox = new Rectangle();
-        this.sprite = new Texture(sprite);
+        this.sprite = new Sprite(new Texture(sprite));
         hitbox.setSize(width, height);
         hitbox.setCenter(x, y);
+    }
+
+    public float getScaleX() {
+        return scaleX;
+    }
+
+    public float getScaleY() {
+        return scaleY;
+    }
+
+    public Vector2 getCenterPos(){
+        Vector2 temp = new Vector2();
+        hitbox.getCenter(temp);
+        return temp;
+    }
+
+    public float getX(){
+        return hitbox.getX();
+    }
+
+    public float getY(){
+        return hitbox.getY();
+    }
+
+    public float getWidth(){
+        return hitbox.getWidth();
+    }
+
+    public float getHeight(){
+        return hitbox.getHeight();
     }
 
     /**
@@ -147,7 +176,7 @@ public class GameObject {
     }
 
     public void dispose(){
-        sprite.dispose();
+        sprite.getTexture().dispose();
     }
 
     public void zoom(SpriteBatch batch) {
@@ -159,5 +188,13 @@ public class GameObject {
         setCenterPos(384, 160);
         setSize(40, 40);
         drawFix(batch);
+    }
+
+    public void hide(){
+        this.sprite.setRegion(emptyTexture);
+    }
+
+    public void unhide(){
+        this.sprite.setRegion(texture);
     }
 }
