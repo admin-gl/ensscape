@@ -1,12 +1,16 @@
 package com.mygdx.escapefromlannioncity.score;
+
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
-import java.util.ArrayList; // import the ArrayList class
-import java.time.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Score implements Serializable {
+public class Score implements Serializable{
     /**
      * Les champs d'une ligne du tableau de score.
      */
@@ -77,8 +81,17 @@ public class Score implements Serializable {
      */
     public static void Serialize(List<Score> table, String name){
    XMLEncoder encoder =null;
+        try {
+            Path path = Paths.get("./Score/");
+            //java.nio.file.Files;
+            Files.createDirectories(path);
+            System.out.println("Directory is created!");
+        } catch (IOException e) {
+            System.err.println("Failed to create directory!" + e.getMessage());
+
+        }
    try {
-       encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("./" + name + ".xml")));
+       encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("./Score/" + name + ".xml")));
 
    }catch(Exception e){
        System.out.println("serialization a echoue"+e);
@@ -97,7 +110,7 @@ public class Score implements Serializable {
     public static List<Score> Deserialize(String name) throws FileNotFoundException {
     XMLDecoder decoder = null;
     try {
-        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("./" + name + ".xml")));
+        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("./Score/" + name + ".xml")));
         List<Score> table = (List<Score>) decoder.readObject();
         System.out.println("deserialization reeussie");
         return table;

@@ -12,3 +12,9 @@ com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
  com.mygdx.escapefromlannioncity.EscapeFromLannionCity
 com/mygdx/escapefromlannioncity/score/Score.java
  com.mygdx.escapefromlannioncity.score.Score
+com/mygdx/escapefromlannioncity/score/Book.java
+ com.mygdx.escapefromlannioncity.score.Book
+com/mygdx/escapefromlannioncity/siteweb/Reverse.java
+ com.mygdx.escapefromlannioncity.siteweb.Reverse
+com/mygdx/escapefromlannioncity/siteweb/URLConnectionReader.java
+ com.mygdx.escapefromlannioncity.siteweb.URLConnectionReader

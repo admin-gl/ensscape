@@ -11,9 +11,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.11'
-        
-
     }
+
 }
 
 allprojects {
@@ -77,4 +76,12 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         
     }
+}
+project(":core") {
+    apply plugin: 'java-library'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        implementation 'com.github.cliftonlabs:json-simple:3.1.0'    }
 }
