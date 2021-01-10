@@ -18,7 +18,7 @@ public class EscapeFromLannionCity extends Game {
 	public Inventory inventory;
 	public BitmapFont mainFont;
 	public Screen[] menuEtTableau = new Screen[2];
-	public float volume = 0.25f;
+	public float volume = 0f;
 
 	@Override
 	public void create () {
@@ -30,7 +30,7 @@ public class EscapeFromLannionCity extends Game {
 		mainFont = new BitmapFont(Gdx.files.internal("MainFont.fnt"));
 		mainFont.setColor(Color.WHITE);
 		// au lancement du jeu, affiche l'EnssatScreen
-		this.setScreen(menuEtTableau[1]);
+		this.setScreen(menuEtTableau[0]);
 
 		// teste la création de fichiers de scores
 		TestMain.TestScore();
