@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Classe d'objets animes
+ * A appeler pour des object qui doivent changer de façon cyclique de sprite ou pour des object indeplaçable mais interragissables
+ */
 public class AnimatedGameObject extends GameObject{
 
     private final Animation<Texture> object;

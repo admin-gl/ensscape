@@ -9,6 +9,10 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Classe d'objet du jeu
+ * a utiliser pour toute zone interagissable fixe
+ */
 public class GameObject {
 
     public Sprite sprite;
@@ -32,15 +36,17 @@ public class GameObject {
     }
 
     public GameObject(FileHandle sprite, Vector2 centerPos, float width, float height){
+        this.texture = new Texture(sprite);
         hitbox = new Rectangle();
-        this.sprite = new Sprite(new Texture(sprite));
+        this.sprite = new Sprite(this.texture);
         hitbox.setSize(width, height);
         hitbox.setCenter(centerPos);
     }
 
     public GameObject(FileHandle sprite, float x, float y, float width, float height){
+        this.texture = new Texture(sprite);
         hitbox = new Rectangle();
-        this.sprite = new Sprite(new Texture(sprite));
+        this.sprite = new Sprite(this.texture);
         hitbox.setSize(width, height);
         hitbox.setCenter(x, y);
     }
@@ -176,14 +182,29 @@ public class GameObject {
     }
 
     public void dispose(){
-        sprite.getTexture().dispose();
+        texture.dispose();
+        emptyTexture.dispose();
     }
 
+    /**
+     * Cache le sprite d'origine du GameObject
+     */
     public void hide(){
         this.sprite.setRegion(emptyTexture);
     }
 
+    /**
+     * Affiche le sprite d'origine du GameObject
+     */
     public void unhide(){
         this.sprite.setRegion(texture);
+    }
+
+    /**
+     * Verifie si le sprite d'origine est cache ou non
+     * @return true si le sprite d'origine n'est pas affiche, false sinon
+     */
+    public boolean isHidden(){
+        return sprite.getTexture().equals(emptyTexture);
     }
 }

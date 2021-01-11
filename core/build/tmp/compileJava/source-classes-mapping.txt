@@ -1,26 +1,30 @@
+com/mygdx/escapefromlannioncity/siteweb/Reverse.java
+ com.mygdx.escapefromlannioncity.siteweb.Reverse
+com/mygdx/escapefromlannioncity/score/Book.java
+ com.mygdx.escapefromlannioncity.score.Book
 com/mygdx/escapefromlannioncity/score/TestMain.java
  com.mygdx.escapefromlannioncity.score.TestMain
+com/mygdx/escapefromlannioncity/siteweb/URLConnectionReader.java
+ com.mygdx.escapefromlannioncity.siteweb.URLConnectionReader
 com/mygdx/escapefromlannioncity/score/Score.java
  com.mygdx.escapefromlannioncity.score.Score
 com/mygdx/escapefromlannioncity/utility/Inventory.java
  com.mygdx.escapefromlannioncity.utility.Inventory
 com/mygdx/escapefromlannioncity/utility/GameObject.java
  com.mygdx.escapefromlannioncity.utility.GameObject
-com/mygdx/escapefromlannioncity/utility/AnimatedGameObject.java
- com.mygdx.escapefromlannioncity.utility.AnimatedGameObject
-com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
- com.mygdx.escapefromlannioncity.screens.AmphiEnssat
-com/mygdx/escapefromlannioncity/menu/Menu.java
- com.mygdx.escapefromlannioncity.menu.Menu
-com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
- com.mygdx.escapefromlannioncity.EscapeFromLannionCity
- com.mygdx.escapefromlannioncity.siteweb.URLConnectionReader
-com/mygdx/escapefromlannioncity/siteweb/URLConnectionReader.java
- com.mygdx.escapefromlannioncity.siteweb.Reverse
-com/mygdx/escapefromlannioncity/siteweb/Reverse.java
- com.mygdx.escapefromlannioncity.score.Book
-com/mygdx/escapefromlannioncity/score/Book.java
- com.mygdx.escapefromlannioncity.score.Score
-com/mygdx/escapefromlannioncity/score/Score.java
 com/mygdx/escapefromlannioncity/menu/ButtonOpenMenu.java
  com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu
+com/mygdx/escapefromlannioncity/menu/Menu.java
+ com.mygdx.escapefromlannioncity.menu.Menu
+com/mygdx/escapefromlannioncity/utility/ChangingCursor.java
+ com.mygdx.escapefromlannioncity.utility.ChangingCursor
+com/mygdx/escapefromlannioncity/utility/AnimatedGameObject.java
+ com.mygdx.escapefromlannioncity.utility.AnimatedGameObject
+com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
+ com.mygdx.escapefromlannioncity.EscapeFromLannionCity
+com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
+ com.mygdx.escapefromlannioncity.screens.AmphiEnssat
+com/mygdx/escapefromlannioncity/utility/FlavorText.java
+ com.mygdx.escapefromlannioncity.utility.FlavorText
+com/mygdx/escapefromlannioncity/screens/UI.java
+ com.mygdx.escapefromlannioncity.screens.UI

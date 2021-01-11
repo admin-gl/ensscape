@@ -18,19 +18,18 @@ public class EscapeFromLannionCity extends Game {
 	public Inventory inventory;
 	public BitmapFont mainFont;
 	public Screen[] menuEtTableau = new Screen[2];
-	public float volume = 0f;
+	public float volume = 0.0f;
 
 	@Override
 	public void create () {
-		menuEtTableau[0] = new Menu(this);
-		menuEtTableau[1] = new AmphiEnssat(this);
 		batch = new SpriteBatch();
 		inventory = new Inventory(Gdx.files.internal("image/Utilitaire/barreInventaire.jpg"));
 		inventory.resize();
 		mainFont = new BitmapFont(Gdx.files.internal("MainFont.fnt"));
-		mainFont.setColor(Color.WHITE);
 		// au lancement du jeu, affiche l'EnssatScreen
-		this.setScreen(menuEtTableau[0]);
+		menuEtTableau[0] = new Menu(this);
+		menuEtTableau[1] = new AmphiEnssat(this);
+		this.setScreen(menuEtTableau[1]);
 
 		// teste la création de fichiers de scores
 		TestMain.TestScore();
