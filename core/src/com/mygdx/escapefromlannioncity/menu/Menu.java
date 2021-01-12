@@ -44,15 +44,15 @@ public class Menu implements Screen {
 
         background = new Sprite(menuing);
 
-        afficherScore = new GameObject(Gdx.files.internal("image/Menu/Score GL.png"),128, 132, 65, 14);
-        sauvegarder = new GameObject(Gdx.files.internal("image/Menu/Sauvegarde GL.png"),128, 106, 65, 14);
-        reprendre = new GameObject(Gdx.files.internal("image/Menu/Reprendre GL.png"),128, 80, 65, 14);
-        quitter = new GameObject(Gdx.files.internal("image/Menu/Quitter GL.png"),128, 54, 65, 14);
-        quitterLeJeu = new GameObject(Gdx.files.internal("image/Menu/Quitter le jeu GL.png"),128, 28, 65, 14);
+        afficherScore = new GameObject(Gdx.files.internal("image/Menu/Score GL.png"),128, 132, 65, 14, "");
+        sauvegarder = new GameObject(Gdx.files.internal("image/Menu/Sauvegarde GL.png"),128, 106, 65, 14,"");
+        reprendre = new GameObject(Gdx.files.internal("image/Menu/Reprendre GL.png"),128, 80, 65, 14,"");
+        quitter = new GameObject(Gdx.files.internal("image/Menu/Quitter GL.png"),128, 54, 65, 14,"");
+        quitterLeJeu = new GameObject(Gdx.files.internal("image/Menu/Quitter le jeu GL.png"),128, 28, 65, 14,"");
 
-        imageVolume = new GameObject(Gdx.files.internal("image/Menu/Volume.png"),7, 106,14 , 14 );
-        sliderVolume = new GameObject(Gdx.files.internal("image/Menu/slider_Volume.png"),40, 106,50 , 14 );
-        setterVolume = new GameObject(Gdx.files.internal("image/Menu/Selecteur_Volume.png"),15+game.volume*50, 106,3 , 4 );
+        imageVolume = new GameObject(Gdx.files.internal("image/Menu/Volume.png"),7, 106,14 , 14,"");
+        sliderVolume = new GameObject(Gdx.files.internal("image/Menu/slider_Volume.png"),40, 106,50 , 14,"");
+        setterVolume = new GameObject(Gdx.files.internal("image/Menu/Selecteur_Volume.png"),15+game.volume*50, 106,3 , 4 ,"");
 
         afficherScore.resize();
         sauvegarder.resize();

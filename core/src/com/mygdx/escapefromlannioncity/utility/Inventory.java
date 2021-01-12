@@ -19,11 +19,11 @@ public class Inventory extends GameObject{
     private final boolean[] zoneInvZoom = {false,false,false,false,false,false,false,false,false,false};
 
     public Inventory(FileHandle t){
-        super(t, 128, 7, 140, 14);
+        super(t, 128, 7, 140, 14,"Inventaire");
         zoomObj = false;
         container = new ArrayList<>();
         for (int i = 0; i<10 ; i++){
-            zoneInv[i] = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 65+i*14, 7, 10, 10);
+            zoneInv[i] = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 65+i*14, 7, 10, 10, "");
             zoneInv[i].resize();
         }
 

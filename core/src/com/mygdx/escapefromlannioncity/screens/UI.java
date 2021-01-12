@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFontCache;
@@ -40,11 +41,14 @@ public abstract class UI implements Screen {
     public final GameObject zoneDroite;
     public final GameObject textZone;
 
+    public final GameObject buttonHint;
+
     private final GameObject zoneTimer;
 
     private final BitmapFontCache timerText;
 
     public FlavorText flavorText;
+    public FlavorText hint;
 
     public final ChangingCursor cursor;
 
@@ -52,12 +56,19 @@ public abstract class UI implements Screen {
     private long timeAtPause;
     private String timeFromBegin = "00:00";
 
-    public UI(EscapeFromLannionCity game, String pathMusique) {
+    public boolean finNiveau;
+
+    private final String[] hints;
+    private String textHint;
+    private int usedHint;
+
+    public UI(EscapeFromLannionCity game, String pathMusique, String[] hints) {
 
         this.game = game;
 
+        this.hints = hints;
         // on met en place le curseur changeant pour les niveaux
-        this.cursor = new ChangingCursor();
+        this.cursor = new ChangingCursor(game);
 
         // on initialise la musique
         musique = Gdx.audio.newMusic(Gdx.files.internal(pathMusique));
@@ -73,10 +84,12 @@ public abstract class UI implements Screen {
         viewport.apply(true);
 
         // on place les objets recurrents
-        zoneDroite = new GameObject(Gdx.files.internal("image/Utilitaire/blacksquare.png"),247, 17.5f, 18, 35);
-        zoneGauche = new GameObject(Gdx.files.internal("image/Utilitaire/blacksquare.png"),9, 17.5f, 18, 35);
-        zoneTimer = new GameObject(Gdx.files.internal("image/Utilitaire/zoneTimer.png"),238, 138, 36, 12);
-        textZone = new GameObject(Gdx.files.internal("image/Utilitaire/zoneTexte.png"),128, 35, 206, 50);
+        zoneDroite = new GameObject(Gdx.files.internal("image/Utilitaire/blacksquare.png"),247, 17.5f, 18, 35, "");
+        zoneGauche = new GameObject(Gdx.files.internal("image/Utilitaire/blacksquare.png"),9, 17.5f, 18, 35,"");
+        zoneTimer = new GameObject(Gdx.files.internal("image/Utilitaire/zoneTimer.png"),238, 138, 36, 12,"");
+        textZone = new GameObject(Gdx.files.internal("image/Utilitaire/zoneTexte.png"),128, 35, 206, 50,"");
+
+        buttonHint = new GameObject();
 
         // on creer un FontCache qui contiendra le texte du timer
         timerText = game.mainFont.newFontCache();
@@ -90,7 +103,10 @@ public abstract class UI implements Screen {
         // on cache la zone de texte car non necessaire sans texte de dialogue
         textZone.hide();
         // on initialise le texte de dialogue vide
-        flavorText = new FlavorText(game, "");
+        flavorText = new FlavorText(game, "", Color.DARK_GRAY, "Dialogue");
+        hint = new FlavorText(game, "", Color.YELLOW, "Hint");
+
+        usedHint = 0;
     }
 
 
@@ -117,6 +133,13 @@ public abstract class UI implements Screen {
                 flavorText.drawAll(game.batch);
             }
 
+            if(!hint.isDrawing() && !textZone.isHidden()){
+                textZone.hide();
+                hint.setText("");
+            } else if(hint.isDrawing()){
+                hint.drawAll(game.batch);
+            }
+
             // prend les coordonnees du clic et les convertis en coordonnees du monde
             Vector2 touched = new Vector2();
             touched.set(Gdx.input.getX(), Gdx.input.getY());
@@ -136,13 +159,14 @@ public abstract class UI implements Screen {
 
         timerText.draw(game.batch);
 
-        flavorText.draw(game.batch);
-
-        if(flavorText.isDrawing() && textZone.isHidden()){
-            textZone.unhide();
+        game.inventory.drawFix(game.batch);
+        for(GameObject object : game.inventory.container){
+            object.drawFix(game.batch);
         }
 
-        game.inventory.drawFix(game.batch);
+        if((flavorText.isDrawing() || hint.isDrawing()) && textZone.isHidden()){
+            textZone.unhide();
+        }
 
         game.batch.flush();
     }
@@ -200,7 +224,7 @@ public abstract class UI implements Screen {
     }
 
     /**
-     * Permet de gerer le timer du niveau en cours
+     * Permet de gerer l'affichage du timer du niveau en cours
      */
     public void timePassed(){
         int min = Integer.parseInt(timeFromBegin.substring(0,2));
@@ -229,4 +253,12 @@ public abstract class UI implements Screen {
             timerText.setText(timeFromBegin, Gdx.graphics.getWidth()-100,Gdx.graphics.getHeight() - 20, 0, 5, 100, Align.left, true);
         }
     }
+
+    public void showHint(int avancement){
+        textHint += hints[avancement];
+        hints[avancement] = "";
+        usedHint += 1;
+        hint.setText(textHint);
+    }
+
 }

@@ -22,12 +22,14 @@ public class AnimatedGameObject extends GameObject{
         hitbox = new Rectangle();
         increment = Gdx.graphics.getDeltaTime();
         object.setPlayMode(Animation.PlayMode.LOOP);
+        name = "";
     }
 
     public AnimatedGameObject(Texture[] keyFrames, float frameDuration){
         object = new Animation<>(frameDuration, keyFrames);
         hitbox = new Rectangle();
         increment = Gdx.graphics.getDeltaTime();
+        name = "";
     }
 
     public AnimatedGameObject(Texture[] keyFrames, float frameDuration, Animation.PlayMode playMode){
@@ -36,6 +38,7 @@ public class AnimatedGameObject extends GameObject{
         object = new Animation<>(frameDuration, kf, playMode);
         hitbox = new Rectangle();
         increment = Gdx.graphics.getDeltaTime();
+        name = "";
     }
 
     /**
