@@ -21,6 +21,7 @@ public class GameObject {
     public Rectangle hitbox;
     float scaleX = 1;
     float scaleY = 1;
+    private boolean hidden;
 
     public GameObject(){
         this.sprite = new Sprite(this.emptyTexture);
@@ -49,6 +50,7 @@ public class GameObject {
         this.sprite = new Sprite(this.texture);
         hitbox.setSize(width, height);
         hitbox.setCenter(x, y);
+        hidden = false;
     }
 
     public float getScaleX() {
@@ -191,6 +193,7 @@ public class GameObject {
      */
     public void hide(){
         this.sprite.setRegion(emptyTexture);
+        hidden = true;
     }
 
     /**
@@ -198,6 +201,7 @@ public class GameObject {
      */
     public void unhide(){
         this.sprite.setRegion(texture);
+        hidden = false;
     }
 
     /**
@@ -205,6 +209,6 @@ public class GameObject {
      * @return true si le sprite d'origine n'est pas affiche, false sinon
      */
     public boolean isHidden(){
-        return sprite.getTexture().equals(emptyTexture);
+        return hidden;
     }
 }

@@ -142,7 +142,7 @@ public class Menu implements Screen {
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
 
-            if(setterVolume.contains(touched) && sliderVolume.contains(setterVolume.getCenterPos())){
+            if(sliderVolume.contains(touched) && sliderVolume.contains(setterVolume.getCenterPos())){
                 setterVolume.setCenterPos(touched.x, setterVolume.getCenterPos().y);
                 game.volume = ((setterVolume.getCenterPos().x)/setterVolume.getScaleX() - 15)/50;
             } else if(setterVolume.getCenterPos().x > sliderVolume.getX()+sliderVolume.getWidth()){
