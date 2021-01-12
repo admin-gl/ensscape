@@ -22,35 +22,40 @@ public class GameObject {
     float scaleX = 1;
     float scaleY = 1;
     private boolean hidden;
+    public String name;
 
     public GameObject(){
         this.sprite = new Sprite(this.emptyTexture);
         hitbox = new Rectangle();
+        name = "";
     }
 
-    public GameObject(FileHandle sprite, float width, float height){
+    public GameObject(FileHandle sprite, float width, float height, String name){
         this.texture = new Texture(sprite);
         hitbox = new Rectangle();
         this.sprite = new Sprite(this.texture);
         hitbox.setSize(width, height);
         hitbox.setPosition(0, 0);
+        this.name = name;
     }
 
-    public GameObject(FileHandle sprite, Vector2 centerPos, float width, float height){
+    public GameObject(FileHandle sprite, Vector2 centerPos, float width, float height, String name){
         this.texture = new Texture(sprite);
         hitbox = new Rectangle();
         this.sprite = new Sprite(this.texture);
         hitbox.setSize(width, height);
         hitbox.setCenter(centerPos);
+        this.name = name;
     }
 
-    public GameObject(FileHandle sprite, float x, float y, float width, float height){
+    public GameObject(FileHandle sprite, float x, float y, float width, float height, String name){
         this.texture = new Texture(sprite);
         hitbox = new Rectangle();
         this.sprite = new Sprite(this.texture);
         hitbox.setSize(width, height);
         hitbox.setCenter(x, y);
         hidden = false;
+        this.name = name;
     }
 
     public float getScaleX() {
@@ -210,5 +215,9 @@ public class GameObject {
      */
     public boolean isHidden(){
         return hidden;
+    }
+
+    public String getName(){
+        return name;
     }
 }

@@ -3,8 +3,12 @@ package com.mygdx.escapefromlannioncity.utility;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFontCache;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 
 /**
  * Classe de curseur changeant
@@ -15,7 +19,17 @@ public class ChangingCursor{
     private final Cursor cursorBase;
     private final Cursor cursorSelectable;
 
-    public ChangingCursor(){
+    private final SpriteBatch batch;
+
+    private final BitmapFontCache nameObject;
+
+    public ChangingCursor(EscapeFromLannionCity game){
+
+        batch = game.batch;
+
+        BitmapFont temp = new BitmapFont(Gdx.files.internal("CursorFont.fnt"));
+        nameObject = temp.newFontCache();
+
         Texture temptext1 = new Texture(Gdx.files.internal("image/Utilitaire/cursor1.png"));
         Texture temptext2 = new Texture(Gdx.files.internal("image/Utilitaire/cursor2.png"));
         temptext1.getTextureData().prepare();
@@ -28,7 +42,7 @@ public class ChangingCursor{
     }
 
     /**
-     * Permet de verifier si on survol un GameObject parmi plusieurs
+     * Permet de verifier si on survol un GameObject parmi plusieurs. Doit etre appeler dans le SpriteBatch
      * @param objects liste de GameObject a tester
      * @param viewport le viewport du Screen afficher actuellement
      * @return true si on est en survol de l'un des GameObject, false sinon
@@ -42,6 +56,8 @@ public class ChangingCursor{
         while (i < objects.length && !contain) {
             if (objects[i].contains(touched)) {
                 Gdx.graphics.setCursor(cursorSelectable);
+                nameObject.setText(objects[i].getName(), touched.x+16, touched.y-16);
+                nameObject.draw(batch);
                 contain = true;
             }
             i++;
@@ -53,7 +69,7 @@ public class ChangingCursor{
     }
 
     /**
-     * Permet de verifier si on survol un GameObject avec le joueur peut interagir
+     * Permet de verifier si on survol un GameObject avec le joueur peut interagir. Doit etre appeler dans le SpriteBatch
      * @param object GameObject a tester
      * @param viewport le viewport du Screen afficher actuellement
      * @return true si on est actuellement en survol du GameObject false sinon
@@ -64,6 +80,8 @@ public class ChangingCursor{
         viewport.unproject(touched);
         if (object.contains(touched)) {
             Gdx.graphics.setCursor(cursorSelectable);
+            nameObject.setText(object.getName(), touched.x+16, touched.y-16);
+            nameObject.draw(batch);
             return true;
         } else {
             Gdx.graphics.setCursor(cursorBase);

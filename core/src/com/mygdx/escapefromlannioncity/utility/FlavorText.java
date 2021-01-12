@@ -23,13 +23,13 @@ public class FlavorText {
 
     Sound sfxDiscution;
 
-    public FlavorText(EscapeFromLannionCity game, String text){
+    public FlavorText(EscapeFromLannionCity game, String text, Color color, String type){
         this.flavorText = game.mainFont.newFontCache();
-        this.flavorText.setColor(Color.DARK_GRAY);
+        this.flavorText.setColor(color);
         this.text = text;
         this.increment = 0;
         this.lastTime = TimeUtils.millis();
-        this.sfxDiscution = Gdx.audio.newSound(Gdx.files.internal("sound/dialogueF.wav"));
+        this.sfxDiscution = Gdx.audio.newSound(Gdx.files.internal("sound/"+type+".wav"));
         this.drawing = false;
     }
 

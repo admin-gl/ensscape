@@ -45,10 +45,13 @@ public class AmphiEnssat extends UI {
     private boolean carteValide;
     private boolean porteVerr;
     private int pos;
+    private boolean hint2;
 
     public AmphiEnssat(final EscapeFromLannionCity game) {
 
-        super(game, "music/enigme_1.wav");
+        super(game, "music/enigme_1.wav", new String[]{"1. Le panneau electrique contient un Post-it qui indique quels interrupteurs actionner\n",
+                                                                    "2. La carte etudiante n'est pas utilisable en l'etat. Un ordinateur pourrait etre utile\n",
+                                                                    "3. Le code pour la carte etudiante est relie au tableau blanc. il suffit de faire correspondre les couleurs aux chiffres"});
 
         darkPlace = new Texture(Gdx.files.internal("image/Amphi_Enssat/Amphi137c-piece1_sombre.jpg"));
         brightPlace = new Texture(Gdx.files.internal("image/Amphi_Enssat/Amphi137c-piece1.png"));
@@ -63,14 +66,14 @@ public class AmphiEnssat extends UI {
 
         background = new Sprite(darkPlace);
 
-        zoneElec = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 8, 82, 16, 22);
-        zoneTableau = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 156, 87 ,156 , 46);
-        zonePc = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"),48, 63, 54, 32);
-        zoneCarte = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 48, 33, 54, 32);
-        carteEtu = new GameObject(Gdx.files.internal("image/Amphi_Enssat/carteEtu.png"), 10, 10, 10,9);
-        quitZoom = new GameObject(Gdx.files.internal("image/Utilitaire/quitZoom.png"), 222, 126, 5, 5);
-        zoneBadge = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 227, 63, 15, 15);
-        porteSortie = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 200, 71, 30, 140);
+        zoneElec = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 8, 82, 16, 22, "Compteur electrique");
+        zoneTableau = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 156, 87 ,156 , 46, "Tableau blanc");
+        zonePc = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"),48, 63, 54, 32, "Ordinateur");
+        zoneCarte = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 48, 33, 54, 32, "Carte Etudiant");
+        carteEtu = new GameObject(Gdx.files.internal("image/Amphi_Enssat/carteEtu.png"), 10, 10, 10,9,"");
+        quitZoom = new GameObject(Gdx.files.internal("image/Utilitaire/quitZoom.png"), 222, 126, 5, 5, "");
+        zoneBadge = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 227, 63, 15, 15, "Capteur de badge");
+        porteSortie = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 200, 71, 30, 140, "Porte de sortie");
 
         Interrupteurs = new AnimatedGameObject[11];
         Texture[] spritesInter = new Texture[2];
@@ -120,6 +123,7 @@ public class AmphiEnssat extends UI {
         code = new int[]{1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0};
         codeOrdi = new int[]{7, 1, 2, 6};
         pos = 0;
+        hint2 = false;
 
     }
 
@@ -137,10 +141,6 @@ public class AmphiEnssat extends UI {
             for(AnimatedGameObject num: Numbers){
                 num.drawFix(game.batch);
             }
-        }
-
-        if(game.inventory.hasIn(carteEtu)){
-            carteEtu.drawFix(game.batch);
         }
 
         // controle du cursor au survol d'un GameObject avec lequel on peut actuellement interagir
@@ -169,15 +169,29 @@ public class AmphiEnssat extends UI {
 
 
         // check pour un clic gauche de la souris
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && !flavorText.isDrawing()) {
+        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && textZone.isHidden()) {
             // prend les coordonnees du clic et les convertis en coordonnees du monde
             Vector2 touched = new Vector2();
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
 
+            if(buttonHint.contains(touched)){
+
+                if(!lights){
+                    super.showHint(0);
+                } else if(game.inventory.hasIn(carteEtu) && !hint2){
+                    super.showHint(1);
+                    hint2 = true;
+                } else if(game.inventory.hasIn(carteEtu) && hint2){
+                    super.showHint(2);
+                }
+            }
+
             if (!zoomed) {
                 if (zoneTableau.contains(touched) && background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c.piece1.*") && lights) {
                     zoomed = true;
+                    zoneGauche.hide();
+                    zoneDroite.hide();
                     background.setRegion(zoomTableau);
                 } else if (zoneTableau.contains(touched) && !lights){
                     flavorText.setText("On ne voit rien");
@@ -185,18 +199,26 @@ public class AmphiEnssat extends UI {
 
                 if (zoneElec.contains(touched) && background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c-piece1_sombre.*")) {
                     zoomed = true;
+                    zoneGauche.hide();
+                    zoneDroite.hide();
                     background.setRegion(zoomElecSombre);
                 }
                 if (zoneElec.contains(touched) && background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c-piece1.*")) {
                     zoomed = true;
+                    zoneGauche.hide();
+                    zoneDroite.hide();
                     background.setRegion(zoomElecClair);
                 }
 
                 if (zonePc.contains(touched) && background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c-piece1_sombre.*")) {
                     zoomed = true;
+                    zoneGauche.hide();
+                    zoneDroite.hide();
                     background.setRegion(zoomOrdiEteint);
                 } else if (zonePc.contains(touched) && background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c-piece1.*")) {
                     zoomed = true;
+                    zoneGauche.hide();
+                    zoneDroite.hide();
                     background.setRegion(zoomOrdiAllume);
                 }
 
@@ -255,6 +277,8 @@ public class AmphiEnssat extends UI {
                     i++;
                 }
                 zoomed = true;
+                zoneGauche.hide();
+                zoneDroite.hide();
                 if(i==11 && !interupt){
                     lights = true;
                     background.setRegion(zoomElecClair);
@@ -265,9 +289,13 @@ public class AmphiEnssat extends UI {
 
                 if(quitZoom.contains(touched) && !lights){
                     zoomed = false;
+                    zoneGauche.unhide();
+                    zoneDroite.unhide();
                     background.setRegion(darkPlace);
                 } else if(quitZoom.contains(touched) && lights){
                     zoomed = false;
+                    zoneGauche.unhide();
+                    zoneDroite.unhide();
                     background.setRegion(brightPlace);
                 }
 
@@ -279,9 +307,13 @@ public class AmphiEnssat extends UI {
 
                 if(quitZoom.contains(touched) && !lights){
                     zoomed = false;
+                    zoneGauche.unhide();
+                    zoneDroite.unhide();
                     background.setRegion(darkPlace);
                 } else if(quitZoom.contains(touched) && lights){
                     zoomed = false;
+                    zoneGauche.unhide();
+                    zoneDroite.unhide();
                     background.setRegion(brightPlace);
                 }
             }
@@ -302,9 +334,13 @@ public class AmphiEnssat extends UI {
 
                 if(quitZoom.contains(touched) && !lights){
                     zoomed = false;
+                    zoneGauche.unhide();
+                    zoneDroite.unhide();
                     background.setRegion(darkPlace);
                 } else if(quitZoom.contains(touched) && lights){
                     zoomed = false;
+                    zoneGauche.unhide();
+                    zoneDroite.unhide();
                     background.setRegion(brightPlace);
                 }
             }
@@ -312,6 +348,8 @@ public class AmphiEnssat extends UI {
 
                 if(quitZoom.contains(touched)){
                     zoomed = false;
+                    zoneGauche.unhide();
+                    zoneDroite.unhide();
                     background.setRegion(brightPlace);
                 }
             }
