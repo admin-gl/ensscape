@@ -14,8 +14,6 @@ import com.mygdx.escapefromlannioncity.utility.GameObject;
 
 public class AmphiEnssat extends UI {
 
-    private final Sprite background;
-
     private final Texture brightPlace;
     private final Texture darkPlace;
     private final Texture zoomElecClair;
@@ -26,8 +24,6 @@ public class AmphiEnssat extends UI {
     private final Texture amphiPorte;
     private final Texture fondAmphi;
     private final Texture fondAmphiSansCarte;
-
-
 
     private final GameObject zonePc;
     private final GameObject zoneTableau;
@@ -128,15 +124,8 @@ public class AmphiEnssat extends UI {
     }
 
     @Override
-    public void show() {
-        super.show();
-    }
-
-    @Override
     public void render(float delta) {
         super.setupRender();
-        // affiche le background sur toute la vue
-        game.batch.draw(background.getTexture(), 0,0, viewport.getWorldWidth(), viewport.getWorldHeight());
 
         if(background.getTexture().toString().contentEquals("image/Amphi_Enssat/tableauelec.png") || background.getTexture().toString().contentEquals("image/Amphi_Enssat/tableauelecsombre.png")) {
             for (AnimatedGameObject inter : Interrupteurs) {
@@ -149,7 +138,7 @@ public class AmphiEnssat extends UI {
                 num.drawFix(game.batch);
             }
         }
-        game.inventory.drawFix(game.batch);
+
         if(game.inventory.hasIn(carteEtu)){
             carteEtu.drawFix(game.batch);
         }
@@ -333,25 +322,6 @@ public class AmphiEnssat extends UI {
         game.batch.end();
     }
 
-    @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-    }
-
-    @Override
-    public void pause() {
-        super.pause();
-    }
-
-    @Override
-    public void resume() {
-        super.resume();
-    }
-
-    @Override
-    public void hide() {
-        super.hide();
-    }
 
     @Override
     public void dispose(){

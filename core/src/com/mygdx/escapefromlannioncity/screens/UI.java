@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFontCache;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -23,6 +24,8 @@ import com.mygdx.escapefromlannioncity.utility.GameObject;
  * En cas de realisation d'un nouveau tableau, etendre cette classe au tableau en question
  */
 public abstract class UI implements Screen {
+
+    public Sprite background;
 
     private final Music musique;
 
@@ -47,7 +50,6 @@ public abstract class UI implements Screen {
 
     private long lastTime;
     private long timeAtPause;
-    private long drawAlltime;
     private String timeFromBegin = "00:00";
 
     public UI(EscapeFromLannionCity game, String pathMusique) {
@@ -140,6 +142,8 @@ public abstract class UI implements Screen {
             textZone.unhide();
         }
 
+        game.inventory.drawFix(game.batch);
+
         game.batch.flush();
     }
 
@@ -192,6 +196,7 @@ public abstract class UI implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
+        game.batch.draw(background.getTexture(), 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
     }
 
     /**

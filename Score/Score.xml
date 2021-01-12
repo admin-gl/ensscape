@@ -4,6 +4,38 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
+     <string>2021-01-12</string>
+    </void>
+    <void property="pseudo">
+     <string>potre</string>
+    </void>
+    <void property="score">
+     <int>27</int>
+    </void>
+    <void property="temps">
+     <int>30</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="com.mygdx.escapefromlannioncity.score.Score">
+    <void property="date">
+     <string>2021-01-12</string>
+    </void>
+    <void property="pseudo">
+     <string>potre</string>
+    </void>
+    <void property="score">
+     <int>27</int>
+    </void>
+    <void property="temps">
+     <int>30</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="com.mygdx.escapefromlannioncity.score.Score">
+    <void property="date">
      <string>2021-01-11</string>
     </void>
     <void property="pseudo">
@@ -1140,7 +1172,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-11</string>
+     <string>2021-01-12</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
@@ -1156,39 +1188,7 @@
   <void method="add">
    <object class="com.mygdx.escapefromlannioncity.score.Score">
     <void property="date">
-     <string>2021-01-11</string>
-    </void>
-    <void property="pseudo">
-     <string>polpo</string>
-    </void>
-    <void property="score">
-     <int>17</int>
-    </void>
-    <void property="temps">
-     <int>20</int>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="com.mygdx.escapefromlannioncity.score.Score">
-    <void property="date">
-     <string>2021-01-11</string>
-    </void>
-    <void property="pseudo">
-     <string>polpo</string>
-    </void>
-    <void property="score">
-     <int>17</int>
-    </void>
-    <void property="temps">
-     <int>20</int>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="com.mygdx.escapefromlannioncity.score.Score">
-    <void property="date">
-     <string>2021-01-11</string>
+     <string>2021-01-12</string>
     </void>
     <void property="pseudo">
      <string>polpo</string>
