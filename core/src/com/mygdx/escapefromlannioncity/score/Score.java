@@ -1,22 +1,31 @@
 package com.mygdx.escapefromlannioncity.score;
 
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
+//import com.github.googlecode.json-simple.
+//import com.github.cliftonlabs.json_simple.JsonObject;
+//import com.github.cliftonlabs.json_simple.Jsonable;
+
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Score implements Serializable{
+public class Score implements Serializable {
     /**
      * Les champs d'une ligne du tableau de score.
      */
-    int score;
+    String score;
     String pseudo;
-    int temps;
+    String temps;
     String date;
 
     public Score(){}
@@ -33,10 +42,17 @@ public class Score implements Serializable{
      * @param date date de réalisation du score
      */
     public Score(String pseudo, int temps, int bonus, int nbenig, int indice,LocalDate date){
-        this.score= temps + bonus - nbenig - indice;
+        int sc =temps + bonus - nbenig - indice;
+        this.score= String.valueOf(sc);
         this.pseudo = pseudo;
-        this.temps=temps;
+        this.temps= String.valueOf(temps);
         this.date = date.toString();
+    }
+    public Score(String score, String pseudo,String temps, String date){
+        this.score=score;
+        this.pseudo=pseudo;
+        this.temps=temps;
+        this.date=date;
     }
 
     public String ToString(){
@@ -49,10 +65,10 @@ public class Score implements Serializable{
  * On crée tous les getters et setters pour que la conversion
  * en json se passe bien
  */
-    public int getScore() {
+    public String getScore() {
         return score;
     }
-    public void setScore(int score) {
+    public void setScore(String score) {
         this.score = score;
     }
     public String getPseudo() {
@@ -61,10 +77,10 @@ public class Score implements Serializable{
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
-    public int getTemps() {
+    public String getTemps() {
         return temps;
     }
-    public void setTemps(int temps) {
+    public void setTemps(String temps) {
         this.temps = temps;
     }
     public String getDate() {
@@ -74,31 +90,58 @@ public class Score implements Serializable{
         this.date = date;
     }
 
+
+    public String toJson() {
+        JSONObject json = new JSONObject();
+        json.put("score", this.score);
+        json.put("pseudo", this.pseudo);
+        json.put("temps", this.temps);
+        json.put("date", this.date);
+        return json.toJSONString();
+    }
+
+
+
+    public static String ListtoJson(List<Score> table) {
+        try {
+            JSONArray list = new JSONArray();
+            String jsonText;
+            for (Score value : table) {
+                list.add(value.toJson());
+            }
+            jsonText = list.toJSONString();
+            System.out.println(jsonText);
+
+            return jsonText;
+
+        } catch (Exception ignored) {
+            return "";
+        }
+    }
     /**
-     * Serialize sous forme xml une liste de score d'un meme ou de plusieurs joueurs.
+     * Serialize sous json une liste de score d'un meme ou de plusieurs joueurs.
      * @param table liste des scores d'un ou plusieurs joueurs
      * @param name nom : du joueur si les scores personnels du joueurs ou Score pour le score général de tous
      */
     public static void Serialize(List<Score> table, String name){
-   XMLEncoder encoder =null;
+        FileWriter file;
         try {
             Path path = Paths.get("./Score/");
-            //java.nio.file.Files;
             Files.createDirectories(path);
             System.out.println("Directory is created!");
         } catch (IOException e) {
             System.err.println("Failed to create directory!" + e.getMessage());
 
         }
-   try {
-       encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("./Score/" + name + ".xml")));
-
-   }catch(Exception e){
-       System.out.println("serialization a echoue"+e);
-   }
-   encoder.writeObject(table);
-   encoder.close();
-}
+        try {
+            file = new FileWriter("./Score/"+name+".json");
+            file.write(ListtoJson(table));
+            file.flush();
+            file.close();
+        }catch(Exception e){
+            System.out.println("serialization a echoue"+e);
+        }
+    }
 
     /**
      * Récupère la liste de score associée à un joueur ou de Score, le tableau de score général.
@@ -107,16 +150,30 @@ public class Score implements Serializable{
      * @return  la liste de score associé au nom rentré
      * @throws FileNotFoundException  lance une exception de fichier non trouvé si la liste de score n'existe pas dans le stockage.
      */
-    public static List<Score> Deserialize(String name) throws FileNotFoundException {
-    XMLDecoder decoder = null;
-    try {
-        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("./Score/" + name + ".xml")));
-        List<Score> table = (List<Score>) decoder.readObject();
+    public static List<Score> Deserialize(String name) throws FileNotFoundException { try {
+            List<Score> table = new ArrayList<>();
+            FileReader reader = new FileReader(new File("./Score/"+name+".json"));
+            JSONParser jsonParser = new JSONParser();
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+            Iterator i = jsonArray.iterator();
+            Object obj ;
+            JSONObject jsonObject;
+            int j = 0;
+            while (i.hasNext()) {
+                 //object = (JSONObject) jsonArray.get(j);
+                 System.out.println(jsonArray.get(j).toString());
+                obj = jsonParser.parse( jsonArray.get(j).toString());
+                jsonObject = (JSONObject)obj;
+                table.add(new Score(jsonObject.get("score").toString(),jsonObject.get("pseudo").toString(),
+                         jsonObject.get("temps").toString(), jsonObject.get("date").toString()));
+                 j++;
+		         i.next();
+                }
         System.out.println("deserialization reeussie");
         return table;
-    }catch(IOException e){
+    }catch(IOException | ParseException e){
         System.out.println("deserialisation ratee"+e);
-        return new ArrayList<Score>();
+        return new ArrayList<>();
     }
     }
 
@@ -132,7 +189,8 @@ public class Score implements Serializable{
        try {
            List<Score> table = Score.Deserialize(pseudo);
            int i = 0;
-            while ((i < table.size()) && (table.get(i).getScore() > score.getScore())) {
+            while ((i < table.size()) &&
+                    (Integer.parseInt(table.get(i).getScore()) > Integer.parseInt(score.getScore()))) {
                 i++;
             }
             table.add(i,score);
@@ -159,7 +217,7 @@ public class Score implements Serializable{
 
            /* Si aucun fichier au nom du joueur n'existe encore */
         }catch(FileNotFoundException e){
-            List<Score> table = new ArrayList<Score>();
+            List<Score> table = new ArrayList<>();
             table.add(score);
             Score.Serialize(table,pseudo);
          }

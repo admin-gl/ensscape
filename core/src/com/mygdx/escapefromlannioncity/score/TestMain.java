@@ -1,56 +1,26 @@
 package com.mygdx.escapefromlannioncity.score;
 
+import com.mygdx.escapefromlannioncity.siteweb.GetJoueur;
+import com.mygdx.escapefromlannioncity.siteweb.GetScore;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestMain {
-    public static void TestScore(){
-        Score j1 = new Score("polpo",20,2,3,2, LocalDate.now());
-        Score j2 = new Score("potre",30,2,3,2, LocalDate.now());
-        Score.AddScore(j1,"Score");
+    public static void main(String[] args) throws Exception{
+        Score j1 = new Score("polpo",9,2,3,2, LocalDate.now());
+        Score j2 = new Score("potre",3,2,3,2, LocalDate.now());
+        List<Score> table = new ArrayList<>();
+        table.add(j1);
+        table.add(j2);
+        Score.Serialize(table,"Local");
+        //List<Score> aff = Score.Deserialize("Local");
+        //System.out.println(aff.get(0).ToString());
+        //System.out.println(aff.get(1).ToString());
+        System.out.println(GetJoueur.LogIn("1:00","3-3"));
+ Score.AddScore(new Score("new",90,1,5,1,LocalDate.now()),"Local");
+System.out.println(GetScore.ScoreLocal());
 
-        Score.AddScore(j1,"potre");
-        Score.AddScore(j1,"potre");
-        Score.AddScore(j1,"potre");
-        Score.AddScore(j1,"potre");
-        Score.AddScore(j1,"potre");
-        Score.AddScore(j1,"potre");
-        Score.AddScore(j1,"potre");
-        Score.AddScore(j1,"potre");
-        Score j = new Score("polpo",15,2,3,2, LocalDate.now());
-
-        Score.AddScore(j,"potre");
-        Score.AddScore(j,"potre");
-        Score.AddScore(j,"potre");
-
-        Score.AddScore(j2,"Score");
-       // Score.Deserialize();
-        try {
-            System.out.println("here");
-            List<Score> aff = Score.Deserialize("Score");
-            System.out.println(aff.get(0).ToString()+aff.get(1).ToString());
-
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        /*
-        Json qui marche
-        try {
-            // create book object
-            Book book = new Book("Thinking in Java", "978-0131872486", 1998,
-                    new String[]{"Bruce Eckel"});
-
-            // convert book object to JSON
-            String json = Jsoner.serialize(book);
-
-            // prettify JSON
-            json = Jsoner.prettyPrint(json);
-
-            // print JSON
-            System.out.println(json);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }*/
     }
 }
