@@ -177,7 +177,7 @@ public class AmphiEnssat extends UI {
 
             if(buttonHint.contains(touched)){
 
-                if(!lights){
+                if(!lights || !game.inventory.hasIn(carteEtu)){
                     super.showHint(0);
                 } else if(game.inventory.hasIn(carteEtu) && !hint2){
                     super.showHint(1);

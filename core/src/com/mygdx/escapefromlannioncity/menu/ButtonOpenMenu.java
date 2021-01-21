@@ -18,11 +18,12 @@ public class ButtonOpenMenu extends GameObject {
 
     }
 
-    /* Cette méthode permet d'afficher le bouton de menu.
-    * Dans render, placez simplement cette méthode après
-    *   game.batch.begin();
-    * et avant
-    *   game.batch.end();
+    /** Cette méthode permet d'afficher le bouton de menu.
+     * Dans render, placez simplement cette méthode après
+     *   game.batch.begin();
+     * et avant
+     *   game.batch.end();
+     * @param pGame le jeu actuel
      */
     public void initButtonMenu(EscapeFromLannionCity pGame) {
 
@@ -31,8 +32,9 @@ public class ButtonOpenMenu extends GameObject {
 
     }
 
-    /* Cette méthode permet d'interagir avec la zone prévue pour le bouton Menu.
-    * Dans render, placez cette méthode après avoir calculé les coordonnées d'un click de souris.
+    /** Cette méthode permet d'interagir avec la zone prévue pour le bouton Menu.
+     * Dans render, placez cette méthode après avoir calculé les coordonnées d'un click de souris.
+     * @param pTouched position du click de souris
      */
     public boolean isMyButton(Vector2 pTouched) {
 
