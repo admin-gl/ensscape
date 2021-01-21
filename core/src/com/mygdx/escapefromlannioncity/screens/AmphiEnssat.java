@@ -70,7 +70,7 @@ public class AmphiEnssat extends UI {
         zoneTableau = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 156, 87 ,156 , 46, "Tableau blanc");
         zonePc = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"),48, 63, 54, 32, "Ordinateur");
         zoneCarte = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 48, 33, 54, 32, "Carte Etudiant");
-        carteEtu = new GameObject(Gdx.files.internal("image/Amphi_Enssat/carteEtu.png"), 10, 10, 10,9,"");
+        carteEtu = new GameObject(Gdx.files.internal("image/Amphi_Enssat/carteEtu.png"), 10, 10, 10,10,"");
         quitZoom = new GameObject(Gdx.files.internal("image/Utilitaire/quitZoom.png"), 222, 126, 5, 5, "");
         zoneBadge = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 227, 63, 15, 15, "Capteur de badge");
         porteSortie = new GameObject(Gdx.files.internal("image/Utilitaire/empty.png"), 200, 71, 30, 140, "Porte de sortie");
@@ -254,10 +254,11 @@ public class AmphiEnssat extends UI {
                 if (carteValide && game.inventory.hasIn(carteEtu) && zoneBadge.contains(touched)){
                     porteVerr = false;
                     game.inventory.remove(carteEtu);
+
                     flavorText.setText("Je peux enfin sortir de cette salle. Je me demande ce qui m'attends par la suite...");
                 }
                 if (!porteVerr && porteSortie.contains(touched)){
-                    game.dispose();
+                    finNiveau = true;
                 }
 
             } else if(background.getTexture().toString().matches("image/Amphi_Enssat/tableauelec.*")) {

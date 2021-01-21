@@ -2,7 +2,6 @@ package com.mygdx.escapefromlannioncity;
 
 import com.badlogic.gdx.Screen;
 import com.mygdx.escapefromlannioncity.menu.Menu;
-import com.mygdx.escapefromlannioncity.score.TestMain;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;

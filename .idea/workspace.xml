@@ -44,12 +44,26 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="projet-gl" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="projet-gl" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="projet-gl" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -97,6 +111,12 @@
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.mygdx.escapefromlannioncity.utility" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets\animation\Amphi_Enssat" />
       <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets\animation" />
@@ -104,14 +124,8 @@
       <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets\image\Utilitaire" />
       <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets\animation\Amphi_Enssat\interrupteur" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\kilia\Desktop\projet GL\projet-gl\core\assets" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.mygdx.escapefromlannioncity.utility" />
-    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.DesktopLauncher">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -153,9 +167,48 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="projet-gl [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="projet-gl [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DesktopLauncher" />
+        <item itemvalue="Gradle.projet-gl [clean]" />
+        <item itemvalue="Gradle.projet-gl [jar]" />
       </list>
     </recent_temporary>
   </component>
@@ -228,35 +281,35 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1607279672564" />
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1610478819057">
+    <state width="1877" height="181" key="GridCell.Tab.0.bottom" timestamp="1611196497527">
       <screen x="-1920" y="-305" width="1920" height="1050" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610478819057" />
-    <state width="1323" height="95" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1610337440109" />
+    <state width="1877" height="181" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611196497527" />
+    <state width="1323" height="181" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611193892952" />
     <state width="1877" height="174" key="GridCell.Tab.0.bottom/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607702167433" />
     <state width="1323" height="117" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1610111945735" />
-    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1610478819057">
+    <state width="1877" height="181" key="GridCell.Tab.0.center" timestamp="1611196497527">
       <screen x="-1920" y="-305" width="1920" height="1050" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610478819057" />
-    <state width="1323" height="95" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1610337440109" />
+    <state width="1877" height="181" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611196497527" />
+    <state width="1323" height="181" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611193892952" />
     <state width="1323" height="117" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1610111945734" />
-    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1610478819056">
+    <state width="1877" height="181" key="GridCell.Tab.0.left" timestamp="1611196497526">
       <screen x="-1920" y="-305" width="1920" height="1050" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610478819056" />
-    <state width="1323" height="95" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1610337440109" />
+    <state width="1877" height="181" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611196497526" />
+    <state width="1323" height="181" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611193892951" />
     <state width="1323" height="117" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1610111945734" />
-    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1610478819057">
+    <state width="1877" height="181" key="GridCell.Tab.0.right" timestamp="1611196497527">
       <screen x="-1920" y="-305" width="1920" height="1050" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610478819057" />
-    <state width="1323" height="95" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1610337440109" />
+    <state width="1877" height="181" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611196497527" />
+    <state width="1323" height="181" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611193892952" />
     <state width="1323" height="117" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1610111945734" />
-    <state x="220" y="0" key="SettingsEditor" timestamp="1610112093559">
+    <state x="220" y="0" key="SettingsEditor" timestamp="1611014228183">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="220" y="0" key="SettingsEditor/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1610013131154" />
+    <state x="220" y="0" key="SettingsEditor/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611014228183" />
     <state x="220" y="0" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1610112093559" />
     <state width="498" height="451" key="SwitcherDM" timestamp="1610336251015">
       <screen x="0" y="0" width="1366" height="738" />
@@ -271,9 +324,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="339" y="165" key="run.anything.popup/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610474283321" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1610472077195">
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1611186910579">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610472077195" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611186910579" />
   </component>
 </project>

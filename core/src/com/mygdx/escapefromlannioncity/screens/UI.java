@@ -107,6 +107,8 @@ public abstract class UI implements Screen {
         hint = new FlavorText(game, "", Color.YELLOW, "Hint");
 
         usedHint = 0;
+
+        finNiveau = false;
     }
 
 
@@ -126,16 +128,12 @@ public abstract class UI implements Screen {
         // check pour un clic gauche de la souris
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
 
-            if(!flavorText.isDrawing() && !textZone.isHidden()){
+            if(!flavorText.isDrawing() && !hint.isDrawing() && !textZone.isHidden()){
                 textZone.hide();
                 flavorText.setText("");
+                hint.setText("");
             } else if(flavorText.isDrawing()){
                 flavorText.drawAll(game.batch);
-            }
-
-            if(!hint.isDrawing() && !textZone.isHidden()){
-                textZone.hide();
-                hint.setText("");
             } else if(hint.isDrawing()){
                 hint.drawAll(game.batch);
             }
@@ -155,17 +153,25 @@ public abstract class UI implements Screen {
         zoneDroite.drawFix(game.batch);
         zoneGauche.drawFix(game.batch);
         zoneTimer.drawFix(game.batch);
-        textZone.drawFix(game.batch);
-
-        timerText.draw(game.batch);
 
         game.inventory.drawFix(game.batch);
         for(GameObject object : game.inventory.container){
             object.drawFix(game.batch);
         }
 
+        textZone.drawFix(game.batch);
+        flavorText.draw(game.batch);
+        hint.draw(game.batch);
+
+        timerText.draw(game.batch);
+
+
         if((flavorText.isDrawing() || hint.isDrawing()) && textZone.isHidden()){
             textZone.unhide();
+        }
+
+        if(!flavorText.isDrawing() && !hint.isDrawing() && textZone.isHidden() && finNiveau){
+            endTableau();
         }
 
         game.batch.flush();
@@ -256,9 +262,21 @@ public abstract class UI implements Screen {
 
     public void showHint(int avancement){
         textHint += hints[avancement];
-        hints[avancement] = "";
-        usedHint += 1;
+        if(!hints[avancement].equals("")) {
+            hints[avancement] = "";
+            usedHint += 1;
+        }
         hint.setText(textHint);
+    }
+
+    public void endTableau(){
+        if(this.getClass().toString().matches(".*AmphiEnssat")){
+            game.menuEtTableau[1] = new ParcStAnne(game);
+            game.setScreen(game.menuEtTableau[1]);
+            this.dispose();
+        } else if(this.getClass().toString().matches(".*ParcStAnne")){
+            game.dispose();
+        }
     }
 
 }
