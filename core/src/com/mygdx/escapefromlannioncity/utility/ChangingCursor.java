@@ -38,6 +38,7 @@ public class ChangingCursor{
         cursorSelectable = Gdx.graphics.newCursor(temptext2.getTextureData().consumePixmap(), 0, 0);
         temptext1.dispose();
         temptext2.dispose();
+        Gdx.graphics.setCursor(cursorBase);
 
     }
 

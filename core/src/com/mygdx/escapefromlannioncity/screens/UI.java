@@ -84,12 +84,12 @@ public abstract class UI implements Screen {
         viewport.apply(true);
 
         // on place les objets recurrents
-        zoneDroite = new GameObject(Gdx.files.internal("image/Utilitaire/blacksquare.png"),247, 17.5f, 18, 35, "");
-        zoneGauche = new GameObject(Gdx.files.internal("image/Utilitaire/blacksquare.png"),9, 17.5f, 18, 35,"");
+        zoneDroite = new GameObject(Gdx.files.internal("image/Utilitaire/flechedroite.png"),246, 17.5f, 18, 35, "");
+        zoneGauche = new GameObject(Gdx.files.internal("image/Utilitaire/flechegauche.png"),10, 17.5f, 18, 35,"");
         zoneTimer = new GameObject(Gdx.files.internal("image/Utilitaire/zoneTimer.png"),238, 138, 36, 12,"");
         textZone = new GameObject(Gdx.files.internal("image/Utilitaire/zoneTexte.png"),128, 35, 206, 50,"");
 
-        buttonHint = new GameObject();
+        buttonHint = new GameObject(Gdx.files.internal("image/Utilitaire/boutonHint.png"),42.5f,136,10,10, "");
 
         // on creer un FontCache qui contiendra le texte du timer
         timerText = game.mainFont.newFontCache();
@@ -99,14 +99,18 @@ public abstract class UI implements Screen {
         zoneGauche.resize();
         zoneTimer.resize();
         textZone.resize();
+        buttonHint.resize();
 
         // on cache la zone de texte car non necessaire sans texte de dialogue
         textZone.hide();
         // on initialise le texte de dialogue vide
-        flavorText = new FlavorText(game, "", Color.DARK_GRAY, "Dialogue");
+        flavorText = new FlavorText(game, "", Color.WHITE, "Dialogue");
         hint = new FlavorText(game, "", Color.YELLOW, "Hint");
 
         usedHint = 0;
+        textHint = "";
+
+        finNiveau = false;
     }
 
 
@@ -126,16 +130,12 @@ public abstract class UI implements Screen {
         // check pour un clic gauche de la souris
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
 
-            if(!flavorText.isDrawing() && !textZone.isHidden()){
+            if(!flavorText.isDrawing() && !hint.isDrawing() && !textZone.isHidden()){
                 textZone.hide();
                 flavorText.setText("");
+                hint.setText("");
             } else if(flavorText.isDrawing()){
                 flavorText.drawAll(game.batch);
-            }
-
-            if(!hint.isDrawing() && !textZone.isHidden()){
-                textZone.hide();
-                hint.setText("");
             } else if(hint.isDrawing()){
                 hint.drawAll(game.batch);
             }
@@ -155,17 +155,26 @@ public abstract class UI implements Screen {
         zoneDroite.drawFix(game.batch);
         zoneGauche.drawFix(game.batch);
         zoneTimer.drawFix(game.batch);
-        textZone.drawFix(game.batch);
-
-        timerText.draw(game.batch);
+        buttonHint.drawFix(game.batch);
 
         game.inventory.drawFix(game.batch);
         for(GameObject object : game.inventory.container){
             object.drawFix(game.batch);
         }
 
+        textZone.drawFix(game.batch);
+        flavorText.draw(game.batch);
+        hint.draw(game.batch);
+
+        timerText.draw(game.batch);
+
+
         if((flavorText.isDrawing() || hint.isDrawing()) && textZone.isHidden()){
             textZone.unhide();
+        }
+
+        if(!flavorText.isDrawing() && !hint.isDrawing() && textZone.isHidden() && finNiveau){
+            endTableau();
         }
 
         game.batch.flush();
@@ -254,11 +263,31 @@ public abstract class UI implements Screen {
         }
     }
 
+    /**
+     * Affiche les indices.
+     * Si avancement change le nombre d'indice affiche augmente, sinon  on reaffiche les anciens indices
+     * @param avancement compris entre 0 et 2
+     */
     public void showHint(int avancement){
         textHint += hints[avancement];
-        hints[avancement] = "";
-        usedHint += 1;
+        if(!hints[avancement].equals("")) {
+            hints[avancement] = "";
+            usedHint += 1;
+        }
         hint.setText(textHint);
+    }
+
+    /**
+     * Change la scene actuelle et la remplace par la scene suivante dans le cas de la reussite d'un tableau
+     */
+    public void endTableau(){
+        if(this.getClass().toString().matches(".*AmphiEnssat")){
+            game.menuEtTableau[1] = new ParcStAnne(game);
+            game.setScreen(game.menuEtTableau[1]);
+            this.dispose();
+        } else if(this.getClass().toString().matches(".*ParcStAnne")){
+            game.dispose();
+        }
     }
 
 }
