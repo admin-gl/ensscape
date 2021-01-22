@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
 /**
  * Lis toutes les données de la base de donnée.
  */
@@ -15,7 +16,7 @@ public class GetScore {
      * Stocke dans ./Score/Tableau.json le score issus de la base de donnée sur internet.
      * @return 0 si aucun pb, 1 si pas d'internet, 2 si une exception
      */
-    public static int ScoreLocal(){
+    public static int StoreScore(){
         String score = getScore();
         if(score != null) {
             if (score.equals("pas d'internet")) {
@@ -35,6 +36,10 @@ public class GetScore {
                     file.write(score);
                     file.flush();
                     file.close();
+                    FileWriter filescec = new FileWriter("./Score/Tableau.js");
+                    filescec.write("Tableau="+score+";");
+                    filescec.flush();
+                    filescec.close();
                     return 0;
                 } catch (Exception e) {
                     System.out.println("serialization des scores en ligne a echoue" + e);

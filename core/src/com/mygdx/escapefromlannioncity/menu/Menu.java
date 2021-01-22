@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
+import com.mygdx.escapefromlannioncity.score.AffScore;
+import com.mygdx.escapefromlannioncity.siteweb.GetScore;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
 
 
@@ -114,6 +116,9 @@ public class Menu implements Screen {
 
                 if (afficherScore.contains(touched)) {
                     System.out.println("J'affiche le score");
+                    System.out.println(GetScore.StoreScore());
+                    AffScore.AffScore();
+
                 }
 
                 if (sauvegarder.contains(touched)) {
