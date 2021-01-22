@@ -5,7 +5,7 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="EscapeFromLannionCity.java:jar" />
+      <artifact name="projet-gl:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -30,7 +30,42 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6230a2b3-e2f2-4586-ae88-bdf91734f1a7" name="Default Changelist" comment="Fichiers pour lesscores locaux" />
+    <list default="true" id="6230a2b3-e2f2-4586-ae88-bdf91734f1a7" name="Default Changelist" comment="Identification avant de commencer le jeu">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/projet_gl_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/assets/image/Menu/Retour GL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/assets/image/Utilitaire/bouttontxt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/assets/image/Utilitaire/bouttontxtup.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/assets/image/Utilitaire/cursortxt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/assets/image/Utilitaire/textinput.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/identify/Accueil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/identify/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/identify/Pseudo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/identify/Signup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/projetgl.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Score.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/score/AffScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/score/AffScore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/screens/ParcStAnne.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/screens/ParcStAnne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/siteweb/GetJoueur.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/mygdx/escapefromlannioncity/siteweb/GetJoueur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,11 +141,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/core/src" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
@@ -129,19 +164,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.DesktopLauncher">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DesktopLauncher" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-15" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -170,6 +192,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mygdx.escapefromlannioncity.score.TestMain" />
+      <module name="projet-gl.core.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mygdx.escapefromlannioncity.score.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="projet-gl [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -186,7 +221,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="projet-gl [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -205,13 +242,16 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.projet-gl [clean]" />
         <item itemvalue="Gradle.projet-gl [jar]" />
+        <item itemvalue="Application.TestMain" />
       </list>
     </recent_temporary>
   </component>
@@ -228,6 +268,13 @@
       <workItem from="1609413646126" duration="8988000" />
       <workItem from="1609426839346" duration="6965000" />
       <workItem from="1609435128291" duration="8644000" />
+      <workItem from="1611320756949" duration="3700000" />
+      <workItem from="1611325213065" duration="3852000" />
+      <workItem from="1611329667194" duration="9850000" />
+      <workItem from="1611340116653" duration="4222000" />
+      <workItem from="1611346258897" duration="6788000" />
+      <workItem from="1611353442037" duration="541000" />
+      <workItem from="1611355130386" duration="478000" />
     </task>
     <task id="LOCAL-00001" summary="Fichiers pour lesscores locaux">
       <created>1609446944125</created>
@@ -243,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609447371462</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Ouverture de l'affichage avec un fichier html">
+      <created>1611323478297</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1611323478297</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,83 +317,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fichiers pour lesscores locaux" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fichiers pour lesscores locaux" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="137" y="0" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610013167126">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="137" y="0" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1610013167126" />
-    <state x="-1234" y="-198" key="#com.intellij.ide.util.MemberChooser" timestamp="1610448744749">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state x="-1234" y="-198" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610448744749" />
-    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1610330389537" />
-    <state x="488" y="75" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1607278780695" />
-    <state x="-1357" y="144" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1610339747324">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state x="-1357" y="144" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610339747324" />
-    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607279672564">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1607279672564" />
-    <state x="-1202" y="-56" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1611200879551">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state x="-1202" y="-56" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611200879551" />
-    <state x="-1180" y="-26" key="FileChooserDialogImpl" timestamp="1611200584080">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state x="-1180" y="-26" key="FileChooserDialogImpl/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611200584080" />
-    <state width="1877" height="119" key="GridCell.Tab.0.bottom" timestamp="1611200879957">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state width="1877" height="119" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611200879957" />
-    <state width="1323" height="119" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611198618341" />
-    <state width="1877" height="174" key="GridCell.Tab.0.bottom/0.0.1366.738/1366.-313.1920.1050@1366.-313.1920.1050" timestamp="1607702167433" />
-    <state width="1323" height="117" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1610111945735" />
-    <state width="1877" height="119" key="GridCell.Tab.0.center" timestamp="1611200879957">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state width="1877" height="119" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611200879957" />
-    <state width="1323" height="119" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611198618341" />
-    <state width="1323" height="117" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1610111945734" />
-    <state width="1877" height="119" key="GridCell.Tab.0.left" timestamp="1611200879957">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state width="1877" height="119" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611200879957" />
-    <state width="1323" height="119" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611198618340" />
-    <state width="1323" height="117" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1610111945734" />
-    <state width="1877" height="119" key="GridCell.Tab.0.right" timestamp="1611200879957">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state width="1877" height="119" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611200879957" />
-    <state width="1323" height="119" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611198618341" />
-    <state width="1323" height="117" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1610111945734" />
-    <state x="220" y="0" key="SettingsEditor" timestamp="1611014228183">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="220" y="0" key="SettingsEditor/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611014228183" />
-    <state x="220" y="0" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1610112093559" />
-    <state width="700" height="642" key="SwitcherDM" timestamp="1611198148116">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state width="700" height="642" key="SwitcherDM/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1611198148116" />
-    <state width="498" height="451" key="SwitcherDM/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1610336251015" />
-    <state x="-1248" y="-140" key="refactoring.ChangeSignatureDialog" timestamp="1610448747908">
-      <screen x="-1920" y="-305" width="1920" height="1050" />
-    </state>
-    <state x="-1248" y="-140" key="refactoring.ChangeSignatureDialog/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610448747908" />
-    <state x="478" y="116" key="refactoring.ChangeSignatureDialog/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1610319395989" />
-    <state x="339" y="165" key="run.anything.popup" timestamp="1610474283321">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="339" y="165" key="run.anything.popup/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610474283321" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1611186910579">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/-1920.-305.1920.1050@-1920.-305.1920.1050" timestamp="1610472077195" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611186910579" />
+    <MESSAGE value="Ouverture de l'affichage avec un fichier html" />
+    <MESSAGE value="Identification avant de commencer le jeu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Identification avant de commencer le jeu" />
   </component>
 </project>

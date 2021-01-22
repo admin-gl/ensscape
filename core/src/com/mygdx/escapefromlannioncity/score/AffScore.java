@@ -151,8 +151,8 @@ public class AffScore {
                         "\n" +
                         "        }\n" +
                         "            function Loc(){\n" +
-                        "                var x= document.getElementById(\"tableau\");\n" +
-                        "                var y= document.getElementById(\"tableau2\");\n" +
+                        "                var y= document.getElementById(\"tableau\");\n" +
+                        "                var x= document.getElementById(\"tableau2\");\n" +
                         "                if(x.style.display==\"none\"){\n" +
                         "                    x.style.display=\"block\";\n" +
                         "                    y.style.display = \"none\"\n" +
@@ -163,8 +163,8 @@ public class AffScore {
                         "            }\n" +
                         "\n" +
                         "            function Gen(){\n" +
-                        "                var y= document.getElementById(\"tableau\");\n" +
-                        "                var x= document.getElementById(\"tableau2\");\n" +
+                        "                var x= document.getElementById(\"tableau\");\n" +
+                        "                var y= document.getElementById(\"tableau2\");\n" +
                         "                if(x.style.display==\"none\"){\n" +
                         "                    x.style.display=\"block\";\n" +
                         "                    y.style.display = \"none\"\n" +

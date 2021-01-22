@@ -17,12 +17,13 @@ public class GetJoueur {
      * ou s'il y a une erreur, et pas d'internet s'il n'y a pas d'internet
      * @param email à tester
      * @param mdp à tester
-     * @return le pseudo du joueur, echoue si echec, pas d'internet sinon
+     * @return le pseudo du joueur, echoue si echec, pas d'internet , no user found si l'email/mot de passe ne sont pas trouvés
      */
     public static String LogIn(String email, String mdp){
         try {
             JSONParser jsonParser = new JSONParser();
             String joueur=getJoueur();
+            assert joueur != null;
             if(joueur.equals("pas d'internet")) {return joueur; }
 
             JSONArray jsonArray = (JSONArray) jsonParser.parse(joueur);
@@ -49,7 +50,7 @@ public class GetJoueur {
                 i.next();
             }
             System.out.println("no user  found");
-            return "echoue";
+            return "no user found";
         }catch(Exception e){
             System.out.println("erreur"+e);
             return "echoue";
