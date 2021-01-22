@@ -218,7 +218,7 @@ public class ParcStAnne extends UI {
         else if (background.getTexture().toString().matches("image/ParcStAnne/CadenasStAnne.*")){
             cursor.survol(zoneChiffres, (StretchViewport) viewport);
         }
-        else if (background.getTexture().toString().matches("image/ParcStAnne/parcVueGloballe.*")){
+        else if (background.getTexture().toString().matches("image/ParcStAnne/ParcVueGloballe.*")){
             if(!cursor.survol(zoneCraft, (StretchViewport) viewport)){
                 if(!cursor.survol(banc, (StretchViewport) viewport)){
                     if(!cursor.survol(grille, (StretchViewport) viewport)){
@@ -392,7 +392,7 @@ public class ParcStAnne extends UI {
                 }
 
             }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/parcVueGloballe.*")){
+            else if (background.getTexture().toString().matches("image/ParcStAnne/ParcVueGloballe.*")){
 
                 if(zoneCraft.contains(touched)){
                     if(game.inventory.hasIn(ficelle) && game.inventory.hasIn(ferraille) && game.inventory.hasIn(baton)){
