@@ -60,10 +60,10 @@ public class Login implements Screen {
                 null, new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/textinput.png")))));
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(null,null,null,nbb);
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
+        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         style.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         style.checked = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
-        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
+        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         Label.LabelStyle rr=new Label.LabelStyle(nbb,WHITE);
 
         // LOG IN
@@ -78,7 +78,7 @@ public class Login implements Screen {
 
         //le tableau pour la structure spatiale
         Table table1 = new Table();
-        table1.add(retour).padLeft(20).padTop(20);
+        table1.add(retour).padLeft(10).padTop(15).maxWidth(150);
         table1.setFillParent(true);
         table1.left().top();
 
@@ -89,7 +89,7 @@ public class Login implements Screen {
         table.add(addressLabel).padBottom(50);
         table.add(MdpText).width(500).padBottom(50);
         table.row();
-        table.add(button).colspan(2).padBottom(50).minWidth(300);
+        table.add(button).colspan(2).padBottom(50).minWidth(100);
         table.row();
         table.add(this.message).colspan(2);
 

@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -19,6 +20,8 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
+
+import static com.badlogic.gdx.graphics.Color.WHITE;
 
 
 public class Accueil implements Screen {
@@ -56,10 +59,10 @@ public class Accueil implements Screen {
         // Le style des boutons
         BitmapFont nbb=game.mainFont.newFontCache().getFont();
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(null,null,null,nbb);
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
+        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         style.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         style.checked = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
-        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
+        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
 
         // la table qui structure la position des éléments du tableau
         //gère la répartition des éléments dans le stage
@@ -70,19 +73,19 @@ public class Accueil implements Screen {
         table.setBackground(new TextureRegionDrawable(new TextureRegion(menuing)));
 
         this.button = new TextButton("JOUER HORS LIGNE", style);
-        table.add(button).center().padBottom(100).minWidth(300);
+        table.add(button).center().padBottom(60).minWidth(350).minHeight(75);
         this.button1 = new TextButton("SE CONNECTER", style);
         table.row();
-        table.add(button1).center().padBottom(100).minWidth(300);
+        table.add(button1).center().padBottom(60).minWidth(350).minHeight(75);
         this.button2 = new TextButton("S'INSCRIRE", style);
         table.row();
-        table.add(button2).center().padBottom(100).minWidth(300);
+        table.add(button2).center().minWidth(350).minHeight(75);
 
 
 
         // on la positionne
         table.setFillParent(true);
-        table.center();
+        //table.center();
 
         // on ajoute la table au stage
         stage.addActor(table);
