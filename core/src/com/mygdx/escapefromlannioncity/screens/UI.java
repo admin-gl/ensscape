@@ -281,6 +281,7 @@ public abstract class UI implements Screen {
      * Change la scene actuelle et la remplace par la scene suivante dans le cas de la reussite d'un tableau
      */
     public void endTableau(){
+        game.inventory.clear();
         if(this.getClass().toString().matches(".*AmphiEnssat")){
             game.menuEtTableau[1] = new ParcStAnne(game);
             game.setScreen(game.menuEtTableau[1]);

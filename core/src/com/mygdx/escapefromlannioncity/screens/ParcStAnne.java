@@ -176,10 +176,6 @@ public class ParcStAnne extends UI {
         super.setupRender();
 
         if(background.getTexture().toString().matches("image/ParcStAnne/CadenasStAnne.*")){
-            if(!zoneGauche.isHidden()){
-                zoneGauche.hide();
-                zoneDroite.hide();
-            }
             for(AnimatedGameObject chiffre : zoneChiffres){
                 chiffre.drawFix(game.batch);
             }
@@ -228,7 +224,7 @@ public class ParcStAnne extends UI {
                     }
                 }
             }
-        }
+        } // fin control curseur au survol
 
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && textZone.isHidden()) {
 
