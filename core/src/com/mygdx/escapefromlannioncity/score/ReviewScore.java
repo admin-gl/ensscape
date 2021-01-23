@@ -1,4 +1,4 @@
-package com.mygdx.escapefromlannioncity.identify;
+package com.mygdx.escapefromlannioncity.score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,35 +11,36 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
 
+import java.time.LocalDate;
+
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
-public class Pseudo implements Screen {
+public class ReviewScore implements Screen {
     private final EscapeFromLannionCity game;
 
     private final Viewport viewport;
-
-   // private final Sprite background;
 
     // le stage et la table pour afficher et structurer les éléments
     private final Stage stage;
 
     // les éléments qu'on modifie avec le rendre
-    private final  TextField nameText;
     private final TextButton button;
-    private final Label message;
     private final TextButton retour;
 
 
 
 
-    public Pseudo(final EscapeFromLannionCity pGame) {
+    public ReviewScore(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;
         Texture menuing = new Texture(Gdx.files.internal("image/Utilitaire/blacksquare.png"));
@@ -56,39 +57,53 @@ public class Pseudo implements Screen {
 
         //Le style des éléments
         BitmapFont nbb=game.mainFont.newFontCache().getFont();
-        TextField.TextFieldStyle Tstyle= new TextField.TextFieldStyle(nbb,WHITE,
-                new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/cursortxt.png")))),
-                null, new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/textinput.png")))));
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(null,null,null,nbb);
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
+        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         style.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         style.checked = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
-        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
+        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         Label.LabelStyle rr=new Label.LabelStyle(nbb,WHITE);
 
+        Score score = new Score(game.pseudo, 23, 2, 3, 1, LocalDate.now());
         //éléments du stage
-        Label nameLabel = new Label("Pseudo :", rr);
-        this.nameText = new TextField("", Tstyle);
-        this.message = new Label("",rr);
-        this.button = new TextButton("JOUER", style);
-        this.retour = new TextButton("RETOUR", style);
+        Label titleLabel = new Label("BRAVO "+score.getPseudo()+" !", rr);
+        Label bonusLabel = new Label("Bonus :", rr);
+        Label bonusVLabel = new Label(Integer.toString(2), rr);
+        Label indiceLabel = new Label("Indices :", rr);
+        Label indiceVLabel = new Label(Integer.toString(1), rr);
+        Label tempsLabel = new Label("Temps :", rr);
+        Label tempsVLabel = new Label(score.getTemps(), rr);
+        Label scoreLabel = new Label("Score :", rr);
+        Label scoreVLabel = new Label(score.getScore(), rr);
+        this.button = new TextButton("AJOUTER AU TABLEAU DES SCORES", style);
+        this.retour = new TextButton("MENU PRINCIPAL", style);
 
 
         //le tableau pour la structure spatiale
         Table table1 = new Table();
-        table1.add(retour).padLeft(10).padTop(15).maxWidth(150);
+        table1.add(retour).padLeft(10).padTop(15);
         table1.setFillParent(true);
         table1.left().top();
 
         // on ajoute les éléments au tableau
         Table table = new Table();
-        table.add(nameLabel).uniform().padBottom(50);
-        table.add(nameText).prefWidth(500).uniform().padBottom(50);
+        table.add(titleLabel).padBottom(50);
         table.row();
-        table.add(button).colspan(2).padBottom(50).minWidth(100);
+        table.add(bonusLabel).uniform().padRight(10).padBottom(20);
+        table.add(bonusVLabel).padBottom(20);
         table.row();
-        table.add(this.message).colspan(2);
+        table.add(indiceLabel).uniform().padRight(10).padBottom(20);
+        table.add(indiceVLabel).padBottom(20);
+        table.row();
+        table.add(tempsLabel).uniform().padRight(10).padBottom(20);
+        table.add(tempsVLabel).padBottom(20);
+        table.row();
+        table.add(scoreLabel).uniform().padRight(10).padBottom(50);
+        table.add(scoreVLabel).padBottom(50);
+        table.row();
+        table.add(button).colspan(2).minWidth(100);
+
 
         //ajout du background
         Image img = new Image(new TextureRegion(menuing));
@@ -153,26 +168,14 @@ public class Pseudo implements Screen {
 
                 if(retour.isPressed()){
                     // on revient sur l'écran d'accueil
-                    game.setScreen(game.menuEtTableau[2]);
+                    game.setScreen(game.menuEtTableau[0]);
                 }
 
                 if (button.isPressed()) {
-                    // l'utilisateur a cliqué sur le bouton
-                    System.out.println(this.nameText.getText());
 
-                    //le text rentré est vide
-                    if(this.nameText.getText().equals("")){
-                        this.message.setText("Choississez un pseudo pour jouer !");
 
-                    //sinon on va à l'écran suivant sans être connecté
-                    }else {
-                        game.pseudo = this.nameText.getText();
+                }
 
-                        // on passe à l'écran suivant
-                        game.setScreen(game.menuEtTableau[1]);
-                    }
-
-            }
         }
     }
 

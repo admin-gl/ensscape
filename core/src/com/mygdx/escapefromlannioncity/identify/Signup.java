@@ -26,8 +26,6 @@ public class Signup implements Screen{
 
     private final Viewport viewport;
 
-    private final Sprite background;
-
     //le stage et la table
     private final Stage stageLogin;
 
@@ -102,9 +100,10 @@ public class Signup implements Screen{
         table.row();
         table.add(this.message).colspan(2);
 
-        //ajout du background
-        table.setBackground(new TextureRegionDrawable(new TextureRegion(menuing)));
-        background = new Sprite(menuing);
+        //ajout fond d'ecran
+        Image img = new Image(new TextureRegion(menuing));
+        img.setFillParent(true);
+        stageLogin.addActor(img);
 
         //position du tableau
         table.setFillParent(true);
@@ -160,7 +159,6 @@ public class Signup implements Screen{
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             int res;
             viewport.unproject(touched);
-            if (background.getTexture().toString().matches("image/Utilitaire/blacksquare.png")) {
 
                 if(retour.isPressed()){
                     // on revient à l'écran d'accueil si retour
@@ -200,7 +198,7 @@ public class Signup implements Screen{
                             //on passe à l'écran suivant
                             game.setScreen(game.menuEtTableau[1]);
                         }
-                    }
+
                 }
             }
         }

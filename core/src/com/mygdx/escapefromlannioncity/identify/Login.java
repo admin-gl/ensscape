@@ -25,7 +25,6 @@ public class Login implements Screen {
     private final EscapeFromLannionCity game;
 
     private final Viewport viewport;
-    private final Sprite background;
 
     // le stage
     private final Stage stageLogin;
@@ -94,8 +93,9 @@ public class Login implements Screen {
         table.add(this.message).colspan(2);
 
         //ajout du background
-        table.setBackground(new TextureRegionDrawable(new TextureRegion(menuing)));
-        background = new Sprite(menuing);
+        Image img = new Image(new TextureRegion(menuing));
+        img.setFillParent(true);
+        stageLogin.addActor(img);
 
         //la position du tableau
         table.setFillParent(true);
@@ -151,7 +151,6 @@ public class Login implements Screen {
             Vector2 touched = new Vector2();
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
-            if (background.getTexture().toString().matches("image/Utilitaire/blacksquare.png")) {
 
                 if(this.retour.isPressed()){
                     //retour à l'écran d'accueil
@@ -188,7 +187,7 @@ public class Login implements Screen {
                             game.setScreen(game.menuEtTableau[1]);
                         }
                     }
-                }
+
             }
         }
     }
