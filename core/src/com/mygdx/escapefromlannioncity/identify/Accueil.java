@@ -19,7 +19,6 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
-import com.mygdx.escapefromlannioncity.utility.GameObject;
 
 
 public class Accueil implements Screen {
@@ -37,7 +36,6 @@ public class Accueil implements Screen {
     private final TextButton button1;
     private final TextButton button2;
 
-    private final GameObject quitterLeJeu;
 
     public Accueil(final EscapeFromLannionCity pGame) {
 
@@ -71,14 +69,14 @@ public class Accueil implements Screen {
         background = new Sprite(menuing);
         table.setBackground(new TextureRegionDrawable(new TextureRegion(menuing)));
 
-        this.button = new TextButton("jouer hors ligne", style);
-        table.add(button).center().padBottom(50);
-        this.button1 = new TextButton("se connecter", style);
+        this.button = new TextButton("JOUER HORS LIGNE", style);
+        table.add(button).center().padBottom(100).minWidth(300);
+        this.button1 = new TextButton("SE CONNECTER", style);
         table.row();
-        table.add(button1).center().padBottom(50);
-        this.button2 = new TextButton("s'inscrire", style);
+        table.add(button1).center().padBottom(100).minWidth(300);
+        this.button2 = new TextButton("S'INSCRIRE", style);
         table.row();
-        table.add(button2).center().padBottom(50);
+        table.add(button2).center().padBottom(100).minWidth(300);
 
 
 
@@ -88,12 +86,6 @@ public class Accueil implements Screen {
 
         // on ajoute la table au stage
         stage.addActor(table);
-
-
-
-        //bouton fixe
-        quitterLeJeu = new GameObject(Gdx.files.internal("image/Menu/Quitter le jeu GL.png"),128, 28, 65, 14,"");
-        quitterLeJeu.resize();
 
     }
 
@@ -132,7 +124,6 @@ public class Accueil implements Screen {
         stage.draw();
         stage.act();
 
-        quitterLeJeu.drawFix(game.batch);
 
         game.batch.end();
 
@@ -144,11 +135,6 @@ public class Accueil implements Screen {
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
             if (background.getTexture().toString().matches("image/Utilitaire/blacksquare.png")) {
-                if (quitterLeJeu.contains(touched)) {
-                    System.out.println("Ciao bye bye");
-                    game.dispose();
-                }
-
                 if(button.isPressed()){
                     System.out.println( "go Pseudo");
                     game.setScreen(new Pseudo(game));
@@ -195,6 +181,5 @@ public class Accueil implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        quitterLeJeu.dispose();
     }
 }

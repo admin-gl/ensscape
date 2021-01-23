@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
 import com.mygdx.escapefromlannioncity.siteweb.GetJoueur;
-import com.mygdx.escapefromlannioncity.utility.GameObject;
 
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
@@ -36,10 +35,7 @@ public class Login implements Screen {
     private final TextField MdpText;
     private final TextButton button;
     private final Label message;
-
-    //les boutons fixes
-    private final GameObject Retour;
-    private final GameObject quitterLeJeu;
+    private final TextButton retour;
 
 
     public Login(final EscapeFromLannionCity pGame) {
@@ -77,17 +73,23 @@ public class Login implements Screen {
         this.MdpText = new TextField("", Tstyle);
         this.MdpText.setPasswordMode(true);
         this.message = new Label("",rr);
-        this.button = new TextButton("se connecter", style);
+        this.button = new TextButton("SE CONNECTER", style);
+        this.retour = new TextButton("RETOUR", style);
 
         //le tableau pour la structure spatiale
+        Table table1 = new Table();
+        table1.add(retour).padLeft(20).padTop(20);
+        table1.setFillParent(true);
+        table1.left().top();
+
         Table table = new Table();
         table.add(nameLabel).uniform().padBottom(20);
         table.add(nameText).prefWidth(500).uniform().padBottom(20);
         table.row();
-        table.add(addressLabel).padBottom(20);
-        table.add(MdpText).width(500).padBottom(20);
+        table.add(addressLabel).padBottom(50);
+        table.add(MdpText).width(500).padBottom(50);
         table.row();
-        table.add(button).colspan(2).padBottom(30);
+        table.add(button).colspan(2).padBottom(50).minWidth(300);
         table.row();
         table.add(this.message).colspan(2);
 
@@ -101,14 +103,8 @@ public class Login implements Screen {
 
         //ajout au stage
         stageLogin.addActor(table);
+        stageLogin.addActor(table1);
 
-
-        //les boutons fixes
-        Retour = new GameObject(Gdx.files.internal("image/Menu/Retour GL.png"),128, 132, 65, 14, "");
-        quitterLeJeu = new GameObject(Gdx.files.internal("image/Menu/Quitter le jeu GL.png"),128, 28, 65, 14,"");
-
-        quitterLeJeu.resize();
-        Retour.resize();
 
     }
 
@@ -145,9 +141,6 @@ public class Login implements Screen {
 
       //  game.batch.draw(background.getTexture(), 0,0, viewport.getWorldWidth(), viewport.getWorldHeight());
 
-        Retour.drawFix(game.batch);
-        quitterLeJeu.drawFix(game.batch);
-
 
         game.batch.end();
 
@@ -159,12 +152,8 @@ public class Login implements Screen {
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
             if (background.getTexture().toString().matches("image/Utilitaire/blacksquare.png")) {
-                if (quitterLeJeu.contains(touched)) {
-                    System.out.println("Ciao bye bye");
-                    game.dispose();
-                }
 
-                if (Retour.contains(touched)) {
+                if(this.retour.isPressed()){
                     //retour à l'écran d'accueil
                     game.setScreen(game.menuEtTableau[2]);
                 }
@@ -227,8 +216,6 @@ public class Login implements Screen {
         @Override
         public void dispose() {
             stageLogin.dispose();
-            Retour.dispose();
 
-            quitterLeJeu.dispose();
         }
 }

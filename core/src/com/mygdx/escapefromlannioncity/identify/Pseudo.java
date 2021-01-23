@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
-import com.mygdx.escapefromlannioncity.utility.GameObject;
 
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
@@ -35,12 +34,9 @@ public class Pseudo implements Screen {
     private final  TextField nameText;
     private final TextButton button;
     private final Label message;
+    private final TextButton retour;
 
-    //pour retourner à l'écran d'accueil
-    private final GameObject Retour;
 
-    //peut être à enlever
-    private final GameObject quitterLeJeu;
 
 
     public Pseudo(final EscapeFromLannionCity pGame) {
@@ -75,17 +71,24 @@ public class Pseudo implements Screen {
         Label nameLabel = new Label("Pseudo :", rr);
         this.nameText = new TextField("", Tstyle);
         this.message = new Label("",rr);
-        this.button = new TextButton("jouer", style);
+        this.button = new TextButton("JOUER", style);
+        this.retour = new TextButton("RETOUR", style);
 
+
+        //le tableau pour la structure spatiale
+        Table table1 = new Table();
+        table1.add(retour).padLeft(20).padTop(20);
+        table1.setFillParent(true);
+        table1.left().top();
 
         // on ajoute les éléments au tableau
         Table table = new Table();
-        table.add(nameLabel).uniform().padBottom(20);
-        table.add(nameText).prefWidth(500).uniform().padBottom(20);
+        table.add(nameLabel).uniform().padBottom(50);
+        table.add(nameText).prefWidth(500).uniform().padBottom(50);
         table.row();
-        table.add(button).colspan(2).padBottom(30);
+        table.add(button).colspan(2).padBottom(50).minWidth(300);
         table.row();
-        table.add(this.message).colspan(2);
+        table.add(this.message).colspan(2).minWidth(300);
 
         //ajout du background
         background = new Sprite(menuing);
@@ -97,15 +100,9 @@ public class Pseudo implements Screen {
 
         // on ajoute le tableau au stage
         stage.addActor(table);
+        stage.addActor(table1);
 
 
-        //bouton pour revenir à l'accueil
-        Retour = new GameObject(Gdx.files.internal("image/Menu/Retour GL.png"),128, 132, 65, 14, "");
-        //pour quitter, peut etre à enlever
-        quitterLeJeu = new GameObject(Gdx.files.internal("image/Menu/Quitter le jeu GL.png"),128, 28, 65, 14,"");
-
-        quitterLeJeu.resize();
-        Retour.resize();
 
     }
 
@@ -143,10 +140,6 @@ public class Pseudo implements Screen {
         stage.draw();
         stage.act();
 
-        // on affiche lesboutons fixes
-        Retour.drawFix(game.batch);
-        quitterLeJeu.drawFix(game.batch);
-
 
         game.batch.end();
 
@@ -157,12 +150,8 @@ public class Pseudo implements Screen {
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
             if (background.getTexture().toString().matches("image/Utilitaire/blacksquare.png")) {
-                if (quitterLeJeu.contains(touched)) {
-                    System.out.println("Ciao bye bye");
-                    game.dispose();
-                }
 
-                if (Retour.contains(touched)) {
+                if(retour.isPressed()){
                     // on revient sur l'écran d'accueil
                     game.setScreen(game.menuEtTableau[2]);
                 }
@@ -210,7 +199,6 @@ public class Pseudo implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        Retour.dispose();
-        quitterLeJeu.dispose();
+
     }
 }
