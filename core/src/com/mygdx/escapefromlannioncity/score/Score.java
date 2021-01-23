@@ -138,6 +138,10 @@ public class Score implements Serializable {
             file.write(ListtoJson(table));
             file.flush();
             file.close();
+            FileWriter filescec = new FileWriter("./Score/"+name+".js");
+            filescec.write(name+"="+ListtoJson(table)+";");
+            filescec.flush();
+            filescec.close();
         }catch(Exception e){
             System.out.println("serialization a echoue"+e);
         }
@@ -152,7 +156,7 @@ public class Score implements Serializable {
      */
     public static List<Score> Deserialize(String name) throws FileNotFoundException { try {
             List<Score> table = new ArrayList<>();
-            FileReader reader = new FileReader(new File("./Score/"+name+".json"));
+            FileReader reader = new FileReader("./Score/"+name+".json");
             JSONParser jsonParser = new JSONParser();
             JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
             Iterator i = jsonArray.iterator();

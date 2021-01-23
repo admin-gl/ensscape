@@ -72,8 +72,8 @@ public class ParcStAnne extends UI {
                                                                     "2. Une canne A peche peut vos servir a atteindre des profondeur, mais aussi des hauteurs\n",
                                                                     "3. Le papier que vous avez ramasser contient un code. Il est surement utilisable quelque part... comme une porte"});
         // init textures zone principale
-        principal = new Texture(Gdx.files.internal("image/ParcStAnne/parcVueGloballe.png"));
-        principalBatonless = new Texture(Gdx.files.internal("image/ParcStAnne/parcVueGloballeBatonless.png"));
+        principal = new Texture(Gdx.files.internal("image/ParcStAnne/ParcVueGloballe.png"));
+        principalBatonless = new Texture(Gdx.files.internal("image/ParcStAnne/ParcVueGloballeBatonless.png"));
         // init textures chapelle
         zoomChapelle = new Texture(Gdx.files.internal("image/ParcStAnne/parcStAnneChap.png"));
         zoomChapelleOpen = new Texture(Gdx.files.internal("image/ParcStAnne/parcStAnneChapOuv.png"));
@@ -218,7 +218,7 @@ public class ParcStAnne extends UI {
         else if (background.getTexture().toString().matches("image/ParcStAnne/CadenasStAnne.*")){
             cursor.survol(zoneChiffres, (StretchViewport) viewport);
         }
-        else if (background.getTexture().toString().matches("image/ParcStAnne/parcVueGloballe.*")){
+        else if (background.getTexture().toString().matches("image/ParcStAnne/ParcVueGloballe.*")){
             if(!cursor.survol(zoneCraft, (StretchViewport) viewport)){
                 if(!cursor.survol(banc, (StretchViewport) viewport)){
                     if(!cursor.survol(grille, (StretchViewport) viewport)){
@@ -392,7 +392,7 @@ public class ParcStAnne extends UI {
                 }
 
             }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/parcVueGloballe.*")){
+            else if (background.getTexture().toString().matches("image/ParcStAnne/ParcVueGloballe.*")){
 
                 if(zoneCraft.contains(touched)){
                     if(game.inventory.hasIn(ficelle) && game.inventory.hasIn(ferraille) && game.inventory.hasIn(baton)){
