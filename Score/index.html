@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Escape From Lannion City</title>
+        <style>
+            #but{
+                width:326px;
+                margin: auto;
+            }
+            button{
+                border: 0;
+                background: #4CAFA1;
+                color: white;
+                border-radius: 4px;
+                font-size: 1em;
+                font-weight: 500;
+                height: 2.5em;
+                line-height: 2.5;
+                padding: 0 1em;
+                min-width: 10em;
+                text-align: center;
+                cursor: pointer;
+                outline: none;
+                text-decoration: none;
+                transform: translateY(0);
+                transition: all .15s ease;
+            }
+            h2,h3{text-align: center;}
+
+            table {
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 90%;
+                margin: auto;
+            }
+
+            table th {
+                border: 1px solid #ddd;
+
+            }
+
+            tr:nth-child(even){background-color: #f2f2f2;}
+
+            tr:hover {background-color: #ddd;}
+            tr{text-align: center;}
+            th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: center;
+                background-color: #4CAFA1;
+                color: white;
+            }
+        </style>
+        <script type="text/javascript" src="Local.js"></script>
+        <script type="text/javascript" src="Tableau.js"></script>
+        <script type="text/javascript">
+            function Tab(arr,id){
+              /*  if( data[0]!=null){
+                    var arr= new Array(JSON.parse(data[0]));}
+                for (var i = 1; i < data.length; i++) {
+                    arr.push(JSON.parse(data[i]));
+                }*/
+
+                var table = document.createElement("table"), row, cellA, cellB, cellC, cellD;
+                document.getElementById(id).appendChild(table);
+
+                row = document.createElement("tr");
+                cellA = document.createElement("th");
+                cellB = document.createElement("th");
+                cellC = document.createElement("th");
+                cellD = document.createElement("th");
+                // (C3) KEY & VALUE
+                cellA.innerHTML = "score";
+                cellB.innerHTML = "pseudo";
+                cellC.innerHTML = "temps";
+                cellD.innerHTML = "date";
+
+                table.appendChild(row);
+                row.appendChild(cellA);
+                row.appendChild(cellB);
+                row.appendChild(cellC);
+                row.appendChild(cellD);
+
+                arr.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));
+
+                for (var i = 0; i < arr.length; i++) {
+                    // (C2) ROWS & CELLS
+                    row = document.createElement("tr");
+                    cellA = document.createElement("td");
+                    cellB = document.createElement("td");
+                    cellC = document.createElement("td");
+                    cellD = document.createElement("td");
+                    // (C3) KEY & VALUE
+                    cellA.innerHTML = arr[i].score;
+                    cellB.innerHTML = arr[i].pseudo;
+                    cellC.innerHTML = arr[i].temps;
+                    cellD.innerHTML = arr[i].date;
+                    // (C4) ATTACH ROW & CELLS
+                    table.appendChild(row);
+                    row.appendChild(cellA);
+                    row.appendChild(cellB);
+                    row.appendChild(cellC);
+                    row.appendChild(cellD);
+                    // alert(JSON.parse(data[0]).score);
+                    //alert(mydata[1]);
+                }
+            }
+        function load() {
+            //var mydata = JSON.parse(data);
+            //data = data.replace(/\\/g, '');
+           if(typeof Local !== 'undefined'){
+               if( Local[0]!=null){
+                   var arr= new Array(JSON.parse(Local[0]));}
+            for (var i = 1; i < Local.length; i++) {
+                arr.push(JSON.parse(Local[i]));
+            }
+               Tab(arr,"tableau");
+           }else{
+               alert("Pas encore de score local")
+           }
+           if(typeof Tableau !== 'undefined'){
+               Tab(Tableau,"tableau2")
+           }else{
+               alert("Le tableau général des scores n'a pas été téléchargé")
+           }
+
+        }
+            function Loc(){
+                var y= document.getElementById("tableau");
+                var x= document.getElementById("tableau2");
+                if(x.style.display=="none"){
+                    x.style.display="block";
+                    y.style.display = "none"
+                }else{
+                    x.style.display="none";
+                    y.style.display = "block"
+                }
+            }
+
+            function Gen(){
+                var x= document.getElementById("tableau");
+                var y= document.getElementById("tableau2");
+                if(x.style.display=="none"){
+                    x.style.display="block";
+                    y.style.display = "none"
+                }else{
+                    x.style.display="none";
+                    y.style.display = "block"
+                }
+            }
+
+        </script>
+    </head>
+    <body onload="load()">
+    <h2>Tableau des scores</h2>
+    </br>
+    <div id="but">
+        <button onclick="Loc()">Scores Locaux</button>
+        <button onclick="Gen()">Tableau général</button>
+    </div>
+    </br>
+    <div id="tableau">
+        <h3>Scores Locaux</h3>
+    </div>
+    <div id="tableau2">
+        <h3>Tableau général</h3>
+    </div>
+    </body>
+</html>
