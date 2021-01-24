@@ -29,7 +29,7 @@ public class AffScore {
                         "        <title>Escape From Lannion City</title>\n" +
                         "        <style>\n" +
                         "            #but{\n" +
-                        "                width:326px;\n" +
+                        "                width:335px;\n" +
                         "                margin: auto;\n" +
                         "            }\n" +
                         "            button{\n" +
@@ -75,6 +75,31 @@ public class AffScore {
                         "                background-color: #4CAFA1;\n" +
                         "                color: white;\n" +
                         "            }\n" +
+                        "            #toTop {\n" +
+                        "  padding: .5em 1em;\n" +
+                        "  width: auto;\n" +
+                        "  display: none;\n" +
+                        "  text-align: center;\n" +
+                        "  position: fixed;\n" +
+                        "  bottom: 20px;\n" +
+                        "  right: 30px;\n" +
+                        "  z-index: 99;\n" +
+                        "  color: white;\n" +
+                        "  font-size: 18px;\n" +
+                        "  border: 0;\n" +
+                        "  border-radius: 4px;\n" +
+                        "  outline: none;\n" +
+                        "  cursor: pointer;\n" +
+                        "  text-decoration: none;\n" +
+                        "  background: #4CAFA1;\n" +
+                        "  box-shadow: 0 4px 6px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .08);\n" +
+                        "  transform: translateY(0);\n" +
+                        "  transition: all .15s ease;\n" +
+                        "}\n" +
+                        "\n" +
+                        "#toTop:hover {\n" +
+                        "  background-color: #064508;\n" +
+                        "}\n" +
                         "        </style>\n" +
                         "        <script type=\"text/javascript\" src=\"Local.js\"></script>\n" +
                         "        <script type=\"text/javascript\" src=\"Tableau.js\"></script>\n" +
@@ -86,7 +111,7 @@ public class AffScore {
                         "                    arr.push(JSON.parse(data[i]));\n" +
                         "                }*/\n" +
                         "\n" +
-                        "                var table = document.createElement(\"table\"), row, cellA, cellB, cellC, cellD;\n" +
+                        "                var table = document.createElement(\"table\"), row, cellA, cellB, cellC, cellD, cellE;\n" +
                         "                document.getElementById(id).appendChild(table);\n" +
                         "\n" +
                         "                row = document.createElement(\"tr\");\n" +
@@ -94,18 +119,21 @@ public class AffScore {
                         "                cellB = document.createElement(\"th\");\n" +
                         "                cellC = document.createElement(\"th\");\n" +
                         "                cellD = document.createElement(\"th\");\n" +
+                        "                cellE = document.createElement(\"th\");\n" +
                         "                // (C3) KEY & VALUE\n" +
-                        "                cellA.innerHTML = \"score\";\n" +
+                        "                cellA.innerHTML = \"rang\";\n" +
                         "                cellB.innerHTML = \"pseudo\";\n" +
-                        "                cellC.innerHTML = \"temps\";\n" +
-                        "                cellD.innerHTML = \"date\";\n" +
+                        "                cellC.innerHTML = \"score\";\n" +
+                        "                cellD.innerHTML = \"temps\";\n" +
+                        "                cellE.innerHTML = \"date\";\n" +
                         "\n" +
                         "                table.appendChild(row);\n" +
                         "                row.appendChild(cellA);\n" +
                         "                row.appendChild(cellB);\n" +
                         "                row.appendChild(cellC);\n" +
                         "                row.appendChild(cellD);\n" +
-                        "\n" +
+                        "                row.appendChild(cellE);\n" +
+                        "                \n" +
                         "                arr.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));\n" +
                         "\n" +
                         "                for (var i = 0; i < arr.length; i++) {\n" +
@@ -115,17 +143,20 @@ public class AffScore {
                         "                    cellB = document.createElement(\"td\");\n" +
                         "                    cellC = document.createElement(\"td\");\n" +
                         "                    cellD = document.createElement(\"td\");\n" +
+                        "                    cellE = document.createElement(\"td\");\n" +
                         "                    // (C3) KEY & VALUE\n" +
-                        "                    cellA.innerHTML = arr[i].score;\n" +
+                        "                    cellA.innerHTML = (i+1).toString();\n" +
+                        "                    cellC.innerHTML = arr[i].score;\n" +
                         "                    cellB.innerHTML = arr[i].pseudo;\n" +
-                        "                    cellC.innerHTML = arr[i].temps;\n" +
-                        "                    cellD.innerHTML = arr[i].date;\n" +
+                        "                    cellD.innerHTML = arr[i].temps;\n" +
+                        "                    cellE.innerHTML = arr[i].date;\n" +
                         "                    // (C4) ATTACH ROW & CELLS\n" +
                         "                    table.appendChild(row);\n" +
                         "                    row.appendChild(cellA);\n" +
                         "                    row.appendChild(cellB);\n" +
                         "                    row.appendChild(cellC);\n" +
                         "                    row.appendChild(cellD);\n" +
+                        "                    row.appendChild(cellE);\n" +
                         "                    // alert(JSON.parse(data[0]).score);\n" +
                         "                    //alert(mydata[1]);\n" +
                         "                }\n" +
@@ -141,12 +172,12 @@ public class AffScore {
                         "            }\n" +
                         "               Tab(arr,\"tableau\");\n" +
                         "           }else{\n" +
-                        "               alert(\"Pas encore de score local\")\n" +
+                        "               alert(\"Pas encore de score sur cet ordinateur\")\n" +
                         "           }\n" +
                         "           if(typeof Tableau !== 'undefined'){\n" +
                         "               Tab(Tableau,\"tableau2\")\n" +
                         "           }else{\n" +
-                        "               alert(\"Le tableau général des scores n'a pas été téléchargé\")\n" +
+                        "               alert(\"Le classement général n'a pas été téléchargé\")\n" +
                         "           }\n" +
                         "\n" +
                         "        }\n" +
@@ -173,23 +204,42 @@ public class AffScore {
                         "                    y.style.display = \"block\"\n" +
                         "                }\n" +
                         "            }\n" +
+                        "  // When the user scrolls down 20px from the top of the document, show the button\n" +
+                        "window.onscroll = function() {\n" +
+                        "  scrollFunction();\n" +
+                        "};\n" +
                         "\n" +
+                        "function scrollFunction() {\n" +
+                        "  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {\n" +
+                        "    document.getElementById(\"toTop\").style.display = \"block\";\n" +
+                        "  } else {\n" +
+                        "    document.getElementById(\"toTop\").style.display = \"none\";\n" +
+                        "  }\n" +
+                        "}\n" +
+                        "// When the user clicks on the button, scroll to the top of the document\n" +
+                        "function topFunction() {\n" +
+                        "  document.body.scrollTop = 0;\n" +
+                        "  document.documentElement.scrollTop = 0;\n" +
+                        "}\n" +
                         "        </script>\n" +
                         "    </head>\n" +
                         "    <body onload=\"load()\">\n" +
                         "    <h2>Tableau des scores</h2>\n" +
                         "    </br>\n" +
                         "    <div id=\"but\">\n" +
-                        "        <button onclick=\"Loc()\">Scores Locaux</button>\n" +
-                        "        <button onclick=\"Gen()\">Tableau général</button>\n" +
+                        "        <button onclick=\"Loc()\">Mes scores</button>\n" +
+                        "        <button onclick=\"Gen()\">Classment général</button>\n" +
                         "    </div>\n" +
                         "    </br>\n" +
                         "    <div id=\"tableau\">\n" +
-                        "        <h3>Scores Locaux</h3>\n" +
+                        "        <h3>Mes Scores</h3>\n" +
                         "    </div>\n" +
                         "    <div id=\"tableau2\">\n" +
-                        "        <h3>Tableau général</h3>\n" +
+                        "        <h3>Classement général</h3>\n" +
                         "    </div>\n" +
+                        "    \n" +
+                        "    \n" +
+                        "      <span onclick=\"topFunction()\" id=\"toTop\" title=\"Go to top\">Top</span>\n" +
                         "    </body>\n" +
                         "</html>");
                 file.flush();
