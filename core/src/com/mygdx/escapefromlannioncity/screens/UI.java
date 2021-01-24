@@ -82,7 +82,18 @@ public abstract class UI implements Screen {
 
         // on initialise la musique
         musique = Gdx.audio.newMusic(Gdx.files.internal(pathMusique));
-        musique.setLooping(true);
+        if(pathMusique.matches("music/enigme_3.*")){
+            musique.setOnCompletionListener(new Music.OnCompletionListener(){
+                @Override
+                public void onCompletion(Music musique){
+                    musique.play();
+                    musique.setPosition(4.4f);
+                }
+            });
+        } else {
+            musique.setLooping(true);
+        }
+
 
         /* Initialise le Bouton de Menu */
         buttonMenu = new ButtonOpenMenu();
@@ -345,7 +356,11 @@ public abstract class UI implements Screen {
             game.menuEtTableau[1] = new ParcStAnne(game, this.timeTotal, this.bonus, this.usedHint);
             game.setScreen(game.menuEtTableau[1]);
             this.dispose();
-        } else if(this.getClass().toString().matches(".*ParcStAnne")){
+        } if(this.getClass().toString().matches(".*ParcStAnne")){
+            game.menuEtTableau[1] = new Warp(game, this.timeTotal, this.bonus, this.usedHint);
+            game.setScreen(game.menuEtTableau[1]);
+            this.dispose();
+        } else if(this.getClass().toString().matches(".*Warp")){
             //game.menuEtTableau[1] = new Warp(game,this.timeTotal,this.bonus,this.usedHint);
             game.menuEtTableau[1] = new ReviewScore(game, this.timeTotal, this.bonus, this.usedHint);
             game.setScreen(game.menuEtTableau[1]);

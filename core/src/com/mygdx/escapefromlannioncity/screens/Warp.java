@@ -18,18 +18,21 @@ import javax.swing.text.View;
 import java.util.Arrays;
 
 import static java.lang.Math.floor;
+import static java.lang.Math.random;
 
 public class Warp extends UI {
 
     //Background textures
     private final Texture principal;
-    private final Texture salleMain;
-    private final Texture salleMainSansBross;
-    private final Texture salleMainSansBross_chev1Bross;
-    private final Texture salleMainSansBross_chev2Bross;
-    private final Texture salleMainSansBross_chevBross;
+    private final Texture principalBrLess;
+    private final Texture principalBrDecapLess;
+    private final Texture principalBrDecapBottleLess;
     private final Texture principalDecapLess;
     private final Texture principalDecapBottleLess;
+    private final Texture salleMain;
+    private final Texture salleMain_chevBross;
+    private final Texture salleMain_chev1Bross;
+    private final Texture salleMain_chev2Bross;
     private final Texture zoomBouteille;
     private final Texture zoomChev1;
     private final Texture zoomChev2;
@@ -57,7 +60,7 @@ public class Warp extends UI {
     // init objets salle
     private final GameObject table1;
     private final GameObject table2;
-    private final GameObject brosse;
+    private final GameObject zoneBrosse;
 
     // tableau entree
     private final GameObject porteSortie;
@@ -88,11 +91,10 @@ public class Warp extends UI {
     private final GameObject piece;
     private final GameObject decapsuleur;
     private final GameObject clefs;
+    private final GameObject brosse;
 
     //utilitaire
     private final GameObject zoneQuitter;
-    private boolean isOpenerPicked;
-    private boolean isMoneyPicked;
     private boolean isDecapsuleurPicked;
     private boolean isPiecePicked;
     private boolean isBorneTurnedOn;
@@ -108,21 +110,23 @@ public class Warp extends UI {
 
 
     public Warp(EscapeFromLannionCity game, String timeTotal,int bonus, int usedHint) {
-        super(game, "music/enigme_2.wav", new String[]{"1. La bouteille bleue contient un objet singulier ...\n",
+        super(game, "music/enigme_3.wav", new String[]{"1. La bouteille bleue contient un objet singulier ...\n",
                 "2. La photo du space invader semble louche ...\n",
                 "3. Les chevalets de la salle ont été repeint très récemment. "}
                 ,timeTotal,bonus,usedHint);
         // init textures zone comptoir
         principal = new Texture(Gdx.files.internal("image/Warp/comptoir.png"));
+        principalBrLess = new Texture(Gdx.files.internal("image/Warp/comptoir_ss_brosse.png"));
+        principalBrDecapLess = new Texture(Gdx.files.internal("image/Warp/comptoir_ss_decap_br.png"));
+        principalBrDecapBottleLess = new Texture(Gdx.files.internal("image/Warp/comptoir_ss_rien.png"));
         principalDecapLess = new Texture(Gdx.files.internal("image/Warp/comptoir_ss_decap.png"));
         principalDecapBottleLess = new Texture(Gdx.files.internal("image/Warp/comptoir_ss_decap_bout.png"));
         zoomBouteille = new Texture(Gdx.files.internal("image/Warp/zoomBouteille.png"));
         // init textures salle
         salleMain = new Texture(Gdx.files.internal("image/Warp/salleMain.png"));
-        salleMainSansBross = new Texture(Gdx.files.internal("image/Warp/salleMainSansBross.png"));
-        salleMainSansBross_chevBross = new Texture(Gdx.files.internal("image/Warp/salleMainChB.png"));
-        salleMainSansBross_chev1Bross = new Texture(Gdx.files.internal("image/Warp/salleMainSansBrossCh1B.png"));
-        salleMainSansBross_chev2Bross = new Texture(Gdx.files.internal("image/Warp/salleMainSansBrossCh2B.png"));
+        salleMain_chevBross = new Texture(Gdx.files.internal("image/Warp/salleMainChB.png"));
+        salleMain_chev1Bross = new Texture(Gdx.files.internal("image/Warp/salleMainCh1B.png"));
+        salleMain_chev2Bross = new Texture(Gdx.files.internal("image/Warp/salleMainCh2B.png"));
         zoomChev1 = new Texture(Gdx.files.internal("image/Warp/zoomChev1.png"));
         zoomChev2 = new Texture(Gdx.files.internal("image/Warp/zoomChev2.png"));
         zoomChev1Gratt = new Texture(Gdx.files.internal("image/Warp/zoomChev1Gratt.png"));
@@ -142,12 +146,14 @@ public class Warp extends UI {
         background = new Sprite(principal);
 
         // init des objets du comptoir
-        bouteille = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 151,144-82+10,8,21,"bouteille");
-        bouchonBouteille = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 92+29,144-27+8,58,16,"bouchon");
+        bouteille = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 147+5,144-91+11,10,22,"bouteille");
+        bouchonBouteille = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 121+10,144-26+4,20,8,"bouchon");
         zoneDecapsuleur = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 136,144-89,11,5,"décapsuleur");
-        zoneObjetDansBouteille = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 156,144-129,38,30,"???");
+        zoneObjetDansBouteille = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 128+7,144-117+7,14,14,"???");
         zoneBiere = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 109,144-84,14,14,"biere");
+        zoneBrosse = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 106+5,144-63+4,10,8,"brosse metallique");
 
+        zoneBrosse.resize();
         bouteille.resize();
         zoneDecapsuleur.resize();
         zoneObjetDansBouteille.resize();
@@ -157,13 +163,11 @@ public class Warp extends UI {
         // init des objets de la salle
         table1 = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 86+28,144-123+7,57,14,"table");
         table2 = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 181+28,144-127+7,57,14,"table");
-        brosse = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 4+5,144-110+4,10,8,"brosse metallique");
-        photoEncadree = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 117+30,144-54+20,60,40,"photo encadrée");
+        photoEncadree = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 117+30,144-54+20,60,40,"photo encadree");
 
         photoEncadree.resize();
         table1.resize();
         table2.resize();
-        brosse.resize();
 
         // init des objets de l'entree
         porteSortie = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 69+49,144-89+41,90,82,"sortie");
@@ -189,18 +193,18 @@ public class Warp extends UI {
         for (int i=0;i<5;i++){
             coffreEtoiles[i] = new Texture("image/Warp/coffre"+i+".png");
         }
-        code = new int[]{4, 7, 2, 5};
+        code = new int[]{4, 9, 2, 9};
         codeCompose = new int[4];
         poigneeCoffre.resize();
         zoneClefs.resize();
         // init des objets dans le zoom borne
-        insererPiece = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 113,74,26,66,"une fente pour la monnaie");
+        insererPiece = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 93+4,144-100+4,8,8,"une fente pour la monnaie");
 
         insererPiece.resize();
 
-        //init des objets zoom table1
-        chev1 = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 113,74,26,66,"chevalet abîmé");
-        chev2 = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 113,74,26,66,"chevalet abîmé");
+        //init des objets zoom table1 et 2
+        chev1 = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 78+50,144-108+44,100,88,"chevalet");
+        chev2 = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 78+50,144-108+44,100,88,"chevalet");
 
         chev1.resize();
         chev2.resize();
@@ -210,8 +214,10 @@ public class Warp extends UI {
         piece = new GameObject(Gdx.files.internal(("image/Warp/jetonArcade.png")), 0,0,10,10,"");
         decapsuleur = new GameObject(Gdx.files.internal(("image/Warp/decapsuleur.png")), 0,0,10,10,"");
         clefs = new GameObject(Gdx.files.internal(("image/Warp/cle.png")), 0,0,10,10,"");
+        brosse = new GameObject(Gdx.files.internal(("image/Warp/brosse.png")), 0,0,10,10,"");
 
         piece.resize();
+        brosse.resize();
         decapsuleur.resize();
         clefs.resize();
 
@@ -241,17 +247,23 @@ public class Warp extends UI {
         if (background.getTexture().toString().matches("image/Warp/comptoir*.*") && !isDecapsuleurPicked){
             if (!cursor.survol(zoneDecapsuleur, (StretchViewport) viewport)){
                 if (!cursor.survol(bouteille, (StretchViewport) viewport)){
-                    cursor.survol(zoneBiere, (StretchViewport) viewport);
+                    if (!cursor.survol(zoneBiere, (StretchViewport) viewport)){
+                        if (!isBrossePicked){cursor.survol(zoneBrosse, (StretchViewport) viewport);}
+                    }
                 }
             }
         }
         else if (background.getTexture().toString().matches("image/Warp/comptoir.*") && !isPiecePicked && isDecapsuleurPicked){
             if (!cursor.survol(bouteille, (StretchViewport) viewport)){
-                cursor.survol(zoneBiere, (StretchViewport) viewport);
+                if (!cursor.survol(zoneBiere, (StretchViewport) viewport)){
+                    if (!isBrossePicked){cursor.survol(zoneBrosse, (StretchViewport) viewport);}
+                }
             }
         }
         else if (background.getTexture().toString().matches("image/Warp/comptoir.*") && isPiecePicked && isDecapsuleurPicked){
-                cursor.survol(zoneBiere, (StretchViewport) viewport);
+                if (!cursor.survol(zoneBiere, (StretchViewport) viewport)){
+                    if (!isBrossePicked){cursor.survol(zoneBrosse, (StretchViewport) viewport);}
+                }
         }
 
         else if (background.getTexture().toString().matches("image/Warp/zoomBouteille.*") && !isPiecePicked){
@@ -274,23 +286,28 @@ public class Warp extends UI {
         } else if (background.getTexture().toString().matches("image/Warp/Open_coffre.png")){
             cursor.survol(zoneClefs, (StretchViewport) viewport);
         }
-        else if (background.getTexture().toString().matches("image/Warp/salleMain.*") && !isBrossePicked){
-            if(!cursor.survol(table1, (StretchViewport) viewport)){
-                if(!cursor.survol(table2, (StretchViewport) viewport)){
-                    if (!cursor.survol(photoEncadree, (StretchViewport) viewport)){
-                        cursor.survol(brosse, (StretchViewport) viewport);
-                    }
-                }
-            }
-        }
-        else if (background.getTexture().toString().matches("image/Warp/salleMainSansGratt.*") && isBrossePicked){
+        else if (background.getTexture().toString().matches("image/Warp/salleMain.*")){
             if(!cursor.survol(table1, (StretchViewport) viewport)){
                 if(!cursor.survol(table2, (StretchViewport) viewport)){
                     cursor.survol(photoEncadree, (StretchViewport) viewport);
                 }
             }
         }
-
+        else if (background.getTexture().toString().matches("image/Warp/salleMainSansBross*.*")){
+            if(!cursor.survol(table1, (StretchViewport) viewport)){
+                if(!cursor.survol(table2, (StretchViewport) viewport)){
+                    cursor.survol(photoEncadree, (StretchViewport) viewport);
+                }
+            }
+        }
+        else if (background.getTexture().toString().matches("image/Warp/zoomBorne*.*")){
+            if (!isBorneTurnedOn){cursor.survol(insererPiece, (StretchViewport) viewport);}
+        }
+        else if (background.getTexture().toString().matches("image/Warp/zoomChev*.*")){
+            if(!cursor.survol(chev1, (StretchViewport) viewport)){
+                cursor.survol(chev2, (StretchViewport) viewport);
+            }
+        }
 
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && textZone.isHidden()) {
 
@@ -311,17 +328,34 @@ public class Warp extends UI {
             if (background.getTexture().toString().matches("image/Warp/comptoir*.*")) {
                 if (bouteille.contains(touched)) {
                     if (!isBiereAlreadyClicked){
-                        flavorText.setText("Une bouteille de bière ... étrange, je ne connais pas la marque.");
+                        flavorText.setText("Une bouteille de biere ... etrange, je ne connais pas la marque.");
                         isBiereAlreadyClicked = true;
                     }
                     background.setRegion(zoomBouteille);
                     zoneDroite.hide();
                     zoneGauche.hide();
-                } else if (zoneDecapsuleur.contains(touched) && !isDecapsuleurPicked) {
+                } else if (zoneDecapsuleur.contains(touched) && !isDecapsuleurPicked && !isBrossePicked) {
                     flavorText.setText("Ceci pourrait m'aider à m'ouvrir la bouteille.\n");
                     game.inventory.add(decapsuleur);
                     isDecapsuleurPicked = true;
                     background.setRegion(principalDecapLess);
+                } else if (zoneDecapsuleur.contains(touched) && !isDecapsuleurPicked && isBrossePicked) {
+                    flavorText.setText("Ceci pourrait m'aider à m'ouvrir la bouteille.\n");
+                    game.inventory.add(decapsuleur);
+                    isDecapsuleurPicked = true;
+                    background.setRegion(principalBrDecapLess);
+                } else if (zoneBrosse.contains(touched) && !isBrossePicked) {
+                    flavorText.setText("Une brosse metallique...\nCe n'est pas ici qu'elle devrait etre rangee. ");
+                    game.inventory.add(brosse);
+                    isBrossePicked = true;
+                    if (isDecapsuleurPicked && isPiecePicked){
+                        background.setRegion(principalBrDecapBottleLess);
+                    } else if (!isDecapsuleurPicked){
+                        background.setRegion(principalBrLess);
+                    } else if (isDecapsuleurPicked && !isPiecePicked){
+                        background.setRegion(principalBrDecapLess);
+                    }
+
                 } else if (zoneBiere.contains(touched)) {
                     flavorText.setText("Ce n'est vraiment pas le moment !");
                 } else if (zoneGauche.contains(touched)) {
@@ -332,44 +366,58 @@ public class Warp extends UI {
                         background.setRegion(entree);
                         zoneGauche.hide();
                     }
-                } else if (zoneDroite.contains(touched) && !isBrossePicked) {
-                    if (!isBrossePicked){
+                } else if (zoneDroite.contains(touched)) {
+                    if (!isChev1Bross && !isChev2Bross){
                         background.setRegion(salleMain);
-                        zoneDroite.hide();
-                    } else if (isBrossePicked && !isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross);
-                        zoneDroite.hide();
-                    } else if (isBrossePicked && isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev1Bross);
-                        zoneDroite.hide();
-                    } else if (isBrossePicked && !isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev2Bross);
-                        zoneDroite.hide();
-                    } else if (isBrossePicked && isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chevBross);
-                        zoneDroite.hide();
+                    } else if (isChev1Bross && !isChev2Bross){
+                        background.setRegion(salleMain_chev1Bross);
+                    } else if (!isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chev2Bross);
+                    } else if (isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chevBross);
                     }
+                    zoneDroite.hide();
                 }
             } else if (background.getTexture().toString().matches("image/Warp/zoomBouteille.png")) {
                 if (isDecapsuleurPicked && bouchonBouteille.contains(touched)) {
-                    flavorText.setText("Je peux enfin voir ce qu'il y a dedans !");
+                    flavorText.setText("Je peux enfin voir ce qu'il y a dedans !\nUn jeton d'arcade !");
                     game.inventory.remove(decapsuleur);
                     game.inventory.add(piece);
                     isPiecePicked = true;
-                    flavorText.setText("Un jeton d'arcade !");
-                    background.setRegion(principalDecapBottleLess);
+                    if (!isBrossePicked){
+                        background.setRegion(principalDecapBottleLess);
+                    } else {
+                        background.setRegion(principalBrDecapBottleLess);
+                    }
                     zoneGauche.unhide();
                     zoneDroite.unhide();
                 } else if (!isDecapsuleurPicked && bouchonBouteille.contains(touched)) {
                     flavorText.setText("J'aimerais bien l'ouvrir pour voir ce qu'il y a dedans ...");
                 } else if (zoneObjetDansBouteille.contains(touched)) {
-                    flavorText.setText("Il y a un objet au fond de la bouteille, mais je n'arrive pas à voir ce que c'est.");
+                    flavorText.setText("Il y a un objet au fond de la bouteille, mais je n'arrive pas a voir ce que c'est.");
                 } else if (zoneQuitter.contains(touched) && isPiecePicked) {
                     background.setRegion(principalDecapBottleLess);
+                    if (isBrossePicked){
+                        background.setRegion(principalBrDecapLess);
+                    } else {
+                        background.setRegion(principalDecapLess);
+                    }
                     zoneGauche.unhide();
                     zoneDroite.unhide();
-                } else if (zoneQuitter.contains(touched) && !isPiecePicked) {
-                    background.setRegion(principalDecapLess);
+                } else if (zoneQuitter.contains(touched) && !isPiecePicked && !isDecapsuleurPicked) {
+                    if (isBrossePicked){
+                        background.setRegion(principalBrLess);
+                    } else {
+                        background.setRegion(principal);
+                    }
+                    zoneDroite.unhide();
+                    zoneGauche.unhide();
+                } else if (zoneQuitter.contains(touched) && !isPiecePicked && isDecapsuleurPicked) {
+                    if (isBrossePicked){
+                        background.setRegion(principalBrDecapLess);
+                    } else {
+                        background.setRegion(principalDecapLess);
+                    }
                     zoneDroite.unhide();
                     zoneGauche.unhide();
                 }
@@ -382,18 +430,34 @@ public class Warp extends UI {
                     background.setRegion(zoomBorne);
                     zoneDroite.hide();
                     zoneGauche.hide();
+                } else if (borneArcade.contains(touched) && isBorneTurnedOn) {
+                    background.setRegion(zoomBorneAllum);
+                    zoneDroite.hide();
+                    zoneGauche.hide();
                 } else if (porteSortie.contains(touched) && !game.inventory.hasIn(clefs)){
-                    flavorText.setText("C'est fermé a clef !");
+                    flavorText.setText("C'est ferme a clef !");
                 } else if (porteSortie.contains(touched) && game.inventory.hasIn(clefs)){
-                    flavorText.setText("Je peux enfin sortir ! Compliqué comme début de vacances !");
+                    flavorText.setText("Je peux enfin sortir ! Complique comme debut de vacances !");
                     finNiveau = true;
                 } else if (zoneDroite.contains(touched)) {
                     if (isDecapsuleurPicked && isPiecePicked) {
-                        background.setRegion(principalDecapBottleLess);
+                        if (isBrossePicked){
+                            background.setRegion(principalBrDecapBottleLess);
+                        } else {
+                            background.setRegion(principalDecapBottleLess);
+                        }
                     } else if (isDecapsuleurPicked && !isPiecePicked) {
-                        background.setRegion(principalDecapLess);
+                        if (isBrossePicked){
+                            background.setRegion(principalBrDecapLess);
+                        } else {
+                            background.setRegion(principalDecapLess);
+                        }
                     } else if (!isDecapsuleurPicked && !isPiecePicked) {
-                        background.setRegion(principal);
+                        if (isBrossePicked){
+                            background.setRegion(principalBrLess);
+                        } else {
+                            background.setRegion(principal);
+                        }
                     }
                     zoneGauche.unhide();
                 }
@@ -403,7 +467,6 @@ public class Warp extends UI {
                     game.inventory.remove(piece);
                     isBorneTurnedOn = true;
                     background.setRegion(zoomBorneAllum);
-                    flavorText.setText("Tiens, pas de jeu : à la place, deux chiffres sont apparus ...");
                 } else if (zoneQuitter.contains(touched)) {
                     if (isBorneTurnedOn) {
                         background.setRegion(entree_BAllum);
@@ -419,22 +482,17 @@ public class Warp extends UI {
                 }
 
             } else if (background.getTexture().toString().matches("image/Warp/salle*.*")) {
-                if (brosse.contains(touched)) {
-                    flavorText.setText("Une brosse métallique ...");
-                    game.inventory.add(brosse);
-                    background.setRegion(salleMainSansBross);
-                    isBrossePicked = true;
-                } else if (table1.contains(touched) && !isChev1Bross) {
-                    background.setRegion(zoomChev1Gratt);
-                    zoneGauche.hide();
-                } else if (table1.contains(touched) && !isChev2Bross) {
-                    background.setRegion(zoomChev2Gratt);
-                    zoneGauche.hide();
-                } else if (table1.contains(touched) && isChev1Bross) {
+                if (table1.contains(touched) && !isChev1Bross) {
                     background.setRegion(zoomChev1);
                     zoneGauche.hide();
-                } else if (table2.contains(touched) && isChev2Bross) {
+                } else if (table1.contains(touched) && isChev1Bross) {
+                    background.setRegion(zoomChev1Gratt);
+                    zoneGauche.hide();
+                } else if (table2.contains(touched) && !isChev2Bross) {
                     background.setRegion(zoomChev2);
+                    zoneGauche.hide();
+                } else if (table2.contains(touched) && isChev2Bross) {
+                    background.setRegion(zoomChev2Gratt);
                     zoneGauche.hide();
                 } else if (photoEncadree.contains(touched) && !isCoffreDiscovered) {
                     if (!isTableauAlreadyClicked){
@@ -451,11 +509,23 @@ public class Warp extends UI {
                     zoneGauche.hide();
                 } else if (zoneGauche.contains(touched)) {
                     if (isDecapsuleurPicked && isPiecePicked) {
-                        background.setRegion(principalDecapBottleLess);
+                        if (isBrossePicked){
+                            background.setRegion(principalBrDecapBottleLess);
+                        } else {
+                            background.setRegion(principalBrDecapLess);
+                        }
                     } else if (isDecapsuleurPicked && !isPiecePicked) {
-                        background.setRegion(principalDecapLess);
+                        if (isBrossePicked){
+                            background.setRegion(principalBrDecapLess);
+                        } else {
+                            background.setRegion(principalDecapLess);
+                        }
                     } else if (!isDecapsuleurPicked && !isPiecePicked) {
-                        background.setRegion(principal);
+                        if (isBrossePicked){
+                            background.setRegion(principalBrLess);
+                        } else {
+                            background.setRegion(principal);
+                        }
                     }
                     zoneDroite.unhide();
                 }
@@ -469,29 +539,27 @@ public class Warp extends UI {
                     if (!isBrossePicked){
                         background.setRegion(salleMain);
                     } else if (isBrossePicked && !isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross);
+                        background.setRegion(salleMain);
                     } else if (isBrossePicked && isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev1Bross);
+                        background.setRegion(salleMain_chev1Bross);
                     } else if (isBrossePicked && !isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev2Bross);
+                        background.setRegion(salleMain_chev2Bross);
                     } else if (isBrossePicked && isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chevBross);
+                        background.setRegion(salleMain_chevBross);
                     }
                     zoneGauche.unhide();
                 }
             } else if (background.getTexture().toString().matches("image/Warp/coffre*.*") && isCoffreDiscovered && !game.inventory.hasIn(clefs)) {
 
                 if (zoneQuitter.contains(touched)) {
-                    if (!isBrossePicked){
+                    if (!isChev1Bross && !isChev2Bross){
                         background.setRegion(salleMain);
-                    } else if (isBrossePicked && !isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross);
-                    } else if (isBrossePicked && isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev1Bross);
-                    } else if (isBrossePicked && !isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev2Bross);
-                    } else if (isBrossePicked && isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chevBross);
+                    } else if (isChev1Bross && !isChev2Bross){
+                        background.setRegion(salleMain_chev1Bross);
+                    } else if (!isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chev2Bross);
+                    } else if (isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chevBross);
                     }
                     zoneGauche.unhide();
                 } else {
@@ -524,21 +592,23 @@ public class Warp extends UI {
                             }
                         }
                         for (int i=0;i<4;i++){
-                            if (codeCompose[i]+1 == code[i]){
+                            if (codeCompose[0]+1 == code[0] && codeCompose[1]+1 == code[1] && codeCompose[2]+1 == code[2] && codeCompose[3]+1 == code[3]){
                                 background.setRegion(coffreOK);
                                 isOpened = true;
-                            } else {
+                            } else if (codeCompose[i]+1 != code[i]){
                                 background.setRegion(coffreKO);
+                                flavorText.setText("Zut...");
                             }
                         }
-                    } else if(background.getTexture().toString().matches("image/Warp/coffreKO.png")){
+                    } else if(background.getTexture().toString().matches("image/Warp/coffreko.png")){
                         for (int i=0;i<9;i++){
                             if(coffreBoutons[i].contains(touched)){
                                 background.setRegion(coffreEtoiles[0]);
                             }
                         }
-                    } else if(background.getTexture().toString().matches("image/Warp/coffreOK.png")){
+                    } else if(background.getTexture().toString().matches("image/Warp/coffreok.png")){
                         if(poigneeCoffre.contains(touched)){
+                            flavorText.setText("Je devrais probablement rappeler le patron pour lui expliquer ceci ...");
                             background.setRegion(coffreOuvert);
                         }
                     }
@@ -548,85 +618,69 @@ public class Warp extends UI {
                     background.setRegion(coffreOuvertSsCle);
                     game.inventory.add(clefs);
                 } else if (zoneQuitter.contains(touched)) {
-                    if (!isBrossePicked){
+                    if (!isChev1Bross && !isChev2Bross){
                         background.setRegion(salleMain);
-                    } else if (isBrossePicked && !isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross);
-                    } else if (isBrossePicked && isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev1Bross);
-                    } else if (isBrossePicked && !isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev2Bross);
-                    } else if (isBrossePicked && isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chevBross);
+                    } else if (isChev1Bross && !isChev2Bross){
+                        background.setRegion(salleMain_chev1Bross);
+                    } else if (!isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chev2Bross);
+                    } else if (isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chevBross);
                     }
                     zoneGauche.unhide();
                 }
 
             } else if(background.getTexture().toString().matches("image/Warp/Open_coffre_ss_cle.png")){
                  if (zoneQuitter.contains(touched)) {
-                    if (!isBrossePicked){
+                    if (!isChev1Bross && !isChev2Bross){
                         background.setRegion(salleMain);
-                    } else if (isBrossePicked && !isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross);
-                    } else if (isBrossePicked && isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev1Bross);
-                    } else if (isBrossePicked && !isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev2Bross);
-                    } else if (isBrossePicked && isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chevBross);
+                    } else if (isChev1Bross && !isChev2Bross){
+                        background.setRegion(salleMain_chev1Bross);
+                    } else if (!isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chev2Bross);
+                    } else if (isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chevBross);
                     }
                     zoneGauche.unhide();
                 }
 
             } else if (background.getTexture().toString().matches("image/Warp/zoomChev1.*")) {
                 if (isBrossePicked && chev1.contains(touched) && !isChev1Bross) {
-                    flavorText.setText("La peinture s'écaille, en grattant avec la brosse je pourrais voir ce qu'il y avait écris avant.");
+                    flavorText.setText("Un chiffre etait cache derriere !");
                     isChev1Bross = true;
                     background.setRegion(zoomChev1Gratt);
                 } else if (!isBrossePicked && chev1.contains(touched)) {
                     flavorText.setText("La peinture s'écaille...");
                 } else if (zoneQuitter.contains(touched)) {
-                    if (!isBrossePicked){
+                    if (!isChev1Bross && !isChev2Bross){
                         background.setRegion(salleMain);
-                        zoneGauche.unhide();
-                    } else if (isBrossePicked && !isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross);
-                        zoneGauche.unhide();
-                    } else if (isBrossePicked && isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev1Bross);
-                        zoneGauche.unhide();
-                    } else if (isBrossePicked && !isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev2Bross);
-                        zoneGauche.unhide();
-                    } else if (isBrossePicked && isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chevBross);
-                        zoneGauche.unhide();
+                    } else if (isChev1Bross && !isChev2Bross){
+                        background.setRegion(salleMain_chev1Bross);
+                    } else if (!isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chev2Bross);
+                    } else if (isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chevBross);
                     }
+                    zoneGauche.unhide();
                 }
             } else if (background.getTexture().toString().matches("image/Warp/zoomChev2.*")) {
                 if (isBrossePicked && chev2.contains(touched) && !isChev2Bross) {
-                    flavorText.setText("La peinture s'écaille, en grattant avec la brosse je pourrais voir ce qu'il y avait écris avant.");
+                    flavorText.setText("Un chiffre etait cache derriere !");
                     isChev2Bross = true;
                     background.setRegion(zoomChev1Gratt);
                 } else if (!isBrossePicked && chev2.contains(touched)) {
                     flavorText.setText("La peinture s'écaille...");
                 } else if (zoneQuitter.contains(touched)) {
-                    if (!isBrossePicked){
+                    if (!isChev1Bross && !isChev2Bross){
                         background.setRegion(salleMain);
-                        zoneGauche.unhide();
-                    } else if (isBrossePicked && !isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross);
-                        zoneGauche.unhide();
-                    } else if (isBrossePicked && isChev1Bross && !isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev1Bross);
-                        zoneGauche.unhide();
-                    } else if (isBrossePicked && !isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chev2Bross);
-                        zoneGauche.unhide();
-                    } else if (isBrossePicked && isChev1Bross && isChev2Bross){
-                        background.setRegion(salleMainSansBross_chevBross);
-                        zoneGauche.unhide();
+                    } else if (isChev1Bross && !isChev2Bross){
+                        background.setRegion(salleMain_chev1Bross);
+                    } else if (!isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chev2Bross);
+                    } else if (isChev1Bross && isChev2Bross){
+                        background.setRegion(salleMain_chevBross);
                     }
+                    zoneGauche.unhide();
                 }
             }
         }
@@ -639,9 +693,16 @@ public class Warp extends UI {
         super.dispose();
         principal.dispose();
         salleMain.dispose();
-        salleMainSansBross.dispose();
+        salleMain_chevBross.dispose();
+        salleMain_chev1Bross.dispose();
+        salleMain_chev2Bross.dispose();
         principalDecapLess.dispose();
+        principalBrDecapLess.dispose();
         principalDecapBottleLess.dispose();
+        principalBrDecapBottleLess.dispose();
+        principalBrLess.dispose();
+        poigneeCoffre.dispose();
+        zoneClefs.dispose();
         zoomBouteille.dispose();
         zoomChev1.dispose();
         zoomChev2.dispose();
