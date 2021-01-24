@@ -56,6 +56,7 @@ public abstract class UI implements Screen {
     private long lastTime;
     private long timeAtPause;
     private String timeFromBegin = "00:00";
+
     private String timeTotal;
 
     private int bonus;
@@ -65,6 +66,9 @@ public abstract class UI implements Screen {
     private final String[] hints;
     private String textHint;
     private int usedHint;
+
+
+
 
     public UI(EscapeFromLannionCity game, String pathMusique, String[] hints, String timeTotal,
               int bonus, int usedHint) {
@@ -366,6 +370,38 @@ public abstract class UI implements Screen {
             game.setScreen(game.menuEtTableau[1]);
             this.dispose();
         }
+    }
+
+    /* Getter et setter utils */
+    public String getTimeFromBegin() {
+        return timeFromBegin;
+    }
+
+    public void setTimeFromBegin(String timeFromBegin) {
+        this.timeFromBegin = timeFromBegin;
+    }
+
+    public void setTimeTotal(String timeTotal) {
+        this.timeTotal = timeTotal;
+    }
+    public String getTimeTotal() {
+        return timeTotal;
+    }
+
+    public int getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(int bonus) {
+        this.bonus = bonus;
+    }
+
+    public int getUsedHint() {
+        return usedHint;
+    }
+
+    public void setUsedHint(int usedHint) {
+        this.usedHint = usedHint;
     }
 
 }

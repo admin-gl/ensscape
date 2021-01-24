@@ -9,8 +9,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
+import com.mygdx.escapefromlannioncity.sauvegarde.SAmphiEnssat;
 import com.mygdx.escapefromlannioncity.utility.AnimatedGameObject;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
+
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class AmphiEnssat extends UI {
 
@@ -183,6 +187,8 @@ public class AmphiEnssat extends UI {
             carteOk.drawFix(game.batch);
             cartePasOk.drawFix(game.batch);
         }
+
+
 
         // controle du cursor au survol d'un GameObject avec lequel on peut actuellement interagir
         if(background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c.piece1.*")){
@@ -387,6 +393,99 @@ public class AmphiEnssat extends UI {
 
         super.render(delta);
         game.batch.end();
+    }
+
+    public void Convertir(int[] interrupteur, int[] number) {
+        int i = 0;
+        while (i < 11) {
+            interrupteur[i] = Interrupteurs[i].getState();
+            i++;
+        }
+        i = 0;
+        while (i < 4) {
+            number[i] = Numbers[i].getState();
+            i++;
+        }
+    }
+
+
+    public void Synchronize(int[] interrupteur, int[] number){
+        for(int i=0;i< interrupteur.length;i++){
+            if(interrupteur[i]!= Interrupteurs[i].getState()){
+                Interrupteurs[i].changeStat(true);
+            }
+        }
+        for(int i=0;i< number.length;i++){
+            if(number[i]!= Numbers[i].getState()){
+                for(int j= 0;j<number[i];j++) {
+                    Numbers[i].changeStat(true);
+                }
+            }
+        }
+    }
+    /* Getter et Setter */
+    public boolean getCarte(){
+        if(game.inventory.hasIn(carteEtu)){ return true;}
+        else{ return false;}
+    }
+    public void setCarte(boolean carte){
+        if(carte) {
+            game.inventory.add(carteEtu);
+            background.setRegion(fondAmphiSansCarte);
+        }
+    }
+    public boolean isLights() {
+        return lights;
+    }
+
+    public void setLights(boolean lights) {
+        if(lights) {
+            background.setRegion(zoomElecClair);
+            background.setRegion(zoomOrdiAllume);
+            zoneGauche.unhide();
+            this.first_light =true;
+        }
+            this.lights = lights;
+    }
+
+    public boolean isCarteValide() {
+        return carteValide;
+    }
+
+    public void setCarteValide(boolean carteValide) {
+        if(carteValide) {
+            carteOk.unhide();
+            cartePasOk.hide();
+        }
+        this.carteValide = carteValide;
+    }
+
+    public boolean isPorteVerr() {
+        return porteVerr;
+    }
+
+    public void setPorteVerr(boolean porteVerr) {
+        if(porteVerr){
+            background.setRegion(amphiPorte);
+        } else {
+            background.setRegion(amphiPorteOuv);
+        }
+        this.porteVerr = porteVerr;
+    }
+
+    public boolean isHint2() {
+        return this.hint2;
+    }
+
+    public void setHint2(boolean hint2) {
+        this.hint2 = hint2;
+    }
+    public void setBackground(boolean lights){
+        if(lights) {
+            background.setRegion(brightPlace);
+        }else{
+            background.setRegion(darkPlace);
+        }
     }
 
 

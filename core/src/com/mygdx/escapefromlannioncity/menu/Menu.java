@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
+import com.mygdx.escapefromlannioncity.sauvegarde.SAmphiEnssat;
+import com.mygdx.escapefromlannioncity.sauvegarde.SParcStAnne;
 import com.mygdx.escapefromlannioncity.score.AffScore;
 import com.mygdx.escapefromlannioncity.siteweb.GetScore;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
@@ -123,6 +125,11 @@ public class Menu implements Screen {
 
                 if (sauvegarder.contains(touched)) {
                     System.out.println("Je sauvegarde");
+                    if(game.menuEtTableau[1].getClass().toString().matches(".*AmphiEnssat")) {
+                        SAmphiEnssat.Enregistrer(game.menuEtTableau[1]);
+                    }else if(game.menuEtTableau[1].getClass().toString().matches(".*ParcStAnne")){
+                        SParcStAnne.Enregistrer(game.menuEtTableau[1]);
+                    }
                 }
 
                 if (reprendre.contains(touched)) {

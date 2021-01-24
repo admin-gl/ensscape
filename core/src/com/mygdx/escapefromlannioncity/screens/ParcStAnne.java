@@ -445,6 +445,105 @@ public class ParcStAnne extends UI {
         game.batch.end();
     }
 
+    /* Recupère l'etat du cadena */
+    public void Convertir(int[] number) {
+        int i = 0;
+        while (i < 4) {
+            number[i] = zoneChiffres[i].getState();
+            i++;
+        }
+    }
+    /* remlpi le cadena a ces valeurs */
+    public void Synchronize(int[] number){
+        for(int i=0;i< number.length;i++){
+            if(number[i]!= zoneChiffres[i].getState()){
+                for(int j= 0;j<number[i];j++) {
+                    zoneChiffres[i].changeStat(true);
+                }
+            }
+        }
+    }
+
+    /* Getter et setter */
+    public boolean hasEchelle(){
+        if(game.inventory.hasIn(echelle)) {
+            return true;
+        }else{return false;}
+    }
+    public void setEchelle(boolean Echelle){
+        if(Echelle){game.inventory.add(echelle); }
+    }
+    public boolean hasCanne(){
+       if(game.inventory.hasIn(canneAPeche)) {
+           return true;
+       }else{return false;}
+    }
+    public void setCanne(boolean canne){
+        if(canne){game.inventory.add(canneAPeche); }
+    }
+    public boolean isOpened() {
+        return isOpened;
+    }
+
+    public void setOpened(boolean opened) {
+        if(opened){background.setRegion(zoomChapelleOpen);}
+        isOpened = opened;
+    }
+
+    public boolean isBatonPicked() {
+
+        return isBatonPicked;
+    }
+
+    public void setBatonPicked(boolean batonPicked) {
+        if(batonPicked && !hasCanne()){game.inventory.add(baton); }
+        isBatonPicked = batonPicked;
+
+    }
+
+    public boolean isStringPicked() {
+        return isStringPicked;
+    }
+
+    public void setStringPicked(boolean stringPicked) {
+        if(stringPicked && !hasCanne()){game.inventory.add(ficelle); }
+        isStringPicked = stringPicked;
+    }
+
+    public boolean isMetalPicked() {
+        return isMetalPicked;
+    }
+
+    public void setMetalPicked(boolean metalPicked) {
+        if(metalPicked && !hasCanne()){game.inventory.add(ferraille); }
+        isMetalPicked = metalPicked;
+    }
+
+    public boolean isPaperPicked() {
+        return isPaperPicked;
+    }
+
+    public void setPaperPicked(boolean paperPicked) {
+        if(paperPicked){game.inventory.add(papierCode); }
+        isPaperPicked = paperPicked;
+    }
+    public void setBackground(){
+        if(isBatonPicked && isMetalPicked){
+            background.setRegion(zoomBancVide);
+        }else if(!isMetalPicked && !isStringPicked){
+            background.setRegion(zoomBanc);
+        }else if(isMetalPicked){
+            background.setRegion(zoomBancStringOnly);
+        }else{
+            background.setRegion(zoomBancMetalOnly);
+        }
+        if(!isBatonPicked) {
+            background.setRegion(principal);
+        }else{
+            background.setRegion(principalBatonless);
+        }
+    }
+
     @Override
     public void dispose(){
         super.dispose();
