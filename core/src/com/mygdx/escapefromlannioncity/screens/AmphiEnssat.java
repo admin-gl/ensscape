@@ -384,7 +384,6 @@ public class AmphiEnssat extends UI {
         }
 
         super.render(delta);
-
         game.batch.end();
     }
 
