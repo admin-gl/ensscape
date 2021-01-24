@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
+import com.mygdx.escapefromlannioncity.siteweb.AddScore;
 
 import java.time.LocalDate;
 
@@ -33,14 +34,16 @@ public class ReviewScore implements Screen {
     // le stage et la table pour afficher et structurer les éléments
     private final Stage stage;
 
+    private final Score score;
+
     // les éléments qu'on modifie avec le rendre
     private final TextButton button;
     private final TextButton retour;
+    private final Label message;
+    private final Label titleLabel;
 
 
-
-
-    public ReviewScore(final EscapeFromLannionCity pGame) {
+    public ReviewScore(final EscapeFromLannionCity pGame, String timeTotal, int bonus, int usedHint) {
 
         this.game = pGame;
         Texture menuing = new Texture(Gdx.files.internal("image/Utilitaire/blacksquare.png"));
@@ -59,25 +62,31 @@ public class ReviewScore implements Screen {
         BitmapFont nbb=game.mainFont.newFontCache().getFont();
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(null,null,null,nbb);
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
+        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
         style.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         style.checked = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
-        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
+        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
         Label.LabelStyle rr=new Label.LabelStyle(nbb,WHITE);
 
-        Score score = new Score(game.pseudo, 23, 2, 3, 1, LocalDate.now());
+        this.score = new Score(game.pseudo, timeTotal, bonus, usedHint, LocalDate.now());
         //éléments du stage
-        Label titleLabel = new Label("BRAVO "+score.getPseudo()+" !", rr);
+        this.titleLabel = new Label("Bravo "+score.getPseudo()+" !", rr);
         Label bonusLabel = new Label("Bonus :", rr);
-        Label bonusVLabel = new Label(Integer.toString(2), rr);
+        Label bonusVLabel = new Label(Integer.toString(bonus), rr);
         Label indiceLabel = new Label("Indices :", rr);
-        Label indiceVLabel = new Label(Integer.toString(1), rr);
+        Label indiceVLabel = new Label(Integer.toString(usedHint), rr);
         Label tempsLabel = new Label("Temps :", rr);
         Label tempsVLabel = new Label(score.getTemps(), rr);
         Label scoreLabel = new Label("Score :", rr);
         Label scoreVLabel = new Label(score.getScore(), rr);
-        this.button = new TextButton("AJOUTER AU TABLEAU DES SCORES", style);
+        if(game.isLoggedin==1) {
+            this.button = new TextButton("AJOUTER AU CLASSEMENT GENERAL", style);
+        }else{
+            System.out.println(game.isLoggedin);
+            this.button = new TextButton("SE CONNECTER POUR AJOUTER AU CLASSEMENT", style);
+        }
         this.retour = new TextButton("MENU PRINCIPAL", style);
+        this.message = new Label("",rr);
 
 
         //le tableau pour la structure spatiale
@@ -93,17 +102,18 @@ public class ReviewScore implements Screen {
         table.add(bonusLabel).uniform().padRight(10).padBottom(20);
         table.add(bonusVLabel).padBottom(20);
         table.row();
-        table.add(indiceLabel).uniform().padRight(10).padBottom(20);
+        table.add(indiceLabel).padBottom(20);
         table.add(indiceVLabel).padBottom(20);
         table.row();
-        table.add(tempsLabel).uniform().padRight(10).padBottom(20);
+        table.add(tempsLabel).padBottom(20);
         table.add(tempsVLabel).padBottom(20);
         table.row();
-        table.add(scoreLabel).uniform().padRight(10).padBottom(50);
+        table.add(scoreLabel).padBottom(50);
         table.add(scoreVLabel).padBottom(50);
         table.row();
-        table.add(button).colspan(2).minWidth(100);
-
+        table.add(button).colspan(2).minWidth(100).padBottom(20);
+        table.row();
+        table.add(this.message).colspan(2);
 
         //ajout du background
         Image img = new Image(new TextureRegion(menuing));
@@ -122,16 +132,6 @@ public class ReviewScore implements Screen {
 
     }
 
-    public void goGoGadgettoMenu(Vector2 pTouched, ButtonOpenMenu pButton) {
-
-        if (pButton.isMyButton(pTouched)) {
-            //pScreen.hide();
-            /*this.render(delta);*/
-            game.setScreen(this);
-
-        }
-
-    }
 
     @Override
     public void show() {
@@ -141,6 +141,8 @@ public class ReviewScore implements Screen {
 
     @Override
     public void render(float delta) {
+        this.score.setPseudo(game.pseudo);
+        this.titleLabel.setText("Bravo "+score.getPseudo()+" !");
 
         // Screen screenPrecedent = game.getScreen();
 
@@ -152,6 +154,9 @@ public class ReviewScore implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        if(game.isLoggedin==1) {
+            this.button.setText("AJOUTER AU CLASSEMENT GENERAL");
+        }
         // on afffiche et démarre le stage
         stage.draw();
         stage.act();
@@ -166,15 +171,29 @@ public class ReviewScore implements Screen {
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
 
-                if(retour.isPressed()){
-                    // on revient sur l'écran d'accueil
-                    game.setScreen(game.menuEtTableau[0]);
+            if(retour.isPressed()){
+                Score.AddScoreLoc(this.score);
+                game.dispose();
+                this.dispose();
+                // on revient au menu principal
+                // game.setScreen(game.menuEtTableau[0]);
+            }
+
+            if (button.isPressed()) {
+                if(game.isLoggedin==1){
+                    int res = AddScore.addScore(this.score);
+                    if(res==0){
+                        this.message.setText("Votre score a ete ajoute au classement !");
+                        button.setDisabled(true);
+                    }else if(res==1){
+                        this.message.setText("Vous n'etes pas connecte a internet !");
+                    }else{
+                        this.message.setText("Desole, une erreur s'est produit !");
+                    }
+                }else if(game.isLoggedin==2){
+                    game.setScreen(game.menuEtTableau[2]);
                 }
-
-                if (button.isPressed()) {
-
-
-                }
+            }
 
         }
     }

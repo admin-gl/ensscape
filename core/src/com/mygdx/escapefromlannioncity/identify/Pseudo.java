@@ -154,6 +154,7 @@ public class Pseudo implements Screen {
                 if(retour.isPressed()){
                     // on revient sur l'écran d'accueil
                     game.setScreen(game.menuEtTableau[2]);
+                    this.dispose();
                 }
 
                 if (button.isPressed()) {
@@ -167,9 +168,10 @@ public class Pseudo implements Screen {
                     //sinon on va à l'écran suivant sans être connecté
                     }else {
                         game.pseudo = this.nameText.getText();
-
+                        game.isLoggedin = 2;
                         // on passe à l'écran suivant
                         game.setScreen(game.menuEtTableau[1]);
+                        this.dispose();
                     }
 
             }

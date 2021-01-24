@@ -61,10 +61,10 @@ public class Signup implements Screen{
                 null, new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/textinput.png")))));
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(null,null,null,nbb);
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
+        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
         style.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         style.checked = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
-        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
+        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
         Label.LabelStyle rr=new Label.LabelStyle(nbb,WHITE);
 
         // éléments du stage  pour l'inscription
@@ -163,6 +163,7 @@ public class Signup implements Screen{
                 if(retour.isPressed()){
                     // on revient à l'écran d'accueil si retour
                     game.setScreen(game.menuEtTableau[2]);
+                    this.dispose();
                 }
 
                 if (button.isPressed()) {
@@ -193,10 +194,11 @@ public class Signup implements Screen{
 
                         } else if (res == 0) { //ok
                             // On enregistre le joueur qui est maintenant connecté
-                            game.isLoggedin = true;
+                            game.isLoggedin = 1;
                             game.pseudo = this.pseudoText.getText();
                             //on passe à l'écran suivant
                             game.setScreen(game.menuEtTableau[1]);
+                            this.dispose();
                         }
 
                 }

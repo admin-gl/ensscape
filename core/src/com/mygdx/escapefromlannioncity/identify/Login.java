@@ -59,10 +59,10 @@ public class Login implements Screen {
                 null, new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/textinput.png")))));
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(null,null,null,nbb);
-        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
+        style.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
         style.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
         style.checked = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
-        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxt.png"))));
+        style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
         Label.LabelStyle rr=new Label.LabelStyle(nbb,WHITE);
 
         // LOG IN
@@ -108,16 +108,7 @@ public class Login implements Screen {
 
     }
 
-    public void goGoGadgettoMenu(Vector2 pTouched, ButtonOpenMenu pButton) {
 
-        if (pButton.isMyButton(pTouched)) {
-            //pScreen.hide();
-            /*this.render(delta);*/
-            game.setScreen(this);
-
-        }
-
-    }
 
     @Override
     public void show() {
@@ -155,6 +146,7 @@ public class Login implements Screen {
                 if(this.retour.isPressed()){
                     //retour à l'écran d'accueil
                     game.setScreen(game.menuEtTableau[2]);
+                    this.dispose();
                 }
                 if (button.isPressed()) {
                     //si l'utilisateur appuie sur se connecter
@@ -181,10 +173,11 @@ public class Login implements Screen {
 
                         } else {
                             // on enregistre le joueur qui est maintenant connecté
-                            game.isLoggedin = true;
+                            game.isLoggedin = 1;
                             game.pseudo = res;
                             // on passe à l'écran suivant
                             game.setScreen(game.menuEtTableau[1]);
+                            this.dispose();
                         }
                     }
 

@@ -37,15 +37,16 @@ public class Score implements Serializable {
      * @param pseudo pseudo du joueur qui a réalisé le score
      * @param temps temps de résolution du défi
      * @param bonus bonus gagné pendant le défi
-     * @param nbenig nombre d'énigme résolue
      * @param indice nombre d'indice utilisé
      * @param date date de réalisation du score
      */
-    public Score(String pseudo, int temps, int bonus, int nbenig, int indice,LocalDate date){
-        int sc =temps + bonus - nbenig - indice;
+    public Score(String pseudo, String temps, int bonus, int indice,LocalDate date){
+        int min = Integer.parseInt(temps.substring(0,2));
+        int sec = Integer.parseInt(temps.substring(3,5));
+        int sc =min*60 +sec + bonus*20 - indice*300;
         this.score= String.valueOf(sc);
         this.pseudo = pseudo;
-        this.temps= String.valueOf(temps);
+        this.temps= temps;
         this.date = date.toString();
     }
     public Score(String score, String pseudo,String temps, String date){
@@ -186,12 +187,10 @@ public class Score implements Serializable {
      * Ajoute un score à une liste de score déjà stockée, ou si aucune n'est déjà stockée pour le nom du joueur
      * ou le score général, crée la liste de score.
      * @param score le score à stocker
-     * @param pseudo le pseudo du joueur dont on stoke le nouveau score (normalement il ne faudrait utiliser
-     *               cette fonction que pour le stockage d'un joueur, le stockage général devra passer par la base de donnée en ligne)
      */
-   public static void AddScore(Score score, String pseudo) {
+   public static void AddScoreLoc(Score score) {
        try {
-           List<Score> table = Score.Deserialize(pseudo);
+           List<Score> table = Score.Deserialize("Local");
            int i = 0;
             while ((i < table.size()) &&
                     (Integer.parseInt(table.get(i).getScore()) > Integer.parseInt(score.getScore()))) {
@@ -199,31 +198,21 @@ public class Score implements Serializable {
             }
             table.add(i,score);
 
-
-            /* On limite le nombre d'entrée stockées dans le tableau. */
-            if(pseudo.equals("Score")){
-                if(table.size() >= 100){
-                    for(i=100;i<table.size();i++){
-                        table.remove(i);
-                    }
-                }
-            }else{
-                System.out.print(table.size());
-                if(table.size() >= 10){
-                    for(i=10;i<table.size();i++){
-                        table.remove(i);
-                    }
-                }
-            }
-
-           Score.Serialize(table, pseudo);
+            /* On limite le stockage local à 100 */
+           System.out.print(table.size());
+           if(table.size() >= 100){
+               for(i=100;i<table.size();i++){
+                   table.remove(i);
+               }
+           }
+           Score.Serialize(table, "Local");
 
 
            /* Si aucun fichier au nom du joueur n'existe encore */
         }catch(FileNotFoundException e){
             List<Score> table = new ArrayList<>();
             table.add(score);
-            Score.Serialize(table,pseudo);
+            Score.Serialize(table,"Local");
          }
     }
 }

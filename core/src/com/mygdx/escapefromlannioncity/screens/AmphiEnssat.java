@@ -61,11 +61,12 @@ public class AmphiEnssat extends UI {
     private boolean first_light;
     private boolean first_carte;
 
-    public AmphiEnssat(final EscapeFromLannionCity game) {
+    public AmphiEnssat(final EscapeFromLannionCity game, String timeTotal,int bonus, int usedHint) {
 
         super(game, "music/enigme_1.wav", new String[]{"1. Le panneau electrique contient un Post-it qui indique quels interrupteurs actionner\n",
                                                                     "2. La carte etudiante n'est pas utilisable en l'etat. Un ordinateur pourrait etre utile\n",
-                                                                    "3. Le code pour la carte etudiante est relie au tableau blanc. il suffit de faire correspondre les couleurs aux chiffres"});
+                                                                    "3. Le code pour la carte etudiante est relie au tableau blanc. il suffit de faire correspondre les couleurs aux chiffres"}
+                                                         ,timeTotal,bonus,usedHint );
 
         // init textures zone principale
         darkPlace = new Texture(Gdx.files.internal("image/Amphi_Enssat/Amphi137c-piece1_sombre.jpg"));
@@ -123,8 +124,8 @@ public class AmphiEnssat extends UI {
         code = new int[]{1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0};
 
         // init des objets zoom ordinateur
-        carteOk = new GameObject(Gdx.files.internal("image/Amphi_Enssat/carteOk.png"), 111, 89, 14, 14, "");
-        cartePasOk = new GameObject(Gdx.files.internal("image/Amphi_Enssat/cartePasOk.png"), 111, 89, 14, 14, "");
+        carteOk = new GameObject(Gdx.files.internal("image/Amphi_Enssat/CarteOk.png"), 111, 89, 14, 14, "");
+        cartePasOk = new GameObject(Gdx.files.internal("image/Amphi_Enssat/CartePasOk.png"), 111, 89, 14, 14, "");
 
         carteOk.resize();
         cartePasOk.resize();
@@ -370,6 +371,7 @@ public class AmphiEnssat extends UI {
                     if(zoneCarte.contains(touched)){
                         flavorText.setText("une carte magnetique d'un etudiant. Elle semble posseder un code en bas a droite...");
                         game.inventory.add(carteEtu);
+                        background.setRegion(fondAmphiSansCarte);
                     }
                 } else if (zoneDroite.contains(touched)){
                     if(porteVerr){

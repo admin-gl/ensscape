@@ -17,7 +17,7 @@ public class EscapeFromLannionCity extends Game {
 	public SpriteBatch batch;
 	public Inventory inventory;
 	public BitmapFont mainFont;
-	public boolean isLoggedin = false;
+	public int isLoggedin = 0; //0 au début, 1 si connecté, 2 si joue hors ligne
 	public String pseudo ="";
 	public Screen[] menuEtTableau = new Screen[3];
 	public float volume = 0.0f;
@@ -30,10 +30,8 @@ public class EscapeFromLannionCity extends Game {
 		mainFont = new BitmapFont(Gdx.files.internal("MainFont.fnt"));
 		// au lancement du jeu, affiche l'EnssatScreen
 		menuEtTableau[0] = new Menu(this);
-		menuEtTableau[1] = new AmphiEnssat(this);
+		menuEtTableau[1] = new AmphiEnssat(this, "00:00",0,0);
 		menuEtTableau[2] = new Accueil(this);
-
-		//menuEtTableau[1] = new Signup(this);
 
 		this.setScreen(menuEtTableau[2]);
 

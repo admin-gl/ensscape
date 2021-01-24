@@ -67,10 +67,11 @@ public class ParcStAnne extends UI {
     private boolean isPaperPicked;
 
 
-    public ParcStAnne(EscapeFromLannionCity game) {
+    public ParcStAnne(EscapeFromLannionCity game, String timeTotal, int bonus, int usedHint) {
         super(game, "music/enigme_2.wav", new String[]{"1. Posez vous quelque part avec certains objets afin de pouvoir en creer un nouveau\n",
                                                                     "2. Une canne A peche peut vos servir a atteindre des profondeur, mais aussi des hauteurs\n",
-                                                                    "3. Le papier que vous avez ramasser contient un code. Il est surement utilisable quelque part... comme une porte"});
+                                                                    "3. Le papier que vous avez ramasser contient un code. Il est surement utilisable quelque part... comme une porte"}
+                                                                    ,timeTotal, bonus, usedHint);
         // init textures zone principale
         principal = new Texture(Gdx.files.internal("image/ParcStAnne/ParcVueGloballe.png"));
         principalBatonless = new Texture(Gdx.files.internal("image/ParcStAnne/ParcVueGloballeBatonless.png"));

@@ -107,10 +107,11 @@ public class Warp extends UI {
     private boolean isTableauAlreadyClicked;
 
 
-    public Warp(EscapeFromLannionCity game) {
+    public Warp(EscapeFromLannionCity game, String timeTotal,int bonus, int usedHint) {
         super(game, "music/enigme_2.wav", new String[]{"1. La bouteille bleue contient un objet singulier ...\n",
                 "2. La photo du space invader semble louche ...\n",
-                "3. Les chevalets de la salle ont été repeint très récemment. "});
+                "3. Les chevalets de la salle ont été repeint très récemment. "}
+                ,timeTotal,bonus,usedHint);
         // init textures zone comptoir
         principal = new Texture(Gdx.files.internal("image/Warp/comptoir.png"));
         principalDecapLess = new Texture(Gdx.files.internal("image/Warp/comptoir_ss_decap.png"));
@@ -133,8 +134,8 @@ public class Warp extends UI {
         zoomBorneAllum = new Texture(Gdx.files.internal("image/Warp/zoomBorneAllum.png"));
         zoomTableau = new Texture(Gdx.files.internal("image/Warp/tableau.png"));
         zoomCoffre = new Texture(Gdx.files.internal("image/Warp/coffre0.png"));
-        coffreKO = new Texture(Gdx.files.internal("image/Warp/coffreKO.png"));
-        coffreOK = new Texture(Gdx.files.internal("image/Warp/coffreOK.png"));
+        coffreKO = new Texture(Gdx.files.internal("image/Warp/coffreko.png"));
+        coffreOK = new Texture(Gdx.files.internal("image/Warp/coffreok.png"));
         coffreOuvert = new Texture(Gdx.files.internal("image/Warp/Open_coffre.png"));
         coffreOuvertSsCle = new Texture(Gdx.files.internal("image/Warp/Open_coffre_ss_cle.png"));
         // mise en place du background principal

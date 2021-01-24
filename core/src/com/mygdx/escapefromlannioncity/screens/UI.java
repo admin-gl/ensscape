@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
+import com.mygdx.escapefromlannioncity.score.ReviewScore;
 import com.mygdx.escapefromlannioncity.utility.ChangingCursor;
 import com.mygdx.escapefromlannioncity.utility.FlavorText;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
@@ -55,6 +56,9 @@ public abstract class UI implements Screen {
     private long lastTime;
     private long timeAtPause;
     private String timeFromBegin = "00:00";
+    private String timeTotal;
+
+    private int bonus;
 
     public boolean finNiveau;
 
@@ -62,13 +66,19 @@ public abstract class UI implements Screen {
     private String textHint;
     private int usedHint;
 
-    public UI(EscapeFromLannionCity game, String pathMusique, String[] hints) {
+    public UI(EscapeFromLannionCity game, String pathMusique, String[] hints, String timeTotal,
+              int bonus, int usedHint) {
 
         this.game = game;
 
         this.hints = hints;
         // on met en place le curseur changeant pour les niveaux
         this.cursor = new ChangingCursor(game);
+
+        //infos du screen précédent
+        this.bonus = bonus;
+        this.timeTotal=timeTotal;
+        this.usedHint = usedHint;
 
         // on initialise la musique
         musique = Gdx.audio.newMusic(Gdx.files.internal(pathMusique));
@@ -107,7 +117,7 @@ public abstract class UI implements Screen {
         flavorText = new FlavorText(game, "", Color.WHITE, "Dialogue");
         hint = new FlavorText(game, "", Color.YELLOW, "Hint");
 
-        usedHint = 0;
+        //usedHint = 0;
         textHint = "";
 
         finNiveau = false;
@@ -262,6 +272,53 @@ public abstract class UI implements Screen {
             timerText.setText(timeFromBegin, Gdx.graphics.getWidth()-100,Gdx.graphics.getHeight() - 20, 0, 5, 100, Align.left, true);
         }
     }
+    /**
+     * Ajoute le temps à celui du niveau précédent
+     */
+    public void bonusAdd(){
+        int min = Integer.parseInt(timeFromBegin.substring(0,2));
+        //int sec = Integer.parseInt(timeFromBegin.substring(3,5));
+         if(min < 2 ){
+              this.bonus ++;
+         }
+    }
+    /**
+     * Ajoute le temps à celui du niveau précédent
+     */
+    public void timeAdd(){
+        int min = Integer.parseInt(timeFromBegin.substring(0,2));
+        int sec = Integer.parseInt(timeFromBegin.substring(3,5));
+        int minTot = Integer.parseInt(timeTotal.substring(0,2));
+        int secTot = Integer.parseInt(timeTotal.substring(3,5));
+
+        if(sec == 60){
+            sec = 0;
+            min +=1;
+        }
+        if(secTot==60){
+            secTot=0;
+            minTot +=1;
+        }
+        int secAdd = sec + secTot;
+        int minAdd = min + minTot;
+            if(secAdd >= 60){
+                minAdd += 1;
+                secAdd = secAdd - 60;
+            }
+            String finalSec;
+            String finalMin;
+            if(secAdd < 10){
+                finalSec = "0" + secAdd;
+            } else {
+                finalSec = "" + secAdd;
+            }
+            if(minAdd < 10){
+                finalMin = "0" + minAdd;
+            } else {
+                finalMin = "" + minAdd;
+            }
+            this.timeTotal = finalMin + ":" + finalSec;
+    }
 
     /**
      * Affiche les indices.
@@ -272,7 +329,7 @@ public abstract class UI implements Screen {
         textHint += hints[avancement];
         if(!hints[avancement].equals("")) {
             hints[avancement] = "";
-            usedHint += 1;
+            usedHint =usedHint +1;
         }
         hint.setText(textHint);
     }
@@ -282,12 +339,17 @@ public abstract class UI implements Screen {
      */
     public void endTableau(){
         game.inventory.clear();
+        timeAdd();
+        bonusAdd();
         if(this.getClass().toString().matches(".*AmphiEnssat")){
-            game.menuEtTableau[1] = new ParcStAnne(game);
+            game.menuEtTableau[1] = new ParcStAnne(game, this.timeTotal, this.bonus, this.usedHint);
             game.setScreen(game.menuEtTableau[1]);
             this.dispose();
         } else if(this.getClass().toString().matches(".*ParcStAnne")){
-            game.dispose();
+            //game.menuEtTableau[1] = new Warp(game,this.timeTotal,this.bonus,this.usedHint);
+            game.menuEtTableau[1] = new ReviewScore(game, this.timeTotal, this.bonus, this.usedHint);
+            game.setScreen(game.menuEtTableau[1]);
+            this.dispose();
         }
     }
 

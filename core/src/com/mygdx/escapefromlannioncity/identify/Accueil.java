@@ -74,10 +74,11 @@ public class Accueil implements Screen {
         img.setFillParent(true);
         stage.addActor(img);
 
+        // au démarrage on peut entrer un pseudo pour jouer hors ligne
         this.button = new TextButton("JOUER HORS LIGNE", style);
         table.add(button).center().padBottom(60).minWidth(350).minHeight(75);
-        this.button1 = new TextButton("SE CONNECTER", style);
         table.row();
+        this.button1 = new TextButton("SE CONNECTER", style);
         table.add(button1).center().padBottom(60).minWidth(350).minHeight(75);
         this.button2 = new TextButton("S'INSCRIRE", style);
         table.row();
@@ -123,7 +124,10 @@ public class Accueil implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //game.batch.draw(background.getTexture(), 0,0, viewport.getWorldWidth(), viewport.getWorldHeight());
-
+        if(game.isLoggedin==2){
+            this.button.setVisible(false);
+            this.button.setDisabled(true);
+        }
         // on affiche le stage et lui permet d'agir
         stage.draw();
         stage.act();
