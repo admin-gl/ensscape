@@ -34,12 +34,12 @@ com/mygdx/escapefromlannioncity/identify/Accueil.java
  com.mygdx.escapefromlannioncity.identify.Accueil
 com/mygdx/escapefromlannioncity/identify/Signup.java
  com.mygdx.escapefromlannioncity.identify.Signup
-com/mygdx/escapefromlannioncity/utility/FlavorText.java
- com.mygdx.escapefromlannioncity.utility.FlavorText
-com/mygdx/escapefromlannioncity/menu/Menu.java
- com.mygdx.escapefromlannioncity.menu.Menu
 com/mygdx/escapefromlannioncity/identify/Login.java
  com.mygdx.escapefromlannioncity.identify.Login
+com/mygdx/escapefromlannioncity/menu/Menu.java
+ com.mygdx.escapefromlannioncity.menu.Menu
+com/mygdx/escapefromlannioncity/utility/FlavorText.java
+ com.mygdx.escapefromlannioncity.utility.FlavorText
 com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
  com.mygdx.escapefromlannioncity.screens.AmphiEnssat
 com/mygdx/escapefromlannioncity/screens/Warp.java

@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 
+import java.awt.*;
+
 /**
  * Classe permettant d'afficher une bulle de dialogue a l'attention du joueur
  */
@@ -46,7 +48,15 @@ public class FlavorText {
         } else if(increment >= text.length()) {
             drawing = false;
         }
-        flavorText.setText(text, Gdx.graphics.getWidth()*0.125f, Gdx.graphics.getHeight()*0.379f,0, increment, Gdx.graphics.getWidth()*0.76f, Align.left, true);
+        String OS = System.getProperty("os.name").toLowerCase();
+        boolean IS_MAC = (OS.indexOf("mac") >= 0);
+        boolean IS_WINDOWS = (OS.indexOf("win") >= 0);
+        boolean IS_UNIX = (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0);
+        if (IS_MAC){
+            flavorText.setText(text, Gdx.graphics.getWidth()*0.125f, Gdx.graphics.getHeight()*0.379f-17,0, increment, Gdx.graphics.getWidth()*0.76f, Align.left, true);
+        } else {
+            flavorText.setText(text, Gdx.graphics.getWidth()*0.125f, Gdx.graphics.getHeight()*0.379f,0, increment, Gdx.graphics.getWidth()*0.76f, Align.left, true);
+        }
         flavorText.draw(batch);
     }
 
