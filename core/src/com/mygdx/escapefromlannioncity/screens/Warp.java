@@ -31,7 +31,7 @@ public class Warp extends UI {
     private final Texture zoomChev2Gratt;
     private final Texture zoomBorne;
     private final Texture zoomBorneAllum;
-    private Texture zoomTableau;
+    private final Texture zoomTableau;
     private Texture zoomCoffre;
     private final Texture coffreOK;
     private final Texture coffreKO;
@@ -102,8 +102,8 @@ public class Warp extends UI {
 
     public Warp(EscapeFromLannionCity game, String timeTotal,int bonus, int usedHint) {
         super(game, "music/enigme_3.wav", new String[]{"1. La bouteille bleue contient un objet singulier ...\n",
-                "2. La photo du space invader semble louche ...\n",
-                "3. Les chevalets de la salle ont été repeint très récemment. "}
+                "2. La photo du space-invader semble louche ...\n",
+                "3. Les chevalets de la salle ont été repeint tres recemment. "}
                 ,timeTotal,bonus,usedHint);
         // init textures zone comptoir
         principal = new Texture(Gdx.files.internal("image/Warp/comptoir.png"));
@@ -214,7 +214,7 @@ public class Warp extends UI {
 
 
         // init des utilitaires
-        zoneQuitter = new GameObject(Gdx.files.internal(("image/Utilitaire/quitZoom.png")), 223,125,6,6,"");
+        zoneQuitter = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 223,125,6,6,"");
         isDecapsuleurPicked = false;
         isPiecePicked = false;
         isBorneTurnedOn = false;
@@ -492,11 +492,14 @@ public class Warp extends UI {
                         }
                         background.setRegion(zoomTableau);
                         zoneGauche.hide();
-                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && !game.inventory.hasIn(clefs)) {
+                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && !game.inventory.hasIn(clefs) && !isOpened) {
                         background.setRegion(zoomCoffre);
                         zoneGauche.hide();
-                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && (game.inventory.hasIn(clefs) || isOpened)) {
+                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && game.inventory.hasIn(clefs) && isOpened) {
                         background.setRegion(coffreOuvertSsCle);
+                        zoneGauche.hide();
+                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && !game.inventory.hasIn(clefs) && isOpened) {
+                        background.setRegion(coffreOuvert);
                         zoneGauche.hide();
                     } else if (zoneGauche.contains(touched)) {
                         if (isDecapsuleurPicked && isPiecePicked) {
@@ -585,6 +588,7 @@ public class Warp extends UI {
                             for (int i = 0; i < 4; i++) {
                                 if (codeCompose[0] + 1 == code[0] && codeCompose[1] + 1 == code[1] && codeCompose[2] + 1 == code[2] && codeCompose[3] + 1 == code[3]) {
                                     background.setRegion(coffreOK);
+                                    isOpened = true;
                                 } else if (codeCompose[i] + 1 != code[i]) {
                                     background.setRegion(coffreKO);
                                     flavorText.setText("Zut...");
@@ -600,7 +604,6 @@ public class Warp extends UI {
                             if (poigneeCoffre.contains(touched)) {
                                 flavorText.setText("Je devrais probablement rappeler le patron pour lui expliquer ceci ...");
                                 background.setRegion(coffreOuvert);
-                                isOpened = true;
                             }
                         }
                     }
