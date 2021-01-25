@@ -23,6 +23,21 @@ public class SAmphiEnssat implements Serializable {
     int bonus;
     int usedHint;
 
+    /**
+     * * Constructeur de la classe qu'on serialize pour stocker les informations nécéssaires à la reconstruction
+     * de l'écran de la partie en cours.
+     * @param timeTotal   -- commun à tous les écrans, temps depuis le commencement du jeu
+     * @param timeFromBegin temps depuis que l'écran actif est affiché
+     * @param bonus  --commun à tous les écrans bonus que l'utilisateur a gagné
+     * @param usedHint  -- commun à tous les écrans nombre d'indice utilisés par le joueur
+     * @param lights
+     * @param carteValide
+     * @param porteVerr
+     * @param hint2
+     * @param carte
+     * @param interrupteur
+     * @param number
+     */
     public SAmphiEnssat(String timeTotal, String timeFromBegin, int bonus, int usedHint, boolean lights,
             boolean carteValide, boolean porteVerr, boolean hint2, boolean carte, int[] interrupteur,  int[] number) {
         for (int i = 0; i < interrupteur.length; i++){
@@ -43,7 +58,11 @@ public class SAmphiEnssat implements Serializable {
         this.usedHint = usedHint;
     }
 
-
+    /**
+     * Stocke sous forme d'un fichier .txt les informations importantes à la reconstruction
+     * d'une partie sauvegarder dans la pièce où la sauvegarde à lieu, ici l'amphitheatre.
+     * @param Amp la classe de la scene à enregistrer, qui contient qussi des informations sur l'utilisateur pour qui on enregistre la partie
+     */
     public static void Enregistrer(Screen Amp){
         int[] interrupteur = new int[11];
         int[] number = new int[4];
@@ -95,7 +114,12 @@ public class SAmphiEnssat implements Serializable {
         }catch(Exception e){System.out.println(e);}
     }
 
-
+    /**
+     * Ouvre un fichier de sauvegarde d'une partie depuis un fichier .txt stocké dans Parties, et retourne la classe AmphEnssat.java correspondante avec
+     * les paramètres et écrans correspondants au stockage.
+     * @param game le jeu dans lequel on se trouve
+     * @return AmphiEnssat Screen de la partie enregistrée
+     */
     public static AmphiEnssat Ouvrir(EscapeFromLannionCity game){
         try{
             ObjectInputStream in;

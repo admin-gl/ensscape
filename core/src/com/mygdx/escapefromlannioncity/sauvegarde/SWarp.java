@@ -29,6 +29,27 @@ public class SWarp implements Serializable {
     int bonus;
     int usedHint;
 
+    /**
+     * Création de la classe SWarp, classe qui est sérializée pour stocker une partie, car elle contient les informations nécessaires pour reprendre une partie depuis
+     * là où l'on l'a laissée dans le Warp.
+     * @param timeTotal   -- commun à tous les écrans, temps depuis le commencement du jeu
+     * @param timeFromBegin temps depuis que l'écran actif est affiché
+     * @param bonus  --commun à tous les écrans bonus que l'utilisateur a gagné
+     * @param usedHint  -- commun à tous les écrans nombre d'indice utilisés par le joueur
+     * @param isOpened
+     * @param isDecapsuleurPicked
+     * @param isBorneTurnedOn
+     * @param isPiecePicked
+     * @param isBorneAlreadyClicked
+     * @param areChevBross
+     * @param isBrossePicked
+     * @param isCoffreDiscoverd
+     * @param isChev1Bross
+     * @param isChev2Bross
+     * @param isBiereAlreadyClicked
+     * @param isTableauAlreadyClicked
+     * @param clef
+     */
     public SWarp(String timeTotal, String timeFromBegin, int bonus, int usedHint,
                        boolean isOpened, boolean isDecapsuleurPicked, boolean isBorneTurnedOn,
                        boolean isPiecePicked, boolean isBorneAlreadyClicked, boolean areChevBross,
@@ -54,7 +75,11 @@ public class SWarp implements Serializable {
         this.usedHint = usedHint;
     }
 
-
+    /**
+     * Stocke sous forme d'un fichier .txt les informations importantes à la reconstruction
+     * d'une partie sauvegarder dans la pièce où la sauvegarde à lieu, ici le Warp.
+     * @param Amp la classe de la scene à enregistrer, qui contient qussi des informations sur l'utilisateur pour qui on enregistre la partie
+     */
     public static void Enregistrer(Screen Amp){
 
         Warp warp = (Warp) Amp;
@@ -106,7 +131,12 @@ public class SWarp implements Serializable {
         }catch(Exception e){System.out.println(e);}
     }
 
-
+    /**
+     * Ouvre un fichier de sauvegarde d'une partie depuis un fichier .txt stocké dans Parties, et retourne la classe Warp.java correspondante avec
+     * les paramètres et écrans correspondants au stockage.
+     * @param game le jeu dans lequel on se trouve
+     * @return Warp Screen de la partie enregistrée
+     */
     public static Warp Ouvrir(EscapeFromLannionCity game){
         try{
             ObjectInputStream in;
@@ -150,7 +180,11 @@ public class SWarp implements Serializable {
         }
     }
 
-
+    /**
+     * Supprime une sauvegarde d'un utilisateur
+     * @param dir répertoire où est stocké le fichier à supprimer
+     * @param pseudo du joueur dont on veut supprimer une sauvegarde
+     */
     public static void Supprimer(String dir, String pseudo){
         File file = new File(dir);
         File[] files = file.listFiles();
@@ -166,6 +200,14 @@ public class SWarp implements Serializable {
             }
         }
     }
+
+    /**
+     * Verifie si une partie a été enregistré dans Parties pour le joueur, et retourne l'endroit de la partie enregistré si c'est le cas.
+     *
+     * @param isLoggedin si l'utilisateur joue hors ligne ou non
+     * @param pseudo le pseudo de la personne dont on cherche une sauvegarde de partie
+     * @return 0 si aucun fichier trouvé, 1 si on était dans l'amphi, 2 dans le parc, 3 dans le warp
+     */
     public static int isPartie(int isLoggedin, String pseudo){
         File file;
 
