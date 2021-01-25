@@ -102,8 +102,8 @@ public class Warp extends UI {
 
     public Warp(EscapeFromLannionCity game, String timeTotal,int bonus, int usedHint) {
         super(game, "music/enigme_3.wav", new String[]{"1. La bouteille bleue contient un objet singulier ...\n",
-                "2. La photo du space invader semble louche ...\n",
-                "3. Les chevalets de la salle ont été repeint très récemment. "}
+                "2. La photo du space-invader semble louche ...\n",
+                "3. Les chevalets de la salle ont été repeint tres recemment. "}
                 ,timeTotal,bonus,usedHint);
         // init textures zone comptoir
         principal = new Texture(Gdx.files.internal("image/Warp/comptoir.png"));
@@ -492,11 +492,14 @@ public class Warp extends UI {
                         }
                         background.setRegion(zoomTableau);
                         zoneGauche.hide();
-                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && !game.inventory.hasIn(clefs)) {
+                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && !game.inventory.hasIn(clefs) && !isOpened) {
                         background.setRegion(zoomCoffre);
                         zoneGauche.hide();
-                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && game.inventory.hasIn(clefs)) {
+                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && game.inventory.hasIn(clefs) && isOpened) {
                         background.setRegion(coffreOuvertSsCle);
+                        zoneGauche.hide();
+                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && !game.inventory.hasIn(clefs) && isOpened) {
+                        background.setRegion(coffreOuvert);
                         zoneGauche.hide();
                     } else if (zoneGauche.contains(touched)) {
                         if (isDecapsuleurPicked && isPiecePicked) {
@@ -523,7 +526,7 @@ public class Warp extends UI {
 
                 } else if (background.getTexture().toString().matches("image/Warp/tableau.*") && !isCoffreDiscovered) {
                     if (boutonTableau.contains(touched)) {
-                        flavorText.setText("Il y avait un coffre-fort caché derrière !");
+                        flavorText.setText("Il y avait un coffre-fort cache derriere !");
                         isCoffreDiscovered = true;
                         background.setRegion(zoomCoffre);
                     } else if (zoneQuitter.contains(touched)) {

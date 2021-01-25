@@ -70,8 +70,8 @@ public class ParcStAnne extends UI {
 
     public ParcStAnne(EscapeFromLannionCity game, String timeTotal, int bonus, int usedHint) {
         super(game, "music/enigme_2.wav", new String[]{"1. Posez vous quelque part avec certains objets afin de pouvoir en creer un nouveau\n",
-                                                                    "2. Une canne A peche peut vos servir a atteindre des profondeur, mais aussi des hauteurs\n",
-                                                                    "3. Le papier que vous avez ramasser contient un code. Il est surement utilisable quelque part... comme une porte"}
+                                                                    "2. Une canne a peche peut vous servir a atteindre des profondeurs, mais aussi des hauteurs\n",
+                                                                    "3. Le papier que vous avez ramasse contient un code. Il est surement utilisable quelque part... comme une porte"}
                                                                     ,timeTotal, bonus, usedHint);
         // init textures zone principale
         principal = new Texture(Gdx.files.internal("image/ParcStAnne/ParcVueGloballe.png"));
@@ -271,14 +271,14 @@ public class ParcStAnne extends UI {
 
                 } else if (background.getTexture().toString().matches("image/ParcStAnne/banczoomed.*")) {
                     if (journalDePeche.contains(touched)) {
-                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
                     } else if (zoneFil.contains(touched)) {
-                        flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourait m'etre utile.");
+                        flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourrait m'etre utile.");
                         game.inventory.add(ficelle);
                         isStringPicked = true;
                         background.setRegion(zoomBancMetalOnly);
                     } else if (zoneFeraille.contains(touched)) {
-                        flavorText.setText("Un vielle opercule de canette. Je le prend pour ma collection !");
+                        flavorText.setText("Un vieil opercule de canette. Je le prend pour ma collection !");
                         game.inventory.add(ferraille);
                         isMetalPicked = true;
                         background.setRegion(zoomBancStringOnly);
@@ -293,9 +293,9 @@ public class ParcStAnne extends UI {
 
                 } else if (background.getTexture().toString().matches("image/ParcStAnne/sansFerailleParc.*")) {
                     if (journalDePeche.contains(touched)) {
-                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
                     } else if (zoneFil.contains(touched)) {
-                        flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourait m'etre utile.");
+                        flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourrait m'etre utile.");
                         game.inventory.add(ficelle);
                         isStringPicked = true;
                         background.setRegion(zoomBancVide);
@@ -310,9 +310,9 @@ public class ParcStAnne extends UI {
 
                 } else if (background.getTexture().toString().matches("image/ParcStAnne/sansFilBanc.*")) {
                     if (journalDePeche.contains(touched)) {
-                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
                     } else if (zoneFeraille.contains(touched)) {
-                        flavorText.setText("Un vielle opercule de canette. Je le prend pour ma collection !");
+                        flavorText.setText("Un vieil opercule de canette. Je le prend pour ma collection !");
                         game.inventory.add(ferraille);
                         isMetalPicked = true;
                         background.setRegion(zoomBancVide);
@@ -327,7 +327,7 @@ public class ParcStAnne extends UI {
 
                 } else if (background.getTexture().toString().matches("image/ParcStAnne/sansobjetbanc.*")) {
                     if (journalDePeche.contains(touched)) {
-                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
                     } else if (zoneQuitter.contains(touched)) {
                         if (isBatonPicked) {
                             background.setRegion(principalBatonless);
@@ -381,13 +381,13 @@ public class ParcStAnne extends UI {
 
                     if (zoneCraft.contains(touched)) {
                         if (game.inventory.hasIn(ficelle) && game.inventory.hasIn(ferraille) && game.inventory.hasIn(baton)) {
-                            flavorText.setText("avec cette ficelle, ce baton et ce morceau de ferraille je devrais pouvoir me faire une canne a peche.\nIl ne me reste plus qu'a lui trouver une utilite...");
+                            flavorText.setText("Avec cette ficelle, ce baton et ce morceau de ferraille, je devrais pouvoir me faire une canne a peche.\nIl ne me reste plus qu'a lui trouver une utilite...");
                             game.inventory.remove(ficelle);
                             game.inventory.remove(ferraille);
                             game.inventory.remove(baton);
                             game.inventory.add(canneAPeche);
                         } else {
-                            flavorText.setText("Cet etablie ne me sert pas a grand chose pour le moment...");
+                            flavorText.setText("Cet etabli ne me sert pas a grand chose pour le moment...");
                         }
                     } else if (banc.contains(touched)) {
                         if (isStringPicked && isMetalPicked) {
@@ -405,11 +405,11 @@ public class ParcStAnne extends UI {
                             flavorText.setText("Partons d'ici.");
                             finNiveau = true;
                         } else {
-                            flavorText.setText("Cette cloture est trop haute pour que je puis passer par dessus sans aide.");
+                            flavorText.setText("Cette cloture est trop haute pour que je puisse passer par dessus sans aide.");
                         }
                     } else if (lac.contains(touched)) {
                         if (game.inventory.hasIn(canneAPeche)) {
-                            flavorText.setText("...\n...\n... Je pense que je ne devais pas pecher litteralement...");
+                            flavorText.setText("...\n...\n... Ce n'est pas le mement...");
                         } else {
                             flavorText.setText("Ce lac est magnifique, peut etre qu'il y a des poissons dedans.");
                         }

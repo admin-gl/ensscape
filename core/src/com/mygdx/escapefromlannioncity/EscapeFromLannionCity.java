@@ -43,7 +43,7 @@ public class EscapeFromLannionCity extends Game {
 		menuEtTableau[2] = new Accueil(this);
 		menuEtTableau[3] = new MenuPrincipal(this);
 
-		this.setScreen(menuEtTableau[1]);
+		this.setScreen(menuEtTableau[3]);
 
 		// teste la création de fichiers de scores
 		//TestMain.TestScore();

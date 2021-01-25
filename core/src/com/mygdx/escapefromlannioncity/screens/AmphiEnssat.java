@@ -70,7 +70,7 @@ public class AmphiEnssat extends UI {
 
         super(game, "music/enigme_1.wav", new String[]{"1. Le panneau electrique contient un Post-it qui indique quels interrupteurs actionner\n",
                                                                     "2. La carte etudiante n'est pas utilisable en l'etat. Un ordinateur pourrait etre utile\n",
-                                                                    "3. Le code pour la carte etudiante est relie au tableau blanc. il suffit de faire correspondre les couleurs aux chiffres"}
+                                                                    "3. Le code pour la carte etudiante est relie au tableau blanc. Il suffit de faire correspondre les couleurs aux chiffres"}
                                                          ,timeTotal,bonus,usedHint );
 
         // init textures zone principale
@@ -289,7 +289,7 @@ public class AmphiEnssat extends UI {
                                     lights = true;
                                     background.setRegion(zoomElecClair);
                                     if (!first_light) {
-                                        flavorText.setText("la lumiere est revenu, je vais pouvoir explorer cette piece.");
+                                        flavorText.setText("La lumiere est revenue, je vais pouvoir explorer cette piece.");
                                         first_light = true;
                                     }
                                 } else {
@@ -331,7 +331,7 @@ public class AmphiEnssat extends UI {
                                         cartePasOk.hide();
                                         if (!first_carte) {
                                             first_carte = true;
-                                            flavorText.setText("Le code semble bon. Il  me reste plus qu'a utiliser cette carte pour sortir d'ici");
+                                            flavorText.setText("Le code semble bon. Il ne me reste plus qu'a utiliser cette carte pour sortir d'ici");
                                         }
                                     } else {
                                         carteValide = false;
@@ -376,7 +376,7 @@ public class AmphiEnssat extends UI {
                 } else if (background.getTexture().toString().matches("image/Amphi_Enssat/fond[aA]mphi.*")) {
                     if (!game.inventory.hasIn(carteEtu)) {
                         if (zoneCarte.contains(touched)) {
-                            flavorText.setText("une carte magnetique d'un etudiant. Elle semble posseder un code en bas a droite...");
+                            flavorText.setText("Une carte magnetique d'un etudiant. Elle semble posseder un code en bas a droite...");
                             game.inventory.add(carteEtu);
                             background.setRegion(fondAmphiSansCarte);
                         }
