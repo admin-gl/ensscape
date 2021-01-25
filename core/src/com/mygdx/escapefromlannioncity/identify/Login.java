@@ -3,6 +3,7 @@ package com.mygdx.escapefromlannioncity.identify;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,11 +18,15 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
+import com.mygdx.escapefromlannioncity.menu.MenuPrincipal;
 import com.mygdx.escapefromlannioncity.siteweb.GetJoueur;
 
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 public class Login implements Screen {
+
+    public Music musique;
+
     private final EscapeFromLannionCity game;
 
     private final Viewport viewport;
@@ -40,7 +45,7 @@ public class Login implements Screen {
     public Login(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;
-        Texture menuing = new Texture(Gdx.files.internal("image/Utilitaire/blacksquare.png"));
+        Texture menuing = new Texture(Gdx.files.internal("image/Utilitaire/fondMenuPricipal.jpg"));
         // place une camera dans la vue actuelle de la fenêtre
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -113,6 +118,9 @@ public class Login implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stageLogin);
+        musique = ((MenuPrincipal)game.menuEtTableau[3]).musique;
+        musique.setVolume(game.volume);
+        musique.play();
     }
 
     @Override
@@ -190,24 +198,24 @@ public class Login implements Screen {
             viewport.update(width, height);
         }
 
-        @Override
-        public void pause() {
+    @Override
+    public void pause() {
+        musique.pause();
+    }
 
-        }
+    @Override
+    public void resume() {
+        musique.setVolume(game.volume);
+        musique.play();
+    }
 
-        @Override
-        public void resume() {
+    @Override
+    public void hide() {
+        musique.pause();
+    }
 
-        }
-
-        @Override
-        public void hide() {
-
-        }
-
-        @Override
-        public void dispose() {
+    @Override
+    public void dispose() {
             stageLogin.dispose();
-
-        }
+    }
 }

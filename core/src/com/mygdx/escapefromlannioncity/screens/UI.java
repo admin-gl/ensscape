@@ -7,9 +7,13 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFontCache;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g3d.environment.BaseLight;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -17,9 +21,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
 import com.mygdx.escapefromlannioncity.score.ReviewScore;
+import com.mygdx.escapefromlannioncity.utility.AnimatedGameObject;
 import com.mygdx.escapefromlannioncity.utility.ChangingCursor;
 import com.mygdx.escapefromlannioncity.utility.FlavorText;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
+
+import static java.lang.Math.max;
 
 /**
  * Class d'affichage utilisateur
@@ -27,6 +34,12 @@ import com.mygdx.escapefromlannioncity.utility.GameObject;
  */
 public abstract class UI implements Screen {
 
+    //transition stuff
+    private final BitmapFontCache upperText;
+    private final BitmapFontCache lowerText;
+    private long debTrans;
+
+    public SpriteDrawable bg;
     public Sprite background;
 
     private final Music musique;
@@ -66,9 +79,8 @@ public abstract class UI implements Screen {
     private final String[] hints;
     private String textHint;
     private int usedHint;
-
-
-
+    public boolean timerOn;
+    private boolean isTransition;
 
     public UI(EscapeFromLannionCity game, String pathMusique, String[] hints, String timeTotal,
               int bonus, int usedHint) {
@@ -132,74 +144,110 @@ public abstract class UI implements Screen {
         flavorText = new FlavorText(game, "", Color.WHITE, "Dialogue");
         hint = new FlavorText(game, "", Color.YELLOW, "Hint");
 
+        upperText = game.mainFont.newFontCache();
+        lowerText = game.mainFont.newFontCache();
+
+        lowerText.setText("Appuyer pour continuer", 0, Gdx.graphics.getHeight()/10f, Gdx.graphics.getWidth(), Align.center ,true);
+
         //usedHint = 0;
         textHint = "";
 
         finNiveau = false;
+        timerOn = false;
+
+        afficheTransition();
+
+        isTransition = true;
     }
 
 
     @Override
     public void show() {
-        musique.setVolume(game.volume);
-        musique.play();
-        lastTime = TimeUtils.millis() - timeAtPause;
+        if(timerOn) {
+            musique.setVolume(game.volume);
+            musique.play();
+            lastTime = TimeUtils.millis() - timeAtPause;
+        }
+        debTrans = TimeUtils.millis();
+        bg = bg.tint(new Color(0,0,0,1));
     }
 
     @Override
     public void render(float delta) {
-        timePassed();
-        //Affiche le bouton "flottant" de Menu
-        buttonMenu.initButtonMenu(game);
 
         // check pour un clic gauche de la souris
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
 
-            if(!flavorText.isDrawing() && !hint.isDrawing() && !textZone.isHidden()){
-                textZone.hide();
-                flavorText.setText("");
-                hint.setText("");
-            } else if(flavorText.isDrawing()){
-                flavorText.drawAll(game.batch);
-            } else if(hint.isDrawing()){
-                hint.drawAll(game.batch);
+            if(timerOn) {
+                if (!flavorText.isDrawing() && !hint.isDrawing() && !textZone.isHidden()) {
+                    textZone.hide();
+                    flavorText.setText("");
+                    hint.setText("");
+                } else if (flavorText.isDrawing()) {
+                    flavorText.drawAll(game.batch);
+                } else if (hint.isDrawing()) {
+                    hint.drawAll(game.batch);
+                }
+
+                // prend les coordonnees du clic et les convertis en coordonnees du monde
+                Vector2 touched = new Vector2();
+                touched.set(Gdx.input.getX(), Gdx.input.getY());
+                viewport.unproject(touched);
+
+                // Lance le Menu si on clique sur le Bouton correspondant
+                if (buttonMenu.contains(touched)) {
+                    game.setScreen(game.menuEtTableau[0]);
+                }
+                game.inventory.checkZoom(touched, game.batch);
+            }
+        }
+
+        if(timerOn) {
+            timePassed();
+
+            buttonMenu.initButtonMenu(game);
+            zoneDroite.drawFix(game.batch);
+            zoneGauche.drawFix(game.batch);
+            zoneTimer.drawFix(game.batch);
+            buttonHint.drawFix(game.batch);
+
+            game.inventory.drawFix(game.batch);
+            for(GameObject object : game.inventory.container){
+                object.drawFix(game.batch);
             }
 
-            // prend les coordonnees du clic et les convertis en coordonnees du monde
-            Vector2 touched = new Vector2();
-            touched.set(Gdx.input.getX(), Gdx.input.getY());
-            viewport.unproject(touched);
+            textZone.drawFix(game.batch);
+            flavorText.draw(game.batch);
+            hint.draw(game.batch);
 
-            // Lance le Menu si on clique sur le Bouton correspondant
-            if(buttonMenu.contains(touched)){
-                game.setScreen(game.menuEtTableau[0]);
+            timerText.draw(game.batch);
+
+
+            if((flavorText.isDrawing() || hint.isDrawing()) && textZone.isHidden()){
+                textZone.unhide();
             }
-            game.inventory.checkZoom(touched, game.batch);
-        }
 
-        zoneDroite.drawFix(game.batch);
-        zoneGauche.drawFix(game.batch);
-        zoneTimer.drawFix(game.batch);
-        buttonHint.drawFix(game.batch);
+            if(!flavorText.isDrawing() && !hint.isDrawing() && textZone.isHidden() && finNiveau){
+                endTableau();
+            }
+        } else {
+            upperText.draw(game.batch);
 
-        game.inventory.drawFix(game.batch);
-        for(GameObject object : game.inventory.container){
-            object.drawFix(game.batch);
-        }
+            float alpha = max(0, (2000 - TimeUtils.timeSinceMillis(debTrans))/2000f);
+            bg = bg.tint(new Color(0,0,0,alpha));
+            if(alpha == 0){
+                isTransition = false;
+            }
+            if(!isTransition) {
+                if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+                    timerOn = true;
+                    this.show();
+                }
+                if (TimeUtils.millis() % 1000 > 500) {
+                    lowerText.draw(game.batch);
+                }
 
-        textZone.drawFix(game.batch);
-        flavorText.draw(game.batch);
-        hint.draw(game.batch);
-
-        timerText.draw(game.batch);
-
-
-        if((flavorText.isDrawing() || hint.isDrawing()) && textZone.isHidden()){
-            textZone.unhide();
-        }
-
-        if(!flavorText.isDrawing() && !hint.isDrawing() && textZone.isHidden() && finNiveau){
-            endTableau();
+            }
         }
 
         game.batch.flush();
@@ -213,21 +261,27 @@ public abstract class UI implements Screen {
 
     @Override
     public void pause() {
-        musique.pause();
-        timeAtPause = TimeUtils.millis() - lastTime;
+        if(timerOn) {
+            musique.pause();
+            timeAtPause = TimeUtils.millis() - lastTime;
+        }
     }
 
     @Override
     public void resume() {
-        musique.setVolume(game.volume);
-        musique.play();
-        lastTime = TimeUtils.millis() - timeAtPause;
+        if(timerOn) {
+            musique.setVolume(game.volume);
+            musique.play();
+            lastTime = TimeUtils.millis() - timeAtPause;
+        }
     }
 
     @Override
     public void hide() {
-        musique.pause();
-        timeAtPause = TimeUtils.millis() - lastTime;
+        if (timerOn) {
+            musique.pause();
+            timeAtPause = TimeUtils.millis() - lastTime;
+        }
     }
 
     @Override
@@ -255,6 +309,9 @@ public abstract class UI implements Screen {
 
         game.batch.begin();
         game.batch.draw(background.getTexture(), 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
+        if(isTransition) {
+            bg.draw(game.batch, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
+        }
     }
 
     /**
@@ -347,6 +404,16 @@ public abstract class UI implements Screen {
             usedHint =usedHint +1;
         }
         hint.setText(textHint);
+    }
+
+    public void afficheTransition(){
+        if(this.getClass().toString().matches(".*AmphiEnssat")){
+            upperText.setText("Vous vous retrouvez dans l'amphiteatre 137c", 0, Gdx.graphics.getHeight()*9/10f, Gdx.graphics.getWidth(), Align.center ,true);
+        } if(this.getClass().toString().matches(".*ParcStAnne")){
+            upperText.setText("Vous penetrez dans le parc St Anne", 0, Gdx.graphics.getHeight()*9/10f, Gdx.graphics.getWidth(), Align.center ,true);
+        } else if(this.getClass().toString().matches(".*Warp")){
+            upperText.setText("Vous prenez la direction du Warp", 0, Gdx.graphics.getHeight()*9/10f, Gdx.graphics.getWidth(), Align.center ,true);
+        }
     }
 
     /**

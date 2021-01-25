@@ -173,10 +173,9 @@ public class ReviewScore implements Screen {
 
             if(retour.isPressed()){
                 Score.AddScoreLoc(this.score);
-                game.dispose();
                 this.dispose();
                 // on revient au menu principal
-                // game.setScreen(game.menuEtTableau[0]);
+                game.setScreen(game.menuEtTableau[3]);
             }
 
             if (button.isPressed()) {

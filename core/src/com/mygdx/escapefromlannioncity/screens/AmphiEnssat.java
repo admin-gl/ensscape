@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.sauvegarde.SAmphiEnssat;
@@ -168,227 +169,228 @@ public class AmphiEnssat extends UI {
 
         zoneDroite.hide();
 
+        bg = new SpriteDrawable(background);
+
     }
 
     @Override
     public void render(float delta) {
         super.setupRender();
-
-        if(background.getTexture().toString().matches("image/Amphi_Enssat/tableauelec.*")) {
-            for (AnimatedGameObject inter : Interrupteurs) {
-                inter.drawFix(game.batch);
-            }
-        }
-
-        if(background.getTexture().toString().contentEquals("image/Amphi_Enssat/ordiallume.png")){
-            for(AnimatedGameObject num: Numbers){
-                num.drawFix(game.batch);
-            }
-            carteOk.drawFix(game.batch);
-            cartePasOk.drawFix(game.batch);
-        }
-
-
-
-        // controle du cursor au survol d'un GameObject avec lequel on peut actuellement interagir
-        if(background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c.piece1.*")){
-            if(!cursor.survol(zoneElec, (StretchViewport) viewport)){
-                if(!cursor.survol(zoneTableau, (StretchViewport) viewport)){
-                    cursor.survol(zonePc, (StretchViewport) viewport);
-                }
-            }
-        } else if(background.getTexture().toString().matches("image/Amphi_Enssat/fondAmphi.*")){
-            cursor.survol(zoneCarte, (StretchViewport) viewport);
-        } else if(background.getTexture().toString().matches("image/Amphi_Enssat/amphiporte.*")){
-            if(!cursor.survol(zoneBadge, (StretchViewport) viewport)){
-                cursor.survol(porteSortie, (StretchViewport) viewport);
-            }
-        } else if(background.getTexture().toString().matches("image/Amphi_Enssat/tableauelec.*")){
-            cursor.survol(Interrupteurs, (StretchViewport) viewport);
-        }else if(background.getTexture().toString().matches("image/Amphi_Enssat/ordiallume.*")){
-            cursor.survol(Numbers, (StretchViewport) viewport);
-        }
-        else {
-            cursor.reset();
-        } // fin control curseur au survol
-
-
-        // check pour un clic gauche de la souris
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && textZone.isHidden()) {
-            // prend les coordonnees du clic et les convertis en coordonnees du monde
-            Vector2 touched = new Vector2();
-            touched.set(Gdx.input.getX(), Gdx.input.getY());
-            viewport.unproject(touched);
-
-            if(buttonHint.contains(touched)){
-
-                if(!lights || !game.inventory.hasIn(carteEtu)){
-                    super.showHint(0);
-                } else if(game.inventory.hasIn(carteEtu) && !hint2){
-                    super.showHint(1);
-                    hint2 = true;
-                } else if(game.inventory.hasIn(carteEtu) && hint2){
-                    super.showHint(2);
+        if(timerOn) {
+            if (background.getTexture().toString().matches("image/Amphi_Enssat/tableauelec.*")) {
+                for (AnimatedGameObject inter : Interrupteurs) {
+                    inter.drawFix(game.batch);
                 }
             }
 
-            if (background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c-piece1.*")){
-                if(!lights) {
-                    if (zoneGauche.contains(touched)) {
-                        flavorText.setText("Il fait trop sombre pour m'aventurer dans cette piece.");
-                    } else if (zoneTableau.contains(touched)) {
-                        flavorText.setText("Il semblerait qu'il y ait quelque chose d'ecrit sur ce tableau...\n la penombre m'empeche de discerner ce que c'est");
-                    } else if(zonePc.contains(touched)){
-                        background.setRegion(zoomOrdiEteint);
-                        zoneGauche.hide();
-                    } else if(zoneElec.contains(touched)){
-                        zoneGauche.hide();
-                        background.setRegion(zoomElecSombre);
+            if (background.getTexture().toString().contentEquals("image/Amphi_Enssat/ordiallume.png")) {
+                for (AnimatedGameObject num : Numbers) {
+                    num.drawFix(game.batch);
+                }
+                carteOk.drawFix(game.batch);
+                cartePasOk.drawFix(game.batch);
+            }
+
+
+            // controle du cursor au survol d'un GameObject avec lequel on peut actuellement interagir
+            if (background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c.piece1.*")) {
+                if (!cursor.survol(zoneElec, (StretchViewport) viewport)) {
+                    if (!cursor.survol(zoneTableau, (StretchViewport) viewport)) {
+                        cursor.survol(zonePc, (StretchViewport) viewport);
                     }
-                } else {
-                    if(zoneGauche.contains(touched)){
-                        zoneDroite.unhide();
-                        if(porteVerr) {
-                            background.setRegion(amphiPorte);
-                        } else {
-                            background.setRegion(amphiPorteOuv);
+                }
+            } else if (background.getTexture().toString().matches("image/Amphi_Enssat/fondAmphi.*")) {
+                cursor.survol(zoneCarte, (StretchViewport) viewport);
+            } else if (background.getTexture().toString().matches("image/Amphi_Enssat/amphiporte.*")) {
+                if (!cursor.survol(zoneBadge, (StretchViewport) viewport)) {
+                    cursor.survol(porteSortie, (StretchViewport) viewport);
+                }
+            } else if (background.getTexture().toString().matches("image/Amphi_Enssat/tableauelec.*")) {
+                cursor.survol(Interrupteurs, (StretchViewport) viewport);
+            } else if (background.getTexture().toString().matches("image/Amphi_Enssat/ordiallume.*")) {
+                cursor.survol(Numbers, (StretchViewport) viewport);
+            } else {
+                cursor.reset();
+            } // fin control curseur au survol
+
+
+            // check pour un clic gauche de la souris
+            if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && textZone.isHidden()) {
+                // prend les coordonnees du clic et les convertis en coordonnees du monde
+                Vector2 touched = new Vector2();
+                touched.set(Gdx.input.getX(), Gdx.input.getY());
+                viewport.unproject(touched);
+
+                if (buttonHint.contains(touched)) {
+
+                    if (!lights || !game.inventory.hasIn(carteEtu)) {
+                        super.showHint(0);
+                    } else if (game.inventory.hasIn(carteEtu) && !hint2) {
+                        super.showHint(1);
+                        hint2 = true;
+                    } else if (game.inventory.hasIn(carteEtu) && hint2) {
+                        super.showHint(2);
+                    }
+                }
+
+                if (background.getTexture().toString().matches("image/Amphi_Enssat/Amphi137c-piece1.*")) {
+                    if (!lights) {
+                        if (zoneGauche.contains(touched)) {
+                            flavorText.setText("Il fait trop sombre pour m'aventurer dans cette piece.");
+                        } else if (zoneTableau.contains(touched)) {
+                            flavorText.setText("Il semblerait qu'il y ait quelque chose d'ecrit sur ce tableau...\n la penombre m'empeche de discerner ce que c'est");
+                        } else if (zonePc.contains(touched)) {
+                            background.setRegion(zoomOrdiEteint);
+                            zoneGauche.hide();
+                        } else if (zoneElec.contains(touched)) {
+                            zoneGauche.hide();
+                            background.setRegion(zoomElecSombre);
                         }
-                    } else if (zoneTableau.contains(touched)){
-                        background.setRegion(zoomTableau);
-                        zoneGauche.hide();
-                    } else if(zonePc.contains(touched)){
-                        background.setRegion(zoomOrdiAllume);
-                        zoneGauche.hide();
-                    } else if(zoneElec.contains(touched)){
-                        zoneGauche.hide();
-                        background.setRegion(zoomElecClair);
-                    }
-                }
-            } else if(background.getTexture().toString().matches("image/Amphi_Enssat/tableauelec.*")){
-                if(quitZoom.contains(touched)){
-                    if(lights){
-                        background.setRegion(brightPlace);
-                    } else{
-                        background.setRegion(darkPlace);
-                    }
-                    zoneGauche.unhide();
-                } else {
-                    for (AnimatedGameObject inter : Interrupteurs) {
-                        if (inter.contains(touched)) {
-                            inter.changeStat(true);
-                            int i = 0;
-                            boolean verif = false;
-                            while (!verif && i < 11) {
-                                if (Interrupteurs[i].getState() != code[i]) {
-                                    verif = true;
-                                }
-                                i++;
-                            }
-                            if (!verif) {
-                                lights = true;
-                                background.setRegion(zoomElecClair);
-                                if (!first_light) {
-                                    flavorText.setText("la lumiere est revenu, je vais pouvoir explorer cette piece.");
-                                    first_light = true;
-                                }
-                            } else {
-                                lights = false;
-                                background.setRegion(zoomElecSombre);
-                            }
-                        }
-                    }
-                }
-            } else if(background.getTexture().toString().matches("image/Amphi_Enssat/zoomtableau.*")){
-                if(quitZoom.contains(touched)){
-                    if(lights){
-                        background.setRegion(brightPlace);
                     } else {
-                        background.setRegion(darkPlace);
+                        if (zoneGauche.contains(touched)) {
+                            zoneDroite.unhide();
+                            if (porteVerr) {
+                                background.setRegion(amphiPorte);
+                            } else {
+                                background.setRegion(amphiPorteOuv);
+                            }
+                        } else if (zoneTableau.contains(touched)) {
+                            background.setRegion(zoomTableau);
+                            zoneGauche.hide();
+                        } else if (zonePc.contains(touched)) {
+                            background.setRegion(zoomOrdiAllume);
+                            zoneGauche.hide();
+                        } else if (zoneElec.contains(touched)) {
+                            zoneGauche.hide();
+                            background.setRegion(zoomElecClair);
+                        }
                     }
-                    zoneGauche.unhide();
-                }
-            } else if(background.getTexture().toString().matches("image/Amphi_Enssat/ordi.*")){
-                if(lights){
-                    if(quitZoom.contains(touched)){
-                        background.setRegion(brightPlace);
+                } else if (background.getTexture().toString().matches("image/Amphi_Enssat/tableauelec.*")) {
+                    if (quitZoom.contains(touched)) {
+                        if (lights) {
+                            background.setRegion(brightPlace);
+                        } else {
+                            background.setRegion(darkPlace);
+                        }
                         zoneGauche.unhide();
                     } else {
-                        for (AnimatedGameObject num : Numbers){
-                            if(num.contains(touched)){
-                                num.changeStat(true);
+                        for (AnimatedGameObject inter : Interrupteurs) {
+                            if (inter.contains(touched)) {
+                                inter.changeStat(true);
                                 int i = 0;
                                 boolean verif = false;
-                                while(!verif && i<4){
-                                    if(Numbers[i].getState()+1 != codeOrdi[i]){
+                                while (!verif && i < 11) {
+                                    if (Interrupteurs[i].getState() != code[i]) {
                                         verif = true;
                                     }
                                     i++;
                                 }
-                                if(!verif){
-                                    carteValide = true;
-                                    carteOk.unhide();
-                                    cartePasOk.hide();
-                                    if(!first_carte){
-                                        first_carte = true;
-                                        flavorText.setText("Le code semble bon. Il  me reste plus qu'a utiliser cette carte pour sortir d'ici");
+                                if (!verif) {
+                                    lights = true;
+                                    background.setRegion(zoomElecClair);
+                                    if (!first_light) {
+                                        flavorText.setText("la lumiere est revenu, je vais pouvoir explorer cette piece.");
+                                        first_light = true;
                                     }
                                 } else {
-                                    carteValide = false;
-                                    carteOk.hide();
-                                    cartePasOk.unhide();
+                                    lights = false;
+                                    background.setRegion(zoomElecSombre);
                                 }
                             }
                         }
                     }
-                } else {
-                    if(quitZoom.contains(touched)){
-                        background.setRegion(darkPlace);
+                } else if (background.getTexture().toString().matches("image/Amphi_Enssat/zoomtableau.*")) {
+                    if (quitZoom.contains(touched)) {
+                        if (lights) {
+                            background.setRegion(brightPlace);
+                        } else {
+                            background.setRegion(darkPlace);
+                        }
+                        zoneGauche.unhide();
+                    }
+                } else if (background.getTexture().toString().matches("image/Amphi_Enssat/ordi.*")) {
+                    if (lights) {
+                        if (quitZoom.contains(touched)) {
+                            background.setRegion(brightPlace);
+                            zoneGauche.unhide();
+                        } else {
+                            for (AnimatedGameObject num : Numbers) {
+                                if (num.contains(touched)) {
+                                    num.changeStat(true);
+                                    int i = 0;
+                                    boolean verif = false;
+                                    while (!verif && i < 4) {
+                                        if (Numbers[i].getState() + 1 != codeOrdi[i]) {
+                                            verif = true;
+                                        }
+                                        i++;
+                                    }
+                                    if (!verif) {
+                                        carteValide = true;
+                                        carteOk.unhide();
+                                        cartePasOk.hide();
+                                        if (!first_carte) {
+                                            first_carte = true;
+                                            flavorText.setText("Le code semble bon. Il  me reste plus qu'a utiliser cette carte pour sortir d'ici");
+                                        }
+                                    } else {
+                                        carteValide = false;
+                                        carteOk.hide();
+                                        cartePasOk.unhide();
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (quitZoom.contains(touched)) {
+                            background.setRegion(darkPlace);
+                            zoneGauche.unhide();
+                        }
+                    }
+                } else if (background.getTexture().toString().matches("image/Amphi_Enssat/amphiporte.*")) {
+                    if (porteSortie.contains(touched)) {
+                        if (porteVerr) {
+                            flavorText.setText("Rien a faire, cette porte ne s'ouvre pas...");
+                        } else {
+                            finNiveau = true;
+                        }
+                    } else if (zoneBadge.contains(touched)) {
+                        if (carteValide && game.inventory.hasIn(carteEtu)) {
+                            background.setRegion(amphiPorteOuv);
+                            flavorText.setText("La led est passee au vert, la porte serait-elle ouverte ?");
+                            porteVerr = false;
+                        } else {
+                            flavorText.setText("Il y a une led rouge dans ce boitier. Permettrait-il de lire des carte magnetiques ?");
+                        }
+                    } else if (zoneGauche.contains(touched)) {
+                        if (game.inventory.hasIn(carteEtu)) {
+                            background.setRegion(fondAmphiSansCarte);
+                        } else {
+                            background.setRegion(fondAmphi);
+                        }
+                        zoneGauche.hide();
+                    } else if (zoneDroite.contains(touched)) {
+                        background.setRegion(brightPlace);
+                        zoneDroite.hide();
+                    }
+                } else if (background.getTexture().toString().matches("image/Amphi_Enssat/fond[aA]mphi.*")) {
+                    if (!game.inventory.hasIn(carteEtu)) {
+                        if (zoneCarte.contains(touched)) {
+                            flavorText.setText("une carte magnetique d'un etudiant. Elle semble posseder un code en bas a droite...");
+                            game.inventory.add(carteEtu);
+                            background.setRegion(fondAmphiSansCarte);
+                        }
+                    } else if (zoneDroite.contains(touched)) {
+                        if (porteVerr) {
+                            background.setRegion(amphiPorte);
+                        } else {
+                            background.setRegion(amphiPorteOuv);
+                        }
                         zoneGauche.unhide();
                     }
                 }
-            } else if(background.getTexture().toString().matches("image/Amphi_Enssat/amphiporte.*")){
-                if(porteSortie.contains(touched)){
-                    if(porteVerr){
-                        flavorText.setText("Rien a faire, cette porte ne s'ouvre pas...");
-                    } else {
-                        finNiveau = true;
-                    }
-                } else if(zoneBadge.contains(touched)){
-                    if(carteValide && game.inventory.hasIn(carteEtu)){
-                        background.setRegion(amphiPorteOuv);
-                        flavorText.setText("La led est passee au vert, la porte serait-elle ouverte ?");
-                        porteVerr = false;
-                    } else {
-                        flavorText.setText("Il y a une led rouge dans ce boitier. Permettrait-il de lire des carte magnetiques ?");
-                    }
-                } else if(zoneGauche.contains(touched)){
-                    if(game.inventory.hasIn(carteEtu)){
-                        background.setRegion(fondAmphiSansCarte);
-                    } else {
-                        background.setRegion(fondAmphi);
-                    }
-                    zoneGauche.hide();
-                } else if(zoneDroite.contains(touched)){
-                    background.setRegion(brightPlace);
-                    zoneDroite.hide();
-                }
-            } else if(background.getTexture().toString().matches("image/Amphi_Enssat/fond[aA]mphi.*")){
-                if(!game.inventory.hasIn(carteEtu)){
-                    if(zoneCarte.contains(touched)){
-                        flavorText.setText("une carte magnetique d'un etudiant. Elle semble posseder un code en bas a droite...");
-                        game.inventory.add(carteEtu);
-                        background.setRegion(fondAmphiSansCarte);
-                    }
-                } else if (zoneDroite.contains(touched)){
-                    if(porteVerr){
-                        background.setRegion(amphiPorte);
-                    } else {
-                        background.setRegion(amphiPorteOuv);
-                    }
-                    zoneGauche.unhide();
-                }
-            }
 
+            }
         }
 
         super.render(delta);

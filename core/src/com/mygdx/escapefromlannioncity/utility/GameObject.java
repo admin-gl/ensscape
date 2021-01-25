@@ -30,24 +30,6 @@ public class GameObject {
         name = "";
     }
 
-    public GameObject(FileHandle sprite, float width, float height, String name){
-        this.texture = new Texture(sprite);
-        hitbox = new Rectangle();
-        this.sprite = new Sprite(this.texture);
-        hitbox.setSize(width, height);
-        hitbox.setPosition(0, 0);
-        this.name = name;
-    }
-
-    public GameObject(FileHandle sprite, Vector2 centerPos, float width, float height, String name){
-        this.texture = new Texture(sprite);
-        hitbox = new Rectangle();
-        this.sprite = new Sprite(this.texture);
-        hitbox.setSize(width, height);
-        hitbox.setCenter(centerPos);
-        this.name = name;
-    }
-
     public GameObject(FileHandle sprite, float x, float y, float width, float height, String name){
         this.texture = new Texture(sprite);
         hitbox = new Rectangle();

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.utility.AnimatedGameObject;
@@ -170,273 +171,261 @@ public class ParcStAnne extends UI {
 
         zoneDroite.hide();
 
+        bg = new SpriteDrawable(background);
+
     }
 
     @Override
     public void render(float delta){
         super.setupRender();
-
-        if(background.getTexture().toString().matches("image/ParcStAnne/CadenasStAnne.*")){
-            for(AnimatedGameObject chiffre : zoneChiffres){
-                chiffre.drawFix(game.batch);
-            }
-        }
-
-        if (background.getTexture().toString().matches("image/ParcStAnne/parcStAnneChap.*")){
-            if(!cursor.survol(porte, (StretchViewport) viewport)){
-                if(!cursor.survol(panneau, (StretchViewport) viewport) && !game.inventory.hasIn(papierCode) && game.inventory.hasIn(canneAPeche)){
-                    cursor.survol(zonePapier, (StretchViewport) viewport);
-                }
-            }
-        }
-        else if (background.getTexture().toString().matches("image/ParcStAnne/banczoomed.*")){
-            if(!cursor.survol(zoneFeraille, (StretchViewport) viewport)){
-                if(!cursor.survol(journalDePeche, (StretchViewport) viewport)){
-                    cursor.survol(zoneFil, (StretchViewport) viewport);
-                }
-            }
-        }
-        else if (background.getTexture().toString().matches("image/ParcStAnne/sansFerailleParc.*")){
-            if(!cursor.survol(zoneFil, (StretchViewport) viewport)){
-                cursor.survol(journalDePeche, (StretchViewport) viewport);
-            }
-        }
-        else if (background.getTexture().toString().matches("image/ParcStAnne/sansFilBanc.*")){
-            if(!cursor.survol(zoneFeraille, (StretchViewport) viewport)){
-                cursor.survol(journalDePeche, (StretchViewport) viewport);
-            }
-        }
-        else if (background.getTexture().toString().matches("image/ParcStAnne/sansobjetbanc.*")){
-            cursor.survol(journalDePeche, (StretchViewport) viewport);
-        }
-        else if (background.getTexture().toString().matches("image/ParcStAnne/intChapelle.*")){
-            cursor.survol(zoneEchelle, (StretchViewport) viewport);
-        }
-        else if (background.getTexture().toString().matches("image/ParcStAnne/CadenasStAnne.*")){
-            cursor.survol(zoneChiffres, (StretchViewport) viewport);
-        }
-        else if (background.getTexture().toString().matches("image/ParcStAnne/ParcVueGloballe.*")){
-            if(!cursor.survol(zoneCraft, (StretchViewport) viewport)){
-                if(!cursor.survol(banc, (StretchViewport) viewport)){
-                    if(!cursor.survol(grille, (StretchViewport) viewport)){
-                        if(!cursor.survol(lac, (StretchViewport) viewport) && !isBatonPicked){
-                            cursor.survol(zoneBaton, (StretchViewport) viewport);
-                        }
-                    }
-                }
-            }
-        } // fin control curseur au survol
-
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && textZone.isHidden()) {
-
-            Vector2 touched = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-            viewport.unproject(touched);
-
-            if(buttonHint.contains(touched)){
-
-                if(!game.inventory.hasIn(canneAPeche)){
-                    super.showHint(0);
-                } else if(game.inventory.hasIn(canneAPeche) && !game.inventory.hasIn(papierCode)){
-                    super.showHint(1);
-                } else if(game.inventory.hasIn(papierCode)){
-                    super.showHint(2);
+        if(timerOn) {
+            if (background.getTexture().toString().matches("image/ParcStAnne/CadenasStAnne.*")) {
+                for (AnimatedGameObject chiffre : zoneChiffres) {
+                    chiffre.drawFix(game.batch);
                 }
             }
 
             if (background.getTexture().toString().matches("image/ParcStAnne/parcStAnneChap.*")) {
-                if(panneau.contains(touched)){
-                    flavorText.setText("\"Acces interdit, renovation de la chapelle en cours\"\nInteressant... Un cadena a chiffre est la seule barriere entre moi et l'interieur de cette chapelle.");
-                } else if(porte.contains(touched)){
-                    if(isOpened){
-                        if(game.inventory.hasIn(echelle)){
-                            background.setRegion(interChapelleLadderless);
+                if (!cursor.survol(porte, (StretchViewport) viewport)) {
+                    if (!cursor.survol(panneau, (StretchViewport) viewport) && !game.inventory.hasIn(papierCode) && game.inventory.hasIn(canneAPeche)) {
+                        cursor.survol(zonePapier, (StretchViewport) viewport);
+                    }
+                }
+            } else if (background.getTexture().toString().matches("image/ParcStAnne/banczoomed.*")) {
+                if (!cursor.survol(zoneFeraille, (StretchViewport) viewport)) {
+                    if (!cursor.survol(journalDePeche, (StretchViewport) viewport)) {
+                        cursor.survol(zoneFil, (StretchViewport) viewport);
+                    }
+                }
+            } else if (background.getTexture().toString().matches("image/ParcStAnne/sansFerailleParc.*")) {
+                if (!cursor.survol(zoneFil, (StretchViewport) viewport)) {
+                    cursor.survol(journalDePeche, (StretchViewport) viewport);
+                }
+            } else if (background.getTexture().toString().matches("image/ParcStAnne/sansFilBanc.*")) {
+                if (!cursor.survol(zoneFeraille, (StretchViewport) viewport)) {
+                    cursor.survol(journalDePeche, (StretchViewport) viewport);
+                }
+            } else if (background.getTexture().toString().matches("image/ParcStAnne/sansobjetbanc.*")) {
+                cursor.survol(journalDePeche, (StretchViewport) viewport);
+            } else if (background.getTexture().toString().matches("image/ParcStAnne/intChapelle.*")) {
+                cursor.survol(zoneEchelle, (StretchViewport) viewport);
+            } else if (background.getTexture().toString().matches("image/ParcStAnne/CadenasStAnne.*")) {
+                cursor.survol(zoneChiffres, (StretchViewport) viewport);
+            } else if (background.getTexture().toString().matches("image/ParcStAnne/ParcVueGloballe.*")) {
+                if (!cursor.survol(zoneCraft, (StretchViewport) viewport)) {
+                    if (!cursor.survol(banc, (StretchViewport) viewport)) {
+                        if (!cursor.survol(grille, (StretchViewport) viewport)) {
+                            if (!cursor.survol(lac, (StretchViewport) viewport) && !isBatonPicked) {
+                                cursor.survol(zoneBaton, (StretchViewport) viewport);
+                            }
+                        }
+                    }
+                }
+            } // fin control curseur au survol
+
+            if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && textZone.isHidden()) {
+
+                Vector2 touched = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+                viewport.unproject(touched);
+
+                if (buttonHint.contains(touched)) {
+
+                    if (!game.inventory.hasIn(canneAPeche)) {
+                        super.showHint(0);
+                    } else if (game.inventory.hasIn(canneAPeche) && !game.inventory.hasIn(papierCode)) {
+                        super.showHint(1);
+                    } else if (game.inventory.hasIn(papierCode)) {
+                        super.showHint(2);
+                    }
+                }
+
+                if (background.getTexture().toString().matches("image/ParcStAnne/parcStAnneChap.*")) {
+                    if (panneau.contains(touched)) {
+                        flavorText.setText("\"Acces interdit, renovation de la chapelle en cours\"\nInteressant... Un cadena a chiffre est la seule barriere entre moi et l'interieur de cette chapelle.");
+                    } else if (porte.contains(touched)) {
+                        if (isOpened) {
+                            if (game.inventory.hasIn(echelle)) {
+                                background.setRegion(interChapelleLadderless);
+                            } else {
+                                background.setRegion(interChapelle);
+                            }
+                            zoneGauche.unhide();
                         } else {
-                            background.setRegion(interChapelle);
+                            background.setRegion(zoomCadena);
+                            zoneGauche.hide();
+                            zoneDroite.hide();
+                        }
+
+                    } else if (zonePapier.contains(touched) && game.inventory.hasIn(canneAPeche) && !isPaperPicked) {
+                        game.inventory.add(papierCode);
+                        isPaperPicked = true;
+                    } else if (zoneDroite.contains(touched)) {
+                        if (isBatonPicked) {
+                            background.setRegion(principalBatonless);
+                        } else {
+                            background.setRegion(principal);
+                        }
+                        zoneDroite.hide();
+                        zoneGauche.unhide();
+                    }
+
+                } else if (background.getTexture().toString().matches("image/ParcStAnne/banczoomed.*")) {
+                    if (journalDePeche.contains(touched)) {
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                    } else if (zoneFil.contains(touched)) {
+                        flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourait m'etre utile.");
+                        game.inventory.add(ficelle);
+                        isStringPicked = true;
+                        background.setRegion(zoomBancMetalOnly);
+                    } else if (zoneFeraille.contains(touched)) {
+                        flavorText.setText("Un vielle opercule de canette. Je le prend pour ma collection !");
+                        game.inventory.add(ferraille);
+                        isMetalPicked = true;
+                        background.setRegion(zoomBancStringOnly);
+                    } else if (zoneQuitter.contains(touched)) {
+                        if (isBatonPicked) {
+                            background.setRegion(principalBatonless);
+                        } else {
+                            background.setRegion(principal);
                         }
                         zoneGauche.unhide();
-                    } else {
-                        background.setRegion(zoomCadena);
+                    }
+
+                } else if (background.getTexture().toString().matches("image/ParcStAnne/sansFerailleParc.*")) {
+                    if (journalDePeche.contains(touched)) {
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                    } else if (zoneFil.contains(touched)) {
+                        flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourait m'etre utile.");
+                        game.inventory.add(ficelle);
+                        isStringPicked = true;
+                        background.setRegion(zoomBancVide);
+                    } else if (zoneQuitter.contains(touched)) {
+                        if (isBatonPicked) {
+                            background.setRegion(principalBatonless);
+                        } else {
+                            background.setRegion(principal);
+                        }
+                        zoneGauche.unhide();
+                    }
+
+                } else if (background.getTexture().toString().matches("image/ParcStAnne/sansFilBanc.*")) {
+                    if (journalDePeche.contains(touched)) {
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                    } else if (zoneFeraille.contains(touched)) {
+                        flavorText.setText("Un vielle opercule de canette. Je le prend pour ma collection !");
+                        game.inventory.add(ferraille);
+                        isMetalPicked = true;
+                        background.setRegion(zoomBancVide);
+                    } else if (zoneQuitter.contains(touched)) {
+                        if (isBatonPicked) {
+                            background.setRegion(principalBatonless);
+                        } else {
+                            background.setRegion(principal);
+                        }
+                        zoneGauche.unhide();
+                    }
+
+                } else if (background.getTexture().toString().matches("image/ParcStAnne/sansobjetbanc.*")) {
+                    if (journalDePeche.contains(touched)) {
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                    } else if (zoneQuitter.contains(touched)) {
+                        if (isBatonPicked) {
+                            background.setRegion(principalBatonless);
+                        } else {
+                            background.setRegion(principal);
+                        }
+                        zoneGauche.unhide();
+                    }
+                } else if (background.getTexture().toString().matches("image/ParcStAnne/intChapelle.*")) {
+                    if (zoneEchelle.contains(touched)) {
+                        flavorText.setText("Une echelle ! Parfait, avec ca je vais pouvoir passer par dessus la cloture.");
+                        game.inventory.add(echelle);
+                        background.setRegion(interChapelleLadderless);
+                    } else if (zoneGauche.contains(touched) || zoneDroite.contains(touched)) {
+                        background.setRegion(zoomChapelleOpen);
                         zoneGauche.hide();
-                        zoneDroite.hide();
                     }
 
-                } else if(zonePapier.contains(touched) && game.inventory.hasIn(canneAPeche) && !isPaperPicked){
-                    game.inventory.add(papierCode);
-                    isPaperPicked = true;
-                }else if(zoneDroite.contains(touched)){
-                    if(isBatonPicked){
-                        background.setRegion(principalBatonless);
+                } else if (background.getTexture().toString().matches("image/ParcStAnne/SansEchelleChapelle.*")) {
+                    if (zoneGauche.contains(touched) || zoneDroite.contains(touched)) {
+                        background.setRegion(zoomChapelleOpen);
+                        zoneGauche.hide();
+                    }
+                } else if (background.getTexture().toString().matches("image/ParcStAnne/CadenasStAnne.*")) {
+                    if (zoneQuitter.contains(touched)) {
+                        background.setRegion(zoomChapelle);
+                        zoneDroite.unhide();
                     } else {
-                        background.setRegion(principal);
-                    }
-                    zoneDroite.hide();
-                    zoneGauche.unhide();
-                }
-
-            }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/banczoomed.*")){
-                if(journalDePeche.contains(touched)){
-                    flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
-                } else if(zoneFil.contains(touched)) {
-                    flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourait m'etre utile.");
-                    game.inventory.add(ficelle);
-                    isStringPicked = true;
-                    background.setRegion(zoomBancMetalOnly);
-                } else if(zoneFeraille.contains(touched)) {
-                    flavorText.setText("Un vielle opercule de canette. Je le prend pour ma collection !");
-                    game.inventory.add(ferraille);
-                    isMetalPicked = true;
-                    background.setRegion(zoomBancStringOnly);
-                } else if(zoneQuitter.contains(touched)){
-                    if(isBatonPicked){
-                        background.setRegion(principalBatonless);
-                    } else {
-                        background.setRegion(principal);
-                    }
-                    zoneGauche.unhide();
-                }
-
-            }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/sansFerailleParc.*")){
-                if(journalDePeche.contains(touched)){
-                    flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
-                } else if(zoneFil.contains(touched)) {
-                    flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourait m'etre utile.");
-                    game.inventory.add(ficelle);
-                    isStringPicked = true;
-                    background.setRegion(zoomBancVide);
-                } else if(zoneQuitter.contains(touched)){
-                    if(isBatonPicked){
-                        background.setRegion(principalBatonless);
-                    } else {
-                        background.setRegion(principal);
-                    }
-                    zoneGauche.unhide();
-                }
-
-            }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/sansFilBanc.*")){
-                if(journalDePeche.contains(touched)){
-                    flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
-                } else if(zoneFeraille.contains(touched)) {
-                    flavorText.setText("Un vielle opercule de canette. Je le prend pour ma collection !");
-                    game.inventory.add(ferraille);
-                    isMetalPicked = true;
-                    background.setRegion(zoomBancVide);
-                } else if(zoneQuitter.contains(touched)){
-                    if(isBatonPicked){
-                        background.setRegion(principalBatonless);
-                    } else {
-                        background.setRegion(principal);
-                    }
-                    zoneGauche.unhide();
-                }
-
-            }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/sansobjetbanc.*")){
-                if(journalDePeche.contains(touched)){
-                    flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser ce qui vous entour pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
-                } else if(zoneQuitter.contains(touched)){
-                    if(isBatonPicked){
-                        background.setRegion(principalBatonless);
-                    } else {
-                        background.setRegion(principal);
-                    }
-                    zoneGauche.unhide();
-                }
-            }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/intChapelle.*")){
-                if(zoneEchelle.contains(touched)){
-                    flavorText.setText("Une echelle ! Parfait, avec ca je vais pouvoir passer par dessus la cloture.");
-                    game.inventory.add(echelle);
-                    background.setRegion(interChapelleLadderless);
-                } else if(zoneGauche.contains(touched) || zoneDroite.contains(touched)){
-                    background.setRegion(zoomChapelleOpen);
-                    zoneGauche.hide();
-                }
-
-            }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/SansEchelleChapelle.*")){
-                if(zoneGauche.contains(touched) || zoneDroite.contains(touched)){
-                    background.setRegion(zoomChapelleOpen);
-                    zoneGauche.hide();
-                }
-            }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/CadenasStAnne.*")){
-                if(zoneQuitter.contains(touched)){
-                    background.setRegion(zoomChapelle);
-                    zoneDroite.unhide();
-                } else {
-                    for (AnimatedGameObject chiffre : zoneChiffres) {
-                        if(chiffre.contains(touched)){
-                            chiffre.changeStat(true);
-                            int i = 0;
-                            boolean verif = false;
-                            while(!verif && i<4){
-                                if(zoneChiffres[i].getState() != code[i]){
-                                    verif = true;
+                        for (AnimatedGameObject chiffre : zoneChiffres) {
+                            if (chiffre.contains(touched)) {
+                                chiffre.changeStat(true);
+                                int i = 0;
+                                boolean verif = false;
+                                while (!verif && i < 4) {
+                                    if (zoneChiffres[i].getState() != code[i]) {
+                                        verif = true;
+                                    }
+                                    i++;
                                 }
-                                i++;
-                            }
-                            if(!verif){
-                                isOpened = true;
-                                flavorText.setText("J'ai trouve le bon code, je vais pouvoir rentrer dans cette chapelle maintenant.");
-                                background.setRegion(zoomChapelleOpen);
-                                zoneDroite.unhide();
+                                if (!verif) {
+                                    isOpened = true;
+                                    flavorText.setText("J'ai trouve le bon code, je vais pouvoir rentrer dans cette chapelle maintenant.");
+                                    background.setRegion(zoomChapelleOpen);
+                                    zoneDroite.unhide();
+                                }
                             }
                         }
                     }
-                }
 
-            }
-            else if (background.getTexture().toString().matches("image/ParcStAnne/ParcVueGloballe.*")){
+                } else if (background.getTexture().toString().matches("image/ParcStAnne/ParcVueGloballe.*")) {
 
-                if(zoneCraft.contains(touched)){
-                    if(game.inventory.hasIn(ficelle) && game.inventory.hasIn(ferraille) && game.inventory.hasIn(baton)){
-                        flavorText.setText("avec cette ficelle, ce baton et ce morceau de ferraille je devrais pouvoir me faire une canne a peche.\nIl ne me reste plus qu'a lui trouver une utilite...");
-                        game.inventory.remove(ficelle);
-                        game.inventory.remove(ferraille);
-                        game.inventory.remove(baton);
-                        game.inventory.add(canneAPeche);
-                    } else {
-                        flavorText.setText("Cet etablie ne me sert pas a grand chose pour le moment...");
+                    if (zoneCraft.contains(touched)) {
+                        if (game.inventory.hasIn(ficelle) && game.inventory.hasIn(ferraille) && game.inventory.hasIn(baton)) {
+                            flavorText.setText("avec cette ficelle, ce baton et ce morceau de ferraille je devrais pouvoir me faire une canne a peche.\nIl ne me reste plus qu'a lui trouver une utilite...");
+                            game.inventory.remove(ficelle);
+                            game.inventory.remove(ferraille);
+                            game.inventory.remove(baton);
+                            game.inventory.add(canneAPeche);
+                        } else {
+                            flavorText.setText("Cet etablie ne me sert pas a grand chose pour le moment...");
+                        }
+                    } else if (banc.contains(touched)) {
+                        if (isStringPicked && isMetalPicked) {
+                            background.setRegion(zoomBancVide);
+                        } else if (isStringPicked && !isMetalPicked) {
+                            background.setRegion(zoomBancMetalOnly);
+                        } else if (!isStringPicked && isMetalPicked) {
+                            background.setRegion(zoomBancStringOnly);
+                        } else {
+                            background.setRegion(zoomBanc);
+                        }
+                        zoneGauche.hide();
+                    } else if (grille.contains(touched)) {
+                        if (game.inventory.hasIn(echelle)) {
+                            flavorText.setText("Partons d'ici.");
+                            finNiveau = true;
+                        } else {
+                            flavorText.setText("Cette cloture est trop haute pour que je puis passer par dessus sans aide.");
+                        }
+                    } else if (lac.contains(touched)) {
+                        if (game.inventory.hasIn(canneAPeche)) {
+                            flavorText.setText("...\n...\n... Je pense que je ne devais pas pecher litteralement...");
+                        } else {
+                            flavorText.setText("Ce lac est magnifique, peut etre qu'il y a des poissons dedans.");
+                        }
+                    } else if (zoneBaton.contains(touched)) {
+                        game.inventory.add(baton);
+                        isBatonPicked = true;
+                        background.setRegion(principalBatonless);
+                    } else if (zoneGauche.contains(touched)) {
+                        if (isOpened) {
+                            background.setRegion(zoomChapelleOpen);
+                        } else {
+                            background.setRegion(zoomChapelle);
+                        }
+                        zoneDroite.unhide();
+                        zoneGauche.hide();
                     }
-                } else if(banc.contains(touched)){
-                    if(isStringPicked && isMetalPicked){
-                        background.setRegion(zoomBancVide);
-                    } else if(isStringPicked && !isMetalPicked){
-                        background.setRegion(zoomBancMetalOnly);
-                    } else if(!isStringPicked && isMetalPicked){
-                        background.setRegion(zoomBancStringOnly);
-                    } else {
-                        background.setRegion(zoomBanc);
-                    }
-                    zoneGauche.hide();
-                } else if(grille.contains(touched)){
-                    if(game.inventory.hasIn(echelle)){
-                        flavorText.setText("Partons d'ici.");
-                        finNiveau = true;
-                    } else {
-                        flavorText.setText("Cette cloture est trop haute pour que je puis passer par dessus sans aide.");
-                    }
-                } else if(lac.contains(touched)){
-                    if(game.inventory.hasIn(canneAPeche)){
-                        flavorText.setText("...\n...\n... Je pense que je ne devais pas pecher litteralement...");
-                    } else {
-                        flavorText.setText("Ce lac est magnifique, peut etre qu'il y a des poissons dedans.");
-                    }
-                } else if(zoneBaton.contains(touched)){
-                    game.inventory.add(baton);
-                    isBatonPicked = true;
-                    background.setRegion(principalBatonless);
-                } else if(zoneGauche.contains(touched)){
-                    if(isOpened){
-                        background.setRegion(zoomChapelleOpen);
-                    } else {
-                        background.setRegion(zoomChapelle);
-                    }
-                    zoneDroite.unhide();
-                    zoneGauche.hide();
                 }
             }
         }

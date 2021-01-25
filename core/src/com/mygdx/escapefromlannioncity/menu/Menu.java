@@ -13,7 +13,9 @@ import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.sauvegarde.SAmphiEnssat;
 import com.mygdx.escapefromlannioncity.sauvegarde.SParcStAnne;
 import com.mygdx.escapefromlannioncity.score.AffScore;
+import com.mygdx.escapefromlannioncity.screens.UI;
 import com.mygdx.escapefromlannioncity.siteweb.GetScore;
+import com.mygdx.escapefromlannioncity.utility.ChangingCursor;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
 
 
@@ -34,9 +36,13 @@ public class Menu implements Screen {
     private final GameObject sliderVolume;
     private final GameObject imageVolume;
 
+    private final ChangingCursor cursor;
+
     public Menu(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;
+
+        this.cursor = new ChangingCursor(pGame);
 
         // place une camera dans la vue actuelle de la fenêtre
         OrthographicCamera camera = new OrthographicCamera();
@@ -82,7 +88,7 @@ public class Menu implements Screen {
 
     @Override
     public void show() {
-
+        background.setRegion(((UI)game.menuEtTableau[1]).background.getTexture());
     }
 
     @Override
@@ -113,9 +119,6 @@ public class Menu implements Screen {
             Vector2 touched = new Vector2();
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
-
-            if (background.getTexture().toString().matches("image/Utilitaire/blacksquare.png")) {
-
                 if (afficherScore.contains(touched)) {
                     System.out.println("J'affiche le score");
                     System.out.println(GetScore.StoreScore());
@@ -145,8 +148,6 @@ public class Menu implements Screen {
                     System.out.println("Ciao bye bye");
                     game.dispose();
                 }
-
-            }
 
         }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
@@ -180,7 +181,7 @@ public class Menu implements Screen {
 
     @Override
     public void resume() {
-
+        background.setRegion(((UI)game.menuEtTableau[1]).background.getTexture());
     }
 
     @Override

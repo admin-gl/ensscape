@@ -41,25 +41,25 @@ public class SAmphiEnssat implements Serializable {
     }
 
 
-public static void Enregistrer(Screen Amp){
-    int[] interrupteur = new int[11];
-    int[] number = new int[4];
-    AmphiEnssat amp = (AmphiEnssat) Amp;
-    amp.Convertir(interrupteur,number);
-    SAmphiEnssat s = new SAmphiEnssat(amp.getTimeTotal(),amp.getTimeFromBegin(),
-            amp.getBonus(), amp.getUsedHint(),amp.isLights(),amp.isCarteValide(),
-            amp.isPorteVerr(),amp.isHint2(),amp.getCarte(),
-            interrupteur, number);
+    public static void Enregistrer(Screen Amp){
+        int[] interrupteur = new int[11];
+        int[] number = new int[4];
+        AmphiEnssat amp = (AmphiEnssat) Amp;
+        amp.Convertir(interrupteur,number);
+        SAmphiEnssat s = new SAmphiEnssat(amp.getTimeTotal(),amp.getTimeFromBegin(),
+                amp.getBonus(), amp.getUsedHint(),amp.isLights(),amp.isCarteValide(),
+                amp.isPorteVerr(),amp.isHint2(),amp.getCarte(),
+                interrupteur, number);
         try{
-        FileOutputStream fout=new FileOutputStream("./f.txt");
-        ObjectOutputStream out=new ObjectOutputStream(fout);
-        out.writeObject(s);
-        out.flush();
-        //closing the stream
-        out.close();
-        System.out.println("success");
-    }catch(Exception e){System.out.println(e);}
-}
+            FileOutputStream fout=new FileOutputStream("./f.txt");
+            ObjectOutputStream out=new ObjectOutputStream(fout);
+            out.writeObject(s);
+            out.flush();
+            //closing the stream
+            out.close();
+            System.out.println("success");
+        }catch(Exception e){System.out.println(e);}
+    }
 
 
     public static AmphiEnssat Ouvrir(EscapeFromLannionCity game){

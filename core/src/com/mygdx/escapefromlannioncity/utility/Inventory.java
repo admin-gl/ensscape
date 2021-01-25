@@ -70,12 +70,14 @@ public class Inventory extends GameObject{
      * @param batch le SpriteBatch dans lequel on doit afficher le GameObject
      */
     public void unzoom(int i, SpriteBatch batch) {
-        GameObject object = container.get(i);
-        object.setSize(object.getWidth()/4, object.getHeight()/4);
-        Vector2 pos = new Vector2(this.getX(), this.getCenterPos().y);
-        Vector2 offset = new Vector2(2*scaleX + object.getWidth()/2 + i*(4*scaleX + object.getWidth()), 0);
-        object.setCenterPos(pos.add(offset));
-        drawFix(batch);
+        if(container.toArray().length > i) {
+            GameObject object = container.get(i);
+            object.setSize(object.getWidth() / 4, object.getHeight() / 4);
+            Vector2 pos = new Vector2(this.getX(), this.getCenterPos().y);
+            Vector2 offset = new Vector2(2 * scaleX + object.getWidth() / 2 + i * (4 * scaleX + object.getWidth()), 0);
+            object.setCenterPos(pos.add(offset));
+            drawFix(batch);
+        }
     }
 
     /**
@@ -114,6 +116,10 @@ public class Inventory extends GameObject{
      */
     public void remove(GameObject object){
         int j = container.indexOf(object);
+        if(zoomObj && zoneInvZoom[j]){
+            zoomObj = false;
+            zoneInvZoom[j] = false;
+        }
         container.remove(object);
         int i;
         for(i=j;i<container.toArray().length;i++){
