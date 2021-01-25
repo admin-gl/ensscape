@@ -201,12 +201,21 @@ public class Signup implements Screen{
                             this.message.setText("Cet email existe deja !");
 
                         } else if (res == 0) { //ok
-                            // On enregistre le joueur qui est maintenant connecté
-                            game.isLoggedin = 1;
-                            game.pseudo = this.pseudoText.getText();
-                            //on passe à l'écran suivant
-                            game.setScreen(game.menuEtTableau[1]);
-                            this.dispose();
+                            if(game.isLoggedin==0){
+                                game.pseudo = this.nameText.getText();
+                                game.isLoggedin = 1;
+                                // on passe à l'écran suivant
+                                game.setScreen(game.menuEtTableau[4]);
+                                this.dispose();
+                            }else {
+                                game.pseudo = this.nameText.getText();
+                                game.isLoggedin = 1;
+                                // on passe à l'écran suivant
+                                game.setScreen(game.menuEtTableau[1]);
+                                this.dispose();
+                            }
+
+
                         }
 
                 }

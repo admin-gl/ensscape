@@ -485,7 +485,7 @@ public class ParcStAnne extends UI {
     }
 
     public void setBatonPicked(boolean batonPicked) {
-        if(batonPicked && !hasCanne()){game.inventory.add(baton); }
+        if(batonPicked && !hasCanne() && !game.inventory.hasIn(baton)){game.inventory.add(baton); }
         isBatonPicked = batonPicked;
 
     }
@@ -495,7 +495,7 @@ public class ParcStAnne extends UI {
     }
 
     public void setStringPicked(boolean stringPicked) {
-        if(stringPicked && !hasCanne()){game.inventory.add(ficelle); }
+        if(stringPicked && !hasCanne() && !game.inventory.hasIn(ficelle)){game.inventory.add(ficelle); }
         isStringPicked = stringPicked;
     }
 
@@ -504,7 +504,7 @@ public class ParcStAnne extends UI {
     }
 
     public void setMetalPicked(boolean metalPicked) {
-        if(metalPicked && !hasCanne()){game.inventory.add(ferraille); }
+        if(metalPicked && !hasCanne() && !this.game.inventory.hasIn(ferraille)){game.inventory.add(ferraille); }
         isMetalPicked = metalPicked;
     }
 
@@ -513,7 +513,7 @@ public class ParcStAnne extends UI {
     }
 
     public void setPaperPicked(boolean paperPicked) {
-        if(paperPicked){game.inventory.add(papierCode); }
+        if(paperPicked && !this.game.inventory.hasIn(papierCode)){game.inventory.add(papierCode); }
         isPaperPicked = paperPicked;
     }
     public void setBackground(){

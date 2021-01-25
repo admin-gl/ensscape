@@ -12,7 +12,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.sauvegarde.SAmphiEnssat;
 import com.mygdx.escapefromlannioncity.sauvegarde.SParcStAnne;
+import com.mygdx.escapefromlannioncity.sauvegarde.SWarp;
 import com.mygdx.escapefromlannioncity.score.AffScore;
+import com.mygdx.escapefromlannioncity.score.ReviewScore;
 import com.mygdx.escapefromlannioncity.screens.UI;
 import com.mygdx.escapefromlannioncity.siteweb.GetScore;
 import com.mygdx.escapefromlannioncity.utility.ChangingCursor;
@@ -54,9 +56,9 @@ public class Menu implements Screen {
 
         background = new Sprite(menuing);
 
-        afficherScore = new GameObject(Gdx.files.internal("image/Menu/Score GL.png"),128, 132, 65, 14, "");
+        reprendre = new GameObject(Gdx.files.internal("image/Menu/Reprendre GL.png"),128, 132, 65, 14, "");
         sauvegarder = new GameObject(Gdx.files.internal("image/Menu/Sauvegarde GL.png"),128, 106, 65, 14,"");
-        reprendre = new GameObject(Gdx.files.internal("image/Menu/Reprendre GL.png"),128, 80, 65, 14,"");
+        afficherScore = new GameObject(Gdx.files.internal("image/Menu/Score GL.png"),128, 80, 65, 14,"");
         quitter = new GameObject(Gdx.files.internal("image/Menu/Quitter GL.png"),128, 54, 65, 14,"");
         quitterLeJeu = new GameObject(Gdx.files.internal("image/Menu/Quitter le jeu GL.png"),128, 28, 65, 14,"");
 
@@ -121,7 +123,7 @@ public class Menu implements Screen {
             viewport.unproject(touched);
                 if (afficherScore.contains(touched)) {
                     System.out.println("J'affiche le score");
-                    System.out.println(GetScore.StoreScore());
+                    GetScore.StoreScore();
                     AffScore.AffScore();
 
                 }
@@ -132,6 +134,9 @@ public class Menu implements Screen {
                         SAmphiEnssat.Enregistrer(game.menuEtTableau[1]);
                     }else if(game.menuEtTableau[1].getClass().toString().matches(".*ParcStAnne")){
                         SParcStAnne.Enregistrer(game.menuEtTableau[1]);
+                    }else if(game.menuEtTableau[1].getClass().toString().matches(".*Warp")){
+                        System.out.println("here");
+                        SWarp.Enregistrer(game.menuEtTableau[1]);
                     }
                 }
 
@@ -142,6 +147,8 @@ public class Menu implements Screen {
 
                 if (quitter.contains(touched)) {
                     System.out.println("Retournons au menu principal");
+                    game.menuEtTableau[1].dispose();
+                    game.setScreen(game.menuEtTableau[4]);
                 }
 
                 if (quitterLeJeu.contains(touched)) {

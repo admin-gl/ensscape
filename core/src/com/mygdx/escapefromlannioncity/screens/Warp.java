@@ -31,8 +31,8 @@ public class Warp extends UI {
     private final Texture zoomChev2Gratt;
     private final Texture zoomBorne;
     private final Texture zoomBorneAllum;
-    private final Texture zoomTableau;
-    private final Texture zoomCoffre;
+    private Texture zoomTableau;
+    private Texture zoomCoffre;
     private final Texture coffreOK;
     private final Texture coffreKO;
     private final Texture coffreOuvert;
@@ -214,7 +214,7 @@ public class Warp extends UI {
 
 
         // init des utilitaires
-        zoneQuitter = new GameObject(Gdx.files.internal(("image/Utilitaire/empty.png")), 223,125,6,6,"");
+        zoneQuitter = new GameObject(Gdx.files.internal(("image/Utilitaire/quitZoom.png")), 223,125,6,6,"");
         isDecapsuleurPicked = false;
         isPiecePicked = false;
         isBorneTurnedOn = false;
@@ -495,7 +495,7 @@ public class Warp extends UI {
                     } else if (photoEncadree.contains(touched) && isCoffreDiscovered && !game.inventory.hasIn(clefs)) {
                         background.setRegion(zoomCoffre);
                         zoneGauche.hide();
-                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && game.inventory.hasIn(clefs)) {
+                    } else if (photoEncadree.contains(touched) && isCoffreDiscovered && (game.inventory.hasIn(clefs) || isOpened)) {
                         background.setRegion(coffreOuvertSsCle);
                         zoneGauche.hide();
                     } else if (zoneGauche.contains(touched)) {
@@ -523,7 +523,7 @@ public class Warp extends UI {
 
                 } else if (background.getTexture().toString().matches("image/Warp/tableau.*") && !isCoffreDiscovered) {
                     if (boutonTableau.contains(touched)) {
-                        flavorText.setText("Il y avait un coffre-fort caché derrière !");
+                        flavorText.setText("Il y avait un coffre-fort cache derriere !");
                         isCoffreDiscovered = true;
                         background.setRegion(zoomCoffre);
                     } else if (zoneQuitter.contains(touched)) {
@@ -585,7 +585,6 @@ public class Warp extends UI {
                             for (int i = 0; i < 4; i++) {
                                 if (codeCompose[0] + 1 == code[0] && codeCompose[1] + 1 == code[1] && codeCompose[2] + 1 == code[2] && codeCompose[3] + 1 == code[3]) {
                                     background.setRegion(coffreOK);
-                                    isOpened = true;
                                 } else if (codeCompose[i] + 1 != code[i]) {
                                     background.setRegion(coffreKO);
                                     flavorText.setText("Zut...");
@@ -601,6 +600,7 @@ public class Warp extends UI {
                             if (poigneeCoffre.contains(touched)) {
                                 flavorText.setText("Je devrais probablement rappeler le patron pour lui expliquer ceci ...");
                                 background.setRegion(coffreOuvert);
+                                isOpened = true;
                             }
                         }
                     }
@@ -660,7 +660,7 @@ public class Warp extends UI {
                         isChev2Bross = true;
                         background.setRegion(zoomChev1Gratt);
                     } else if (!isBrossePicked && chev2.contains(touched)) {
-                        flavorText.setText("La peinture s'écaille...");
+                        flavorText.setText("La peinture s'ecaille...");
                     } else if (zoneQuitter.contains(touched)) {
                         if (!isChev1Bross && !isChev2Bross) {
                             background.setRegion(salleMain);
@@ -678,6 +678,175 @@ public class Warp extends UI {
         }
         super.render(delta);
         game.batch.end();
+    }
+
+
+    /* Getter et setter */
+    public boolean hasClef(){
+        if(game.inventory.hasIn(clefs)){return true;}
+        else{return false;}
+    }
+    public void setClef(boolean clef){
+        if (clef && !game.inventory.hasIn(clefs)) {
+            game.inventory.add(clefs);
+        }
+    }
+    public boolean isDecapsuleurPicked() {
+        return isDecapsuleurPicked;
+    }
+
+    public void setDecapsuleurPicked(boolean decapsuleurPicked) {
+
+        if(decapsuleurPicked && (!isPiecePicked && !isBorneTurnedOn) && !game.inventory.hasIn(decapsuleur)){
+            game.inventory.add(decapsuleur);
+        }
+        isDecapsuleurPicked = decapsuleurPicked;
+    }
+
+    public boolean isPiecePicked() {
+        return isPiecePicked;
+    }
+
+    public void setPiecePicked(boolean piecePicked) {
+        if(piecePicked && !this.isBorneTurnedOn && !game.inventory.hasIn(piece)) {
+            game.inventory.add(piece);
+        }
+        isPiecePicked = piecePicked;
+    }
+
+    public boolean isBorneTurnedOn() {
+        return isBorneTurnedOn;
+    }
+
+    public void setBorneTurnedOn(boolean borneTurnedOn) {
+        if(borneTurnedOn) {
+            background.setRegion(zoomBorneAllum);
+        }
+        isBorneTurnedOn = borneTurnedOn;
+    }
+
+    public boolean isBorneAlredyClicked() {
+        return isBorneAlredyClicked;
+    }
+
+    public void setBorneAlredyClicked(boolean borneAlredyClicked) {
+        isBorneAlredyClicked = borneAlredyClicked;
+    }
+
+    public boolean isAreChevBross() {
+        return areChevBross;
+    }
+
+    public void setAreChevBross(boolean areChevBross) {
+        this.areChevBross = areChevBross;
+    }
+
+    public boolean isBrossePicked() {
+        return isBrossePicked;
+    }
+
+    public void setBrossePicked(boolean brossePicked) {
+
+        if(brossePicked && !game.inventory.hasIn(brosse)){
+            game.inventory.add(brosse);
+        }
+        isBrossePicked = brossePicked;
+
+    }
+
+    public boolean isCoffreDiscovered() {
+        return isCoffreDiscovered;
+    }
+
+    public void setCoffreDiscovered(boolean coffreDiscovered) {
+        if(coffreDiscovered && game.inventory.hasIn(clefs)){
+            background.setRegion(coffreOuvertSsCle);
+        }
+        isCoffreDiscovered = coffreDiscovered;
+    }
+
+    public boolean isOpened() {
+        return isOpened;
+    }
+
+    public void setOpened(boolean opened) {
+        if(opened){
+            if(hasClef()) {
+                zoomCoffre = coffreOuvertSsCle;
+            }else{
+                zoomCoffre = coffreOuvert;
+            }
+        }
+        System.out.println(opened);
+        isOpened = opened;
+    }
+
+    public boolean isChev1Bross() {
+        return isChev1Bross;
+    }
+
+    public void setChev1Bross(boolean chev1Bross) {
+        if(chev1Bross){
+            background.setRegion(zoomChev1Gratt);
+        }
+        isChev1Bross = chev1Bross;
+    }
+
+    public boolean isChev2Bross() {
+        return isChev2Bross;
+    }
+
+    public void setChev2Bross(boolean chev2Bross) {
+        if(chev2Bross){
+            background.setRegion(zoomChev2Gratt);
+        }
+        isChev2Bross = chev2Bross;
+    }
+
+    public boolean isBiereAlreadyClicked() {
+        return isBiereAlreadyClicked;
+    }
+
+    public void setBiereAlreadyClicked(boolean biereAlreadyClicked) {
+        isBiereAlreadyClicked = biereAlreadyClicked;
+    }
+
+    public boolean isTableauAlreadyClicked() {
+        return isTableauAlreadyClicked;
+    }
+
+    public void setTableauAlreadyClicked(boolean tableauAlreadyClicked) {
+        isTableauAlreadyClicked = tableauAlreadyClicked;
+    }
+    public void setBackground(){
+        if (!isChev1Bross && !isChev2Bross) {
+            background.setRegion(salleMain);
+        } else if (isChev1Bross && !isChev2Bross) {
+            background.setRegion(salleMain_chev1Bross);
+        } else if (!isChev1Bross && isChev2Bross) {
+            background.setRegion(salleMain_chev2Bross);
+        } else if (isChev1Bross && isChev2Bross) {
+            background.setRegion(salleMain_chevBross);
+        }
+        if (isDecapsuleurPicked && isPiecePicked) {
+            if (isBrossePicked) {
+                background.setRegion(principalBrDecapBottleLess);
+            } else {
+                background.setRegion(principalBrDecapLess);
+            }
+        } else if (isDecapsuleurPicked && !isPiecePicked) {
+            if (isBrossePicked) {
+                background.setRegion(principalBrDecapLess);
+            } else {
+                background.setRegion(principalDecapLess);
+            }
+        } else if (!isDecapsuleurPicked && !isPiecePicked) {
+            if (isBrossePicked) {
+                background.setRegion(principalBrLess);
+            } else {
+                background.setRegion(principal);
+            }
+        }
     }
 
     @Override

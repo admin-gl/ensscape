@@ -43,7 +43,7 @@ public class Score implements Serializable {
     public Score(String pseudo, String temps, int bonus, int indice,LocalDate date){
         int min = Integer.parseInt(temps.substring(0,2));
         int sec = Integer.parseInt(temps.substring(3,5));
-        int sc =min*60 +sec + bonus*20 - indice*300;
+        int sc = (15*60 - (min*60 +sec))* + bonus*20 - indice*300;
         this.score= String.valueOf(sc);
         this.pseudo = pseudo;
         this.temps= temps;

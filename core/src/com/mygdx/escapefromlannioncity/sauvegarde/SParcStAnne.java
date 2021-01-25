@@ -6,6 +6,9 @@ import com.mygdx.escapefromlannioncity.screens.AmphiEnssat;
 import com.mygdx.escapefromlannioncity.screens.ParcStAnne;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class SParcStAnne implements Serializable {
     int[] number = new int[4];
@@ -53,8 +56,38 @@ public class SParcStAnne implements Serializable {
                 parc.isStringPicked(),parc.isMetalPicked(),parc.isPaperPicked(), parc.hasCanne(),
                 parc.hasEchelle(),number);
         try{
-            FileOutputStream fout=new FileOutputStream("./f.txt");
-            ObjectOutputStream out=new ObjectOutputStream(fout);
+            try {
+                Path path = Paths.get("./Parties/");
+                Files.createDirectories(path);
+                System.out.println("Directory is created!");
+            } catch (IOException e) {
+                System.err.println("Failed to create directory!" + e.getMessage());
+
+            }
+            FileOutputStream fout;
+            if(parc.game.isLoggedin==1){
+                try {
+                    Path path = Paths.get("./Parties/1/");
+                    Files.createDirectories(path);
+                    System.out.println("Directory is created!");
+                } catch (IOException e) {
+                    System.err.println("Failed to create directory!" + e.getMessage());
+
+                }
+                SWarp.Supprimer("./Parties/1/", parc.game.pseudo);
+                fout=new FileOutputStream("./Parties/1/"+parc.game.pseudo+"P.txt");
+            }else{
+                try {
+                    Path path = Paths.get("./Parties/2/");
+                    Files.createDirectories(path);
+                    System.out.println("Directory is created!");
+                } catch (IOException e) {
+                    System.err.println("Failed to create directory!" + e.getMessage());
+
+                }
+                SWarp.Supprimer("./Parties/2/", parc.game.pseudo);
+                fout=new FileOutputStream("./Parties/2/"+parc.game.pseudo+"P.txt");
+            }            ObjectOutputStream out=new ObjectOutputStream(fout);
             out.writeObject(s);
             out.flush();
             //closing the stream
@@ -67,8 +100,13 @@ public class SParcStAnne implements Serializable {
     public static ParcStAnne Ouvrir(EscapeFromLannionCity game){
         try{
             //Creating stream to read the object
-            ObjectInputStream in=new ObjectInputStream(new FileInputStream("f.txt"));
-            SParcStAnne s=(SParcStAnne) in.readObject();
+            ObjectInputStream in;
+            //Creating stream to read the object
+            if(game.isLoggedin==1) {
+                in = new ObjectInputStream(new FileInputStream("./Parties/1/" + game.pseudo + "P.txt"));
+            }else{
+                in = new ObjectInputStream(new FileInputStream("./Parties/2/" + game.pseudo + "P.txt"));
+            }            SParcStAnne s=(SParcStAnne) in.readObject();
             //closing the stream
             in.close();
             System.out.println(s.usedHint);

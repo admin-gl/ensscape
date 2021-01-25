@@ -175,11 +175,19 @@ public class Pseudo implements Screen {
 
                     //sinon on va à l'écran suivant sans être connecté
                     }else {
-                        game.pseudo = this.nameText.getText();
-                        game.isLoggedin = 2;
-                        // on passe à l'écran suivant
-                        game.setScreen(game.menuEtTableau[1]);
-                        this.dispose();
+                        if(game.isLoggedin==0){
+                            game.pseudo = this.nameText.getText();
+                            game.isLoggedin = 2;
+                            // on passe à l'écran suivant
+                            game.setScreen(game.menuEtTableau[4]);
+                            this.dispose();
+                        }else {
+                            game.pseudo = this.nameText.getText();
+                            game.isLoggedin = 2;
+                            // on passe à l'écran suivant
+                            game.setScreen(game.menuEtTableau[1]);
+                            this.dispose();
+                        }
                     }
 
             }

@@ -1,57 +1,61 @@
 com/mygdx/escapefromlannioncity/siteweb/GetJoueur.java
  com.mygdx.escapefromlannioncity.siteweb.GetJoueur
-com/mygdx/escapefromlannioncity/utility/LoadingBar.java
- com.mygdx.escapefromlannioncity.utility.LoadingBar
-com/mygdx/escapefromlannioncity/utility/AnimatedGameObject.java
- com.mygdx.escapefromlannioncity.utility.AnimatedGameObject
-com/mygdx/escapefromlannioncity/siteweb/AddScore.java
- com.mygdx.escapefromlannioncity.siteweb.AddScore
-com/mygdx/escapefromlannioncity/score/AffScore.java
- com.mygdx.escapefromlannioncity.score.AffScore
-com/mygdx/escapefromlannioncity/score/Score.java
- com.mygdx.escapefromlannioncity.score.Score
-com/mygdx/escapefromlannioncity/siteweb/AddJoueur.java
- com.mygdx.escapefromlannioncity.siteweb.AddJoueur
-com/mygdx/escapefromlannioncity/score/TestMain.java
- com.mygdx.escapefromlannioncity.score.TestMain
-com/mygdx/escapefromlannioncity/utility/Inventory.java
- com.mygdx.escapefromlannioncity.utility.Inventory
-com/mygdx/escapefromlannioncity/utility/GameObject.java
- com.mygdx.escapefromlannioncity.utility.GameObject
-com/mygdx/escapefromlannioncity/siteweb/GetScore.java
- com.mygdx.escapefromlannioncity.siteweb.GetScore
 com/mygdx/escapefromlannioncity/utility/ChangingCursor.java
  com.mygdx.escapefromlannioncity.utility.ChangingCursor
-com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
- com.mygdx.escapefromlannioncity.EscapeFromLannionCity
+com/mygdx/escapefromlannioncity/identify/Signup.java
+ com.mygdx.escapefromlannioncity.identify.Signup
+com/mygdx/escapefromlannioncity/screens/UI.java
+ com.mygdx.escapefromlannioncity.screens.UI
+ com.mygdx.escapefromlannioncity.screens.UI$1
+com/mygdx/escapefromlannioncity/score/AffScore.java
+ com.mygdx.escapefromlannioncity.score.AffScore
 com/mygdx/escapefromlannioncity/identify/Pseudo.java
  com.mygdx.escapefromlannioncity.identify.Pseudo
 com/mygdx/escapefromlannioncity/menu/ButtonOpenMenu.java
  com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu
-com/mygdx/escapefromlannioncity/score/ReviewScore.java
- com.mygdx.escapefromlannioncity.score.ReviewScore
 com/mygdx/escapefromlannioncity/identify/Accueil.java
  com.mygdx.escapefromlannioncity.identify.Accueil
+com/mygdx/escapefromlannioncity/utility/Inventory.java
+ com.mygdx.escapefromlannioncity.utility.Inventory
 com/mygdx/escapefromlannioncity/screens/AmphiEnssat.java
  com.mygdx.escapefromlannioncity.screens.AmphiEnssat
-com/mygdx/escapefromlannioncity/screens/Warp.java
- com.mygdx.escapefromlannioncity.screens.Warp
-com/mygdx/escapefromlannioncity/menu/Menu.java
- com.mygdx.escapefromlannioncity.menu.Menu
+com/mygdx/escapefromlannioncity/sauvegarde/SWarp.java
+ com.mygdx.escapefromlannioncity.sauvegarde.SWarp
 com/mygdx/escapefromlannioncity/identify/Login.java
  com.mygdx.escapefromlannioncity.identify.Login
 com/mygdx/escapefromlannioncity/menu/MenuPrincipal.java
  com.mygdx.escapefromlannioncity.menu.MenuPrincipal
-com/mygdx/escapefromlannioncity/screens/ParcStAnne.java
- com.mygdx.escapefromlannioncity.screens.ParcStAnne
 com/mygdx/escapefromlannioncity/sauvegarde/SAmphiEnssat.java
  com.mygdx.escapefromlannioncity.sauvegarde.SAmphiEnssat
 com/mygdx/escapefromlannioncity/utility/FlavorText.java
  com.mygdx.escapefromlannioncity.utility.FlavorText
+com/mygdx/escapefromlannioncity/screens/ParcStAnne.java
+ com.mygdx.escapefromlannioncity.screens.ParcStAnne
+com/mygdx/escapefromlannioncity/utility/AnimatedGameObject.java
+ com.mygdx.escapefromlannioncity.utility.AnimatedGameObject
+com/mygdx/escapefromlannioncity/siteweb/GetScore.java
+ com.mygdx.escapefromlannioncity.siteweb.GetScore
 com/mygdx/escapefromlannioncity/sauvegarde/SParcStAnne.java
  com.mygdx.escapefromlannioncity.sauvegarde.SParcStAnne
-com/mygdx/escapefromlannioncity/screens/UI.java
- com.mygdx.escapefromlannioncity.screens.UI
- com.mygdx.escapefromlannioncity.screens.UI$1
-com/mygdx/escapefromlannioncity/identify/Signup.java
- com.mygdx.escapefromlannioncity.identify.Signup
+com/mygdx/escapefromlannioncity/siteweb/AddJoueur.java
+ com.mygdx.escapefromlannioncity.siteweb.AddJoueur
+com/mygdx/escapefromlannioncity/menu/MenuPrincipal2.java
+ com.mygdx.escapefromlannioncity.menu.MenuPrincipal2
+com/mygdx/escapefromlannioncity/utility/GameObject.java
+ com.mygdx.escapefromlannioncity.utility.GameObject
+com/mygdx/escapefromlannioncity/screens/Warp.java
+ com.mygdx.escapefromlannioncity.screens.Warp
+com/mygdx/escapefromlannioncity/score/ReviewScore.java
+ com.mygdx.escapefromlannioncity.score.ReviewScore
+com/mygdx/escapefromlannioncity/utility/LoadingBar.java
+ com.mygdx.escapefromlannioncity.utility.LoadingBar
+com/mygdx/escapefromlannioncity/score/Score.java
+ com.mygdx.escapefromlannioncity.score.Score
+com/mygdx/escapefromlannioncity/score/TestMain.java
+ com.mygdx.escapefromlannioncity.score.TestMain
+com/mygdx/escapefromlannioncity/siteweb/AddScore.java
+ com.mygdx.escapefromlannioncity.siteweb.AddScore
+com/mygdx/escapefromlannioncity/menu/Menu.java
+ com.mygdx.escapefromlannioncity.menu.Menu
+com/mygdx/escapefromlannioncity/EscapeFromLannionCity.java
+ com.mygdx.escapefromlannioncity.EscapeFromLannionCity

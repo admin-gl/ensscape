@@ -180,12 +180,20 @@ public class Login implements Screen {
                             this.message.setText("Email ou mot de passe inconnu !");
 
                         } else {
-                            // on enregistre le joueur qui est maintenant connecté
-                            game.isLoggedin = 1;
-                            game.pseudo = res;
-                            // on passe à l'écran suivant
-                            game.setScreen(game.menuEtTableau[1]);
-                            this.dispose();
+                            if(game.isLoggedin==0){
+                                game.pseudo = res;
+                                game.isLoggedin = 1;
+                                // on passe à l'écran suivant
+                                game.setScreen(game.menuEtTableau[4]);
+                                this.dispose();
+                            }else {
+                                game.pseudo = res;
+                                game.isLoggedin = 1;
+                                // on passe à l'écran suivant
+                                game.setScreen(game.menuEtTableau[1]);
+                                this.dispose();
+                            }
+
                         }
                     }
 

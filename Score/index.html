@@ -4,7 +4,7 @@
         <title>Escape From Lannion City</title>
         <style>
             #but{
-                width:326px;
+                width:335px;
                 margin: auto;
             }
             button{
@@ -50,6 +50,31 @@
                 background-color: #4CAFA1;
                 color: white;
             }
+            #toTop {
+  padding: .5em 1em;
+  width: auto;
+  display: none;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  color: white;
+  font-size: 18px;
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  background: #4CAFA1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .08);
+  transform: translateY(0);
+  transition: all .15s ease;
+}
+
+#toTop:hover {
+  background-color: #064508;
+}
         </style>
         <script type="text/javascript" src="Local.js"></script>
         <script type="text/javascript" src="Tableau.js"></script>
@@ -61,7 +86,7 @@
                     arr.push(JSON.parse(data[i]));
                 }*/
 
-                var table = document.createElement("table"), row, cellA, cellB, cellC, cellD;
+                var table = document.createElement("table"), row, cellA, cellB, cellC, cellD, cellE;
                 document.getElementById(id).appendChild(table);
 
                 row = document.createElement("tr");
@@ -69,18 +94,21 @@
                 cellB = document.createElement("th");
                 cellC = document.createElement("th");
                 cellD = document.createElement("th");
+                cellE = document.createElement("th");
                 // (C3) KEY & VALUE
-                cellA.innerHTML = "score";
+                cellA.innerHTML = "rang";
                 cellB.innerHTML = "pseudo";
-                cellC.innerHTML = "temps";
-                cellD.innerHTML = "date";
+                cellC.innerHTML = "score";
+                cellD.innerHTML = "temps";
+                cellE.innerHTML = "date";
 
                 table.appendChild(row);
                 row.appendChild(cellA);
                 row.appendChild(cellB);
                 row.appendChild(cellC);
                 row.appendChild(cellD);
-
+                row.appendChild(cellE);
+                
                 arr.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));
 
                 for (var i = 0; i < arr.length; i++) {
@@ -90,17 +118,20 @@
                     cellB = document.createElement("td");
                     cellC = document.createElement("td");
                     cellD = document.createElement("td");
+                    cellE = document.createElement("td");
                     // (C3) KEY & VALUE
-                    cellA.innerHTML = arr[i].score;
+                    cellA.innerHTML = (i+1).toString();
+                    cellC.innerHTML = arr[i].score;
                     cellB.innerHTML = arr[i].pseudo;
-                    cellC.innerHTML = arr[i].temps;
-                    cellD.innerHTML = arr[i].date;
+                    cellD.innerHTML = arr[i].temps;
+                    cellE.innerHTML = arr[i].date;
                     // (C4) ATTACH ROW & CELLS
                     table.appendChild(row);
                     row.appendChild(cellA);
                     row.appendChild(cellB);
                     row.appendChild(cellC);
                     row.appendChild(cellD);
+                    row.appendChild(cellE);
                     // alert(JSON.parse(data[0]).score);
                     //alert(mydata[1]);
                 }
@@ -116,12 +147,12 @@
             }
                Tab(arr,"tableau");
            }else{
-               alert("Pas encore de score local")
+               alert("Pas encore de score sur cet ordinateur")
            }
            if(typeof Tableau !== 'undefined'){
                Tab(Tableau,"tableau2")
            }else{
-               alert("Le tableau général des scores n'a pas été téléchargé")
+               alert("Le classement général n'a pas été téléchargé")
            }
 
         }
@@ -148,22 +179,41 @@
                     y.style.display = "block"
                 }
             }
+  // When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {
+  scrollFunction();
+};
 
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("toTop").style.display = "block";
+  } else {
+    document.getElementById("toTop").style.display = "none";
+  }
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
         </script>
     </head>
     <body onload="load()">
     <h2>Tableau des scores</h2>
     </br>
     <div id="but">
-        <button onclick="Loc()">Scores Locaux</button>
-        <button onclick="Gen()">Tableau général</button>
+        <button onclick="Loc()">Mes scores</button>
+        <button onclick="Gen()">Classment général</button>
     </div>
     </br>
     <div id="tableau">
-        <h3>Scores Locaux</h3>
+        <h3>Mes Scores</h3>
     </div>
     <div id="tableau2">
-        <h3>Tableau général</h3>
+        <h3>Classement général</h3>
     </div>
+    
+    
+      <span onclick="topFunction()" id="toTop" title="Go to top">Top</span>
     </body>
 </html>
