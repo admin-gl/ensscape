@@ -198,6 +198,7 @@ public abstract class UI implements Screen {
 
                 // Lance le Menu si on clique sur le Bouton correspondant
                 if (buttonMenu.contains(touched)) {
+                    game.sfxButton.play(game.volume);
                     game.setScreen(game.menuEtTableau[0]);
                 }
                 game.inventory.checkZoom(touched, game.batch);

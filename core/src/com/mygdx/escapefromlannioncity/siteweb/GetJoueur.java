@@ -37,7 +37,6 @@ public class GetJoueur {
             int j = 0;
             while (i.hasNext()) {
                 //object = (JSONObject) jsonArray.get(j);
-                //System.out.println(jsonArray.get(j));
                 obj = jsonParser.parse(jsonArray.get(j).toString());
                 jsonObject = (JSONObject)obj;
                 if(
@@ -52,7 +51,7 @@ public class GetJoueur {
             System.out.println("no user  found");
             return "no user found";
         }catch(Exception e){
-            System.out.println("erreur"+e);
+            System.err.println("erreur"+e);
             return "echoue";
         }
     }
@@ -63,7 +62,6 @@ public class GetJoueur {
      */
     public static String getJoueur(){
         try {
-            System.out.println("begin the connection now");
             StringBuilder res = new StringBuilder();
 
             URL url = new URL("https://escapefromlannion.netlify.app/.netlify/functions/get-joueur");
@@ -72,16 +70,14 @@ public class GetJoueur {
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             String line = reader.readLine(); // reads a line
             res.append(line);
-            System.out.println(line);
 
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
                 res.append(line);
             }
             input.close();
             return res.toString();
         } catch (UnknownHostException e) {
-            System.out.println("pas d'internet");
+            System.err.println("pas d'internet");
             e.printStackTrace();
             return "pas d'internet";
         }

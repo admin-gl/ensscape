@@ -151,17 +151,17 @@ public class Accueil implements Screen {
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
                 if(button.isPressed()){
-                    System.out.println( "go Pseudo");
+                    game.sfxButton.play(game.volume);
                     game.setScreen(new Pseudo(game));
 
                 }
                 if(button1.isPressed()){
-                    System.out.println( "go to se connecter");
+                    game.sfxButton.play(game.volume);
                     game.setScreen(new Login(game));
 
                 }
                 if(button2.isPressed()){
-                    System.out.println( "go to s'inscire");
+                    game.sfxButton.play(game.volume);
                     game.setScreen(new Signup(game));
 
                 }

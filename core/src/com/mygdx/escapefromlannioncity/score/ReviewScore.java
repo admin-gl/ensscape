@@ -82,7 +82,6 @@ public class ReviewScore implements Screen {
         if(game.isLoggedin==1) {
             this.button = new TextButton("AJOUTER AU CLASSEMENT GENERAL", style);
         }else{
-            System.out.println(game.isLoggedin);
             this.button = new TextButton("SE CONNECTER POUR AJOUTER AU CLASSEMENT", style);
         }
         this.retour = new TextButton("MENU PRINCIPAL", style);

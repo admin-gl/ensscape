@@ -21,7 +21,7 @@ public class FlavorText {
 
     private long lastTime;
 
-    Sound sfxDiscution;
+    private Sound sfxDiscution;
     private float volume;
 
     public FlavorText(EscapeFromLannionCity game, String text, Color color, String type){

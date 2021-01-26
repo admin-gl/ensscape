@@ -17,7 +17,6 @@ import com.mygdx.escapefromlannioncity.sauvegarde.SAmphiEnssat;
 import com.mygdx.escapefromlannioncity.sauvegarde.SParcStAnne;
 import com.mygdx.escapefromlannioncity.sauvegarde.SWarp;
 import com.mygdx.escapefromlannioncity.score.AffScore;
-import com.mygdx.escapefromlannioncity.score.ReviewScore;
 import com.mygdx.escapefromlannioncity.screens.UI;
 import com.mygdx.escapefromlannioncity.siteweb.GetScore;
 import com.mygdx.escapefromlannioncity.utility.ChangingCursor;
@@ -125,43 +124,33 @@ public class Menu implements Screen {
             Vector2 touched = new Vector2();
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
-                if (afficherScore.contains(touched)) {
-                    GetScore.StoreScore();
-                    AffScore.AffScore();
 
+            if (afficherScore.contains(touched)) {
+                game.sfxButton.play(game.volume);
+                GetScore.StoreScore();
+                AffScore.AffScore();
+
+            } else if (sauvegarder.contains(touched)) {
+                game.sfxButton.play(game.volume);
+                if(game.menuEtTableau[1].getClass().toString().matches(".*AmphiEnssat")) {
+                    SAmphiEnssat.Enregistrer(game.menuEtTableau[1]);
+                }else if(game.menuEtTableau[1].getClass().toString().matches(".*ParcStAnne")){
+                    SParcStAnne.Enregistrer(game.menuEtTableau[1]);
+                }else if(game.menuEtTableau[1].getClass().toString().matches(".*Warp")){
+                    SWarp.Enregistrer(game.menuEtTableau[1]);
                 }
-
-                if (sauvegarder.contains(touched)) {
-                    if(game.menuEtTableau[1].getClass().toString().matches(".*AmphiEnssat")) {
-                        SAmphiEnssat.Enregistrer(game.menuEtTableau[1]);
-                    }else if(game.menuEtTableau[1].getClass().toString().matches(".*ParcStAnne")){
-                        SParcStAnne.Enregistrer(game.menuEtTableau[1]);
-                    }else if(game.menuEtTableau[1].getClass().toString().matches(".*Warp")){
-                        SWarp.Enregistrer(game.menuEtTableau[1]);
-                    }
-                    timeOfSave = TimeUtils.millis();
-                }
-
-                if (reprendre.contains(touched)) {
-                    game.setScreen(game.menuEtTableau[1]);
-                }
-
-                if (quitter.contains(touched)) {
-                    game.menuEtTableau[1].dispose();
-                    game.setScreen(game.menuEtTableau[4]);
-                }
-
-                if (quitterLeJeu.contains(touched)) {
-                    game.dispose();
-                }
-
-        }
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-            Vector2 touched = new Vector2();
-            touched.set(Gdx.input.getX(), Gdx.input.getY());
-            viewport.unproject(touched);
-
-            if(sliderVolume.contains(touched) && sliderVolume.contains(setterVolume.getCenterPos())){
+                timeOfSave = TimeUtils.millis();
+            } else if (reprendre.contains(touched)) {
+                game.sfxButton.play(game.volume);
+                game.setScreen(game.menuEtTableau[1]);
+            } else if (quitter.contains(touched)) {
+                game.sfxButton.play(game.volume);
+                game.menuEtTableau[1].dispose();
+                game.setScreen(game.menuEtTableau[4]);
+            } else if (quitterLeJeu.contains(touched)) {
+                game.sfxButton.play(game.volume);
+                game.dispose();
+            } else if(sliderVolume.contains(touched) && sliderVolume.contains(setterVolume.getCenterPos())){
                 setterVolume.setCenterPos(touched.x, setterVolume.getCenterPos().y);
                 game.volume = ((setterVolume.getCenterPos().x)/setterVolume.getScaleX() - 15)/50;
             } else if(setterVolume.getCenterPos().x > sliderVolume.getX()+sliderVolume.getWidth()){

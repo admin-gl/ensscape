@@ -42,7 +42,7 @@ public class GetScore {
                     filescec.close();
                     return 0;
                 } catch (Exception e) {
-                    System.out.println("serialization des scores en ligne a echoue" + e);
+                    System.err.println("serialization des scores en ligne a echoue" + e);
                     return 2;
                 }
             }
@@ -58,7 +58,6 @@ public class GetScore {
      */
     public static String getScore(){
         try{
-            System.out.println("begin the connection now");
             StringBuilder res=new StringBuilder();
 
             URL url = new URL("https://escapefromlannion.netlify.app/.netlify/functions/get-score");
@@ -67,15 +66,13 @@ public class GetScore {
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             String line = reader.readLine(); // reads a line
             res.append(line);
-            System.out.println(line);
             while ((line = reader.readLine()) != null) {
                 res.append(line);
-                System.out.println(line);
             }
             input.close();
             return res.toString();
         } catch (UnknownHostException e) {
-            System.out.println("pas d'internet");
+            System.err.println("pas d'internet");
             e.printStackTrace();
             return "pas d'internet";
         }

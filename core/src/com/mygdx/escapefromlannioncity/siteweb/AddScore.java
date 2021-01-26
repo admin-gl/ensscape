@@ -47,12 +47,12 @@ public class AddScore {
             in.close();
             return 0;
         } catch (UnknownHostException e) {
-            System.out.println("pas d'internet");
+            System.err.println("pas d'internet");
             //e.printStackTrace();
             return 1;
         }
         catch (IOException e){
-            System.out.println("cette exeption apparait toujours, il faut regarder si ça marche pas les parametres");
+            System.err.println("cette exeption apparait toujours, il faut regarder si ça marche pas les parametres");
             //e.printStackTrace();
             return 0;
         }

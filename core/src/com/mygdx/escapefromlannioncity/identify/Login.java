@@ -152,14 +152,14 @@ public class Login implements Screen {
             viewport.unproject(touched);
 
                 if(this.retour.isPressed()){
+                    game.sfxButton.play(game.volume);
                     //retour à l'écran d'accueil
                     game.setScreen(game.menuEtTableau[2]);
                     this.dispose();
                 }
                 if (button.isPressed()) {
+                    game.sfxButton.play(game.volume);
                     //si l'utilisateur appuie sur se connecter
-                    System.out.println(this.nameText.getText());
-                    System.out.println(this.MdpText.getText());
                     //tous les champs doivent être remplis
                     if(this.nameText.getText().equals("") ||
                             this.MdpText.getText().equals("")){
@@ -168,7 +168,6 @@ public class Login implements Screen {
                     }else {
                         //on essaie de se connecter
                         res = GetJoueur.LogIn(this.nameText.getText(), this.MdpText.getText());
-                        System.out.println(res);
 
                         if (res.equals("echoue")) {
                             this.message.setText("Une erreur s'est produit !");

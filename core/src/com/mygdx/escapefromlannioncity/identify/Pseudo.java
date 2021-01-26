@@ -112,17 +112,6 @@ public class Pseudo implements Screen {
 
     }
 
-    public void goGoGadgettoMenu(Vector2 pTouched, ButtonOpenMenu pButton) {
-
-        if (pButton.isMyButton(pTouched)) {
-            //pScreen.hide();
-            /*this.render(delta);*/
-            game.setScreen(this);
-
-        }
-
-    }
-
     @Override
     public void show() {
         // le stage peut gérer les inputs
@@ -160,14 +149,15 @@ public class Pseudo implements Screen {
             viewport.unproject(touched);
 
                 if(retour.isPressed()){
+                    game.sfxButton.play(game.volume);
                     // on revient sur l'écran d'accueil
                     game.setScreen(game.menuEtTableau[2]);
                     this.dispose();
                 }
 
                 if (button.isPressed()) {
+                    game.sfxButton.play(game.volume);
                     // l'utilisateur a cliqué sur le bouton
-                    System.out.println(this.nameText.getText());
 
                     //le text rentré est vide
                     if(this.nameText.getText().equals("")){

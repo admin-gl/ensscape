@@ -176,6 +176,7 @@ public class MenuPrincipal2 implements Screen {
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
             if(button.isPressed()){
+                game.sfxButton.play(game.volume);
                 game.inventory.clear();
                 // NOUVELLE PARTIE
                 game.menuEtTableau[1] = new AmphiEnssat(game, "00:00",0,0);
@@ -184,6 +185,7 @@ public class MenuPrincipal2 implements Screen {
             }
             if(!isTutoOpen){
                 if(button1.isPressed()){
+                    game.sfxButton.play(game.volume);
                     game.inventory.clear();
                     if(!game.menuEtTableau[1].getClass().toString().matches(".*ReviewScore")) {
                         game.menuEtTableau[1].dispose();
@@ -191,7 +193,6 @@ public class MenuPrincipal2 implements Screen {
                     // REPRENDRE PARTIE
                     int res =SWarp.isPartie(game.isLoggedin,game.pseudo);
                     if(res==0){
-                        System.out.println("no partie for this user");
                     }else if(res==1){
                         game.menuEtTableau[1] = SAmphiEnssat.Ouvrir(game);
                         game.setScreen(game.menuEtTableau[1]);
@@ -204,24 +205,26 @@ public class MenuPrincipal2 implements Screen {
                     }
                 }
                 if(button2.isPressed()){
+                    game.sfxButton.play(game.volume);
                     //Score
-                    System.out.println(GetScore.StoreScore());
                     AffScore.AffScore();
 
                 }
                 if(button3.isPressed()){
                     //return accueil
+                    game.sfxButton.play(game.volume);
                     game.isLoggedin = 0;
                     game.setScreen(game.menuEtTableau[2]);
 
                 }
                 if(button4.isPressed()){
                     //quitter
-                    System.out.println("Ciao bye bye");
+                    game.sfxButton.play(game.volume);
                     game.dispose();
 
                 }
                 if(tutoriel.isPressed()){
+                    game.sfxButton.play(game.volume);
                     isTutoOpen = true;
                 }
             } else {

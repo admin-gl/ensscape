@@ -39,7 +39,6 @@ public class AddJoueur {
             int j = 0;
             while (i.hasNext()) {
                 //object = (JSONObject) jsonArray.get(j);
-                //System.out.println(jsonArray.get(j));
                 obj = jsonParser.parse(jsonArray.get(j).toString());
                 jsonObject = (JSONObject)obj;
                 if(
@@ -51,10 +50,9 @@ public class AddJoueur {
                 j++;
                 i.next();
             }
-            System.out.println("no user  found");
             return "ok";
         }catch(Exception e){
-            System.out.println("erreur"+e);
+            System.err.println("erreur"+e);
             return "echoue";
         }
     }
@@ -111,12 +109,12 @@ public class AddJoueur {
                 }
             }
         } catch(UnknownHostException e){
-            System.out.println("pas d'internet");
+            System.err.println("pas d'internet");
             e.printStackTrace();
             return 1;
         }
         catch(IOException e){
-            System.out.println("cette exeption apparait toujours, il faut regarder si ça marche pas les parametres");
+            System.err.println("cette exeption apparait toujours, il faut regarder si ça marche pas les parametres");
             //e.printStackTrace();
             return 0;
         }

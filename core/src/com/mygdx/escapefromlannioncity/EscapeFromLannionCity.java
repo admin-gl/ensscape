@@ -3,6 +3,7 @@ package com.mygdx.escapefromlannioncity;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -30,6 +31,7 @@ public class EscapeFromLannionCity extends Game {
 	public String pseudo ="";
 	public Screen[] menuEtTableau = new Screen[5];
 	public float volume = 0.2f;
+	public Sound sfxButton;
 
 	@Override
 	public void create () {
@@ -37,11 +39,11 @@ public class EscapeFromLannionCity extends Game {
 		inventory = new Inventory(Gdx.files.internal("image/Utilitaire/barreInventaire.jpg"));
 		inventory.resize();
 		mainFont = new BitmapFont(Gdx.files.internal("MainFont.fnt"));
+		sfxButton = Gdx.audio.newSound(Gdx.files.internal("sound/Button.wav"));
 
 		// au lancement du jeu, affiche l'EnssatScreen
 		menuEtTableau[0] = new Menu(this);
-		 menuEtTableau[1] = new AmphiEnssat(this, "00:00",0,0);
-
+		menuEtTableau[1] = new AmphiEnssat(this, "00:00",0,0);
 		menuEtTableau[2] = new Accueil(this);
 		menuEtTableau[3] = new MenuPrincipal(this);
 		menuEtTableau[4] = new MenuPrincipal2(this);
@@ -69,7 +71,7 @@ public class EscapeFromLannionCity extends Game {
 		menuEtTableau[2].dispose();
 		menuEtTableau[3].dispose();
 		menuEtTableau[4].dispose();
-
+		sfxButton.dispose();
 
 	}
 

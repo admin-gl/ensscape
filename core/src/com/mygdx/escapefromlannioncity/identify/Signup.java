@@ -121,17 +121,6 @@ public class Signup implements Screen{
 
     }
 
-    public void goGoGadgettoMenu(Vector2 pTouched, ButtonOpenMenu pButton) {
-
-        if (pButton.isMyButton(pTouched)) {
-            //pScreen.hide();
-            /*this.render(delta);*/
-            game.setScreen(this);
-
-        }
-
-    }
-
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stageLogin);
@@ -169,16 +158,15 @@ public class Signup implements Screen{
             viewport.unproject(touched);
 
                 if(retour.isPressed()){
+                    game.sfxButton.play(game.volume);
                     // on revient à l'écran d'accueil si retour
                     game.setScreen(game.menuEtTableau[2]);
                     this.dispose();
                 }
 
                 if (button.isPressed()) {
+                    game.sfxButton.play(game.volume);
                     //si le joueur appuie sur s'inscrire
-                    System.out.println(this.pseudoText.getText());
-                    System.out.println(this.nameText.getText());
-                    System.out.println(this.MdpText.getText());
 
                     // il faut que tous les champs soient remplis
                     if(this.pseudoText.getText().equals("") || this.nameText.getText().equals("") ||

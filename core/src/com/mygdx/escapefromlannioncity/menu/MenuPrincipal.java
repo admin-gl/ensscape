@@ -138,6 +138,7 @@ public class MenuPrincipal implements Screen {
         if(!isTransition1 && !isTransition2) {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
                 game.setScreen(game.menuEtTableau[2]);
+                game.sfxButton.play(game.volume);
             }
         }
         game.batch.end();

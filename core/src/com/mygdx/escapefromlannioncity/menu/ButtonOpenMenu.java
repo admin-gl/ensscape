@@ -39,7 +39,6 @@ public class ButtonOpenMenu extends GameObject {
     public boolean isMyButton(Vector2 pTouched) {
 
         if (contains(pTouched)) {
-            System.out.println("Toucher le menu fonctionne");
             return true;
         } else {
             return false;

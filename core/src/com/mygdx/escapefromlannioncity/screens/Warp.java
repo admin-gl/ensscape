@@ -506,7 +506,7 @@ public class Warp extends UI {
                             if (isBrossePicked) {
                                 background.setRegion(principalBrDecapBottleLess);
                             } else {
-                                background.setRegion(principalBrDecapLess);
+                                background.setRegion(principalDecapBottleLess);
                             }
                         } else if (isDecapsuleurPicked && !isPiecePicked) {
                             if (isBrossePicked) {
@@ -780,7 +780,6 @@ public class Warp extends UI {
                 zoomCoffre = coffreOuvert;
             }
         }
-        System.out.println(opened);
         isOpened = opened;
     }
 

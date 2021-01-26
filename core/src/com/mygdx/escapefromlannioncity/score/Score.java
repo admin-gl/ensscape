@@ -57,8 +57,6 @@ public class Score implements Serializable {
     }
 
     public String ToString(){
-        System.out.println("Score de "+getPseudo()+" : "+ getScore()+" le "+getDate()+
-                " en "+getTemps());
         return "Score de "+getPseudo()+" : "+ getScore()+" le "+getDate()+
                 " en "+getTemps();
     }
@@ -111,7 +109,6 @@ public class Score implements Serializable {
                 list.add(value.toJson());
             }
             jsonText = list.toJSONString();
-            System.out.println(jsonText);
 
             return jsonText;
 
@@ -144,7 +141,7 @@ public class Score implements Serializable {
             filescec.flush();
             filescec.close();
         }catch(Exception e){
-            System.out.println("serialization a echoue"+e);
+            System.err.println("serialization a echoue"+e);
         }
     }
 
@@ -166,7 +163,6 @@ public class Score implements Serializable {
             int j = 0;
             while (i.hasNext()) {
                  //object = (JSONObject) jsonArray.get(j);
-                 System.out.println(jsonArray.get(j).toString());
                 obj = jsonParser.parse( jsonArray.get(j).toString());
                 jsonObject = (JSONObject)obj;
                 table.add(new Score(jsonObject.get("score").toString(),jsonObject.get("pseudo").toString(),
@@ -177,7 +173,7 @@ public class Score implements Serializable {
         System.out.println("deserialization reeussie");
         return table;
     }catch(IOException | ParseException e){
-        System.out.println("deserialisation ratee"+e);
+        System.err.println("deserialisation ratee"+e);
         return new ArrayList<>();
     }
     }
@@ -199,7 +195,6 @@ public class Score implements Serializable {
             table.add(i,score);
 
             /* On limite le stockage local à 100 */
-           System.out.print(table.size());
            if(table.size() >= 100){
                for(i=100;i<table.size();i++){
                    table.remove(i);

@@ -271,7 +271,7 @@ public class ParcStAnne extends UI {
 
                 } else if (background.getTexture().toString().matches("image/ParcStAnne/banczoomed.*")) {
                     if (journalDePeche.contains(touched)) {
-                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement convaincu sur ce point mais je vais le garder en memoire.");
                     } else if (zoneFil.contains(touched)) {
                         flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourrait m'etre utile.");
                         game.inventory.add(ficelle);
