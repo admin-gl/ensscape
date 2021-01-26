@@ -1,5 +1,7 @@
 package com.mygdx.escapefromlannioncity.score;
 
+import com.badlogic.gdx.Gdx;
+
 import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,7 +13,7 @@ import java.nio.file.Paths;
 public class AffScore {
     public static boolean AffScore(){
         try {
-            Path path = Paths.get("./Score/");
+            Path path = Paths.get(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/");
             Files.createDirectories(path);
             System.out.println("Directory is created!");
         } catch (IOException e) {
@@ -19,10 +21,10 @@ public class AffScore {
 
         }
         try {
-            File f = new File("./Score/index.html");
+            File f = new File(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/index.html");
             if (!f.isFile()) {
                 System.out.println("Création de index.html");
-                FileWriter file = new FileWriter("./Score/index.html");
+                FileWriter file = new FileWriter(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/index.html");
                 file.write("<!doctype html>\n" +
                         "<html>\n" +
                         "    <head>\n" +

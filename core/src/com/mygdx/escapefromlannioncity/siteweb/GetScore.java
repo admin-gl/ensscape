@@ -1,4 +1,6 @@
 package com.mygdx.escapefromlannioncity.siteweb;
+import com.badlogic.gdx.Gdx;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -24,7 +26,7 @@ public class GetScore {
             } else {
                 FileWriter file;
                 try {
-                    Path path = Paths.get("./Score/");
+                    Path path = Paths.get(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/");
                     Files.createDirectories(path);
                     System.out.println("Directory is created!");
                 } catch (IOException e) {
@@ -32,11 +34,11 @@ public class GetScore {
                     return 2;
                 }
                 try {
-                    file = new FileWriter("./Score/Tableau.json");
+                    file = new FileWriter(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/Tableau.json");
                     file.write(score);
                     file.flush();
                     file.close();
-                    FileWriter filescec = new FileWriter("./Score/Tableau.js");
+                    FileWriter filescec = new FileWriter(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/Tableau.js");
                     filescec.write("Tableau="+score+";");
                     filescec.flush();
                     filescec.close();

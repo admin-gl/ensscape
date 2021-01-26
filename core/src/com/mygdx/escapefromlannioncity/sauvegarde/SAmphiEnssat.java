@@ -1,5 +1,6 @@
 package com.mygdx.escapefromlannioncity.sauvegarde;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.screens.AmphiEnssat;
@@ -74,7 +75,7 @@ public class SAmphiEnssat implements Serializable {
                 interrupteur, number);
         try{
             try {
-                Path path = Paths.get("./Parties/");
+                Path path = Paths.get(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Parties/");
                 Files.createDirectories(path);
                 System.out.println("Directory is created!");
             } catch (IOException e) {
@@ -84,26 +85,26 @@ public class SAmphiEnssat implements Serializable {
             FileOutputStream fout;
             if(amp.game.isLoggedin==1){
                 try {
-                    Path path = Paths.get("./Parties/1/");
+                    Path path = Paths.get(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Parties/1/");
                     Files.createDirectories(path);
                     System.out.println("Directory is created!");
                 } catch (IOException e) {
                     System.err.println("Failed to create directory!" + e.getMessage());
 
                 }
-                SWarp.Supprimer("./Parties/1/", amp.game.pseudo);
-                fout=new FileOutputStream("./Parties/1/"+amp.game.pseudo+"A.txt");
+                SWarp.Supprimer(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Parties/1/", amp.game.pseudo);
+                fout=new FileOutputStream(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Parties/1/"+amp.game.pseudo+"A.txt");
             }else{
                 try {
-                    Path path = Paths.get("./Parties/2/");
+                    Path path = Paths.get(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Parties/2/");
                     Files.createDirectories(path);
                     System.out.println("Directory is created!");
                 } catch (IOException e) {
                     System.err.println("Failed to create directory!" + e.getMessage());
 
                 }
-                SWarp.Supprimer("./Parties/2/", amp.game.pseudo);
-                fout=new FileOutputStream("./Parties/2/"+amp.game.pseudo+"A.txt");
+                SWarp.Supprimer(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Parties/2/", amp.game.pseudo);
+                fout=new FileOutputStream(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Parties/2/"+amp.game.pseudo+"A.txt");
             }
             ObjectOutputStream out=new ObjectOutputStream(fout);
             out.writeObject(s);
@@ -125,9 +126,9 @@ public class SAmphiEnssat implements Serializable {
             ObjectInputStream in;
             //Creating stream to read the object
             if(game.isLoggedin==1) {
-                in = new ObjectInputStream(new FileInputStream("./Parties/1/" + game.pseudo + "A.txt"));
+                in = new ObjectInputStream(new FileInputStream(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Parties/1/" + game.pseudo + "A.txt"));
             }else{
-                in = new ObjectInputStream(new FileInputStream("./Parties/2/" + game.pseudo + "A.txt"));
+                in = new ObjectInputStream(new FileInputStream(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Parties/2/" + game.pseudo + "A.txt"));
             }
             SAmphiEnssat s=(SAmphiEnssat) in.readObject();
             //closing the stream

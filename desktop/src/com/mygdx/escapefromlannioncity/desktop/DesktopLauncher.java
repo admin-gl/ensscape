@@ -1,6 +1,7 @@
 package com.mygdx.escapefromlannioncity.desktop;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglGraphics;
@@ -18,8 +19,8 @@ public class DesktopLauncher {
 		boolean IS_MAC = (OS.indexOf("mac") >= 0);
 		//booléens untiles si on on a besoin de traitements particuliers
 		//boolean IS_WINDOWS = (OS.indexOf("win") >= 0);
-		//boolean IS_UNIX = (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0);
-		if (IS_MAC){
+		boolean IS_UNIX = (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0);
+		if (IS_MAC || IS_UNIX){
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			config.width = screenSize.width;
 			config.height = screenSize.height-54;

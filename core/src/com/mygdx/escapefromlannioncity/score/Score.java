@@ -5,6 +5,7 @@ package com.mygdx.escapefromlannioncity.score;
 //import com.github.cliftonlabs.json_simple.Jsonable;
 
 
+import com.badlogic.gdx.Gdx;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -124,7 +125,7 @@ public class Score implements Serializable {
     public static void Serialize(List<Score> table, String name){
         FileWriter file;
         try {
-            Path path = Paths.get("./Score/");
+            Path path = Paths.get(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/");
             Files.createDirectories(path);
             System.out.println("Directory is created!");
         } catch (IOException e) {
@@ -132,11 +133,11 @@ public class Score implements Serializable {
 
         }
         try {
-            file = new FileWriter("./Score/"+name+".json");
+            file = new FileWriter(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/"+name+".json");
             file.write(ListtoJson(table));
             file.flush();
             file.close();
-            FileWriter filescec = new FileWriter("./Score/"+name+".js");
+            FileWriter filescec = new FileWriter(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/"+name+".js");
             filescec.write(name+"="+ListtoJson(table)+";");
             filescec.flush();
             filescec.close();
@@ -154,7 +155,7 @@ public class Score implements Serializable {
      */
     public static List<Score> Deserialize(String name) throws FileNotFoundException { try {
             List<Score> table = new ArrayList<>();
-            FileReader reader = new FileReader("./Score/"+name+".json");
+            FileReader reader = new FileReader(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/"+name+".json");
             JSONParser jsonParser = new JSONParser();
             JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
             Iterator i = jsonArray.iterator();
