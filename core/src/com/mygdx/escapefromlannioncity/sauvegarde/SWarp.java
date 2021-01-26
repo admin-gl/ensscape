@@ -91,7 +91,7 @@ public class SWarp implements Serializable {
                 warp.isTableauAlreadyClicked(), warp.hasClef());
         try{
             try {
-                Path path = Paths.get("./Parties/");
+                Path path = Paths.get(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/");
                 Files.createDirectories(path);
                 System.out.println("Directory is created!");
             } catch (IOException e) {
@@ -101,25 +101,25 @@ public class SWarp implements Serializable {
             FileOutputStream fout;
             if(warp.game.isLoggedin==1){
                 try {
-                    Path path = Paths.get("./Parties/1/");
+                    Path path = Paths.get(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/1/");
                     Files.createDirectories(path);
                     System.out.println("Directory is created!");
                 } catch (IOException e) {
                     System.err.println("Failed to create directory!" + e.getMessage());
 
                 }
-                Supprimer("./Parties/1/", warp.game.pseudo);
-                fout=new FileOutputStream("./Parties/1/"+warp.game.pseudo+"W.txt");
+                Supprimer(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/1/", warp.game.pseudo);
+                fout=new FileOutputStream(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/1/"+warp.game.pseudo+"W.txt");
             }else{
                 try {
-                    Path path = Paths.get("./Parties/2/");
+                    Path path = Paths.get(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/2/");
                     Files.createDirectories(path);
                     System.out.println("Directory is created!");
                 } catch (IOException e) {
                     System.err.println("Failed to create directory!" + e.getMessage());
 
                 }
-                Supprimer("./Parties/2/", warp.game.pseudo);
+                Supprimer(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/2/", warp.game.pseudo);
                 fout=new FileOutputStream("./Parties/2/"+warp.game.pseudo+"W.txt");
             }
             ObjectOutputStream out=new ObjectOutputStream(fout);
@@ -142,9 +142,9 @@ public class SWarp implements Serializable {
             ObjectInputStream in;
             //Creating stream to read the object
             if(game.isLoggedin==1) {
-               in = new ObjectInputStream(new FileInputStream("./Parties/1/" + game.pseudo + "W.txt"));
+               in = new ObjectInputStream(new FileInputStream(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/1/" + game.pseudo + "W.txt"));
             }else{
-               in = new ObjectInputStream(new FileInputStream("./Parties/2/" + game.pseudo + "W.txt"));
+               in = new ObjectInputStream(new FileInputStream(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/2/" + game.pseudo + "W.txt"));
             }
 
             SWarp s=(SWarp) in.readObject();
@@ -212,9 +212,9 @@ public class SWarp implements Serializable {
         File file;
 
         if(isLoggedin==1){
-             file = new File("./Parties/1/");
+             file = new File(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/1/");
          }else{
-            file = new File("./Parties/2/");
+            file = new File(System.getProperty("user.home")+"/Public/EFLC/Parties/Parties/2/");
 
         }
         File[] files = file.listFiles();

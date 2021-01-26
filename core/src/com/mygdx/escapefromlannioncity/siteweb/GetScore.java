@@ -24,7 +24,7 @@ public class GetScore {
             } else {
                 FileWriter file;
                 try {
-                    Path path = Paths.get("./Score/");
+                    Path path = Paths.get(System.getProperty("user.home")+"/Public/EFLC/Score/");
                     Files.createDirectories(path);
                     System.out.println("Directory is created!");
                 } catch (IOException e) {
@@ -32,11 +32,11 @@ public class GetScore {
                     return 2;
                 }
                 try {
-                    file = new FileWriter("./Score/Tableau.json");
+                    file = new FileWriter(System.getProperty("user.home")+"/Public/EFLC/Score/Tableau.json");
                     file.write(score);
                     file.flush();
                     file.close();
-                    FileWriter filescec = new FileWriter("./Score/Tableau.js");
+                    FileWriter filescec = new FileWriter(System.getProperty("user.home")+"/Public/EFLC/Score/Tableau.js");
                     filescec.write("Tableau="+score+";");
                     filescec.flush();
                     filescec.close();

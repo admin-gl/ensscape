@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 public class AffScore {
     public static boolean AffScore(){
         try {
-            Path path = Paths.get("./Score/");
+            Path path = Paths.get(System.getProperty("user.home")+"/Public/EFLC/Score/");
             Files.createDirectories(path);
             System.out.println("Directory is created!");
         } catch (IOException e) {
@@ -19,10 +19,10 @@ public class AffScore {
 
         }
         try {
-            File f = new File("./Score/index.html");
+            File f = new File(System.getProperty("user.home")+"/Public/EFLC/Score/index.html");
             if (!f.isFile()) {
                 System.out.println("Création de index.html");
-                FileWriter file = new FileWriter("./Score/index.html");
+                FileWriter file = new FileWriter(System.getProperty("user.home")+"/Public/EFLC/Score/index.html");
                 file.write("<!doctype html>\n" +
                         "<html>\n" +
                         "    <head>\n" +

@@ -207,6 +207,7 @@ public class MenuPrincipal2 implements Screen {
                 if(button2.isPressed()){
                     game.sfxButton.play(game.volume);
                     //Score
+                    System.out.println(GetScore.StoreScore());
                     AffScore.AffScore();
 
                 }
