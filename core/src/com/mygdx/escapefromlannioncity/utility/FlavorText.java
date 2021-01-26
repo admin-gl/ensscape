@@ -9,8 +9,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 
-import java.awt.*;
-
 /**
  * Classe permettant d'afficher une bulle de dialogue a l'attention du joueur
  */
@@ -24,6 +22,7 @@ public class FlavorText {
     private long lastTime;
 
     Sound sfxDiscution;
+    private float volume;
 
     public FlavorText(EscapeFromLannionCity game, String text, Color color, String type){
         this.flavorText = game.mainFont.newFontCache();
@@ -33,6 +32,7 @@ public class FlavorText {
         this.lastTime = TimeUtils.millis();
         this.sfxDiscution = Gdx.audio.newSound(Gdx.files.internal("sound/"+type+".wav"));
         this.drawing = false;
+        this.volume = 0.25f;
     }
 
     /**
@@ -43,7 +43,7 @@ public class FlavorText {
         if(TimeUtils.timeSinceMillis(lastTime) >= 75 && increment < text.length()){
             increment += 1;
             lastTime = TimeUtils.millis();
-            sfxDiscution.play(0.25f);
+            sfxDiscution.play(volume);
             drawing = true;
         } else if(increment >= text.length()) {
             drawing = false;
@@ -84,6 +84,10 @@ public class FlavorText {
     public void drawAll(SpriteBatch batch){
         increment = text.length()-1;
         this.draw(batch);
+    }
+
+    public void setVolume(float volume){
+        this.volume = volume;
     }
 
     public void dispose(){

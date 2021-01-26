@@ -167,6 +167,8 @@ public abstract class UI implements Screen {
             musique.setVolume(game.volume);
             musique.play();
             lastTime = TimeUtils.millis() - timeAtPause;
+            flavorText.setVolume(game.volume);
+            hint.setVolume(game.volume);
         }
         debTrans = TimeUtils.millis();
         bg = bg.tint(new Color(0,0,0,1));
@@ -270,6 +272,8 @@ public abstract class UI implements Screen {
     @Override
     public void resume() {
         if(timerOn) {
+            flavorText.setVolume(game.volume);
+            hint.setVolume(game.volume);
             musique.setVolume(game.volume);
             musique.play();
             lastTime = TimeUtils.millis() - timeAtPause;

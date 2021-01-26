@@ -163,6 +163,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.DesktopLauncher">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DesktopLauncher" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-15" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -204,17 +215,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="projet-gl [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -231,9 +231,7 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
     <configuration name="projet-gl [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -252,9 +250,7 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -338,5 +334,23 @@
     <MESSAGE value="Identification avant de commencer le jeu" />
     <MESSAGE value="Sauvegarde et menu principal" />
     <option name="LAST_COMMIT_MESSAGE" value="Sauvegarde et menu principal" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1323" height="84" key="GridCell.Tab.0.bottom" timestamp="1611629294826">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="84" key="GridCell.Tab.0.bottom/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611629294826" />
+    <state width="1323" height="84" key="GridCell.Tab.0.center" timestamp="1611629294826">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="84" key="GridCell.Tab.0.center/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611629294826" />
+    <state width="1323" height="84" key="GridCell.Tab.0.left" timestamp="1611629294826">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="84" key="GridCell.Tab.0.left/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611629294826" />
+    <state width="1323" height="84" key="GridCell.Tab.0.right" timestamp="1611629294826">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="84" key="GridCell.Tab.0.right/0.0.1366.738/-1920.-305.1920.1050@0.0.1366.738" timestamp="1611629294826" />
   </component>
 </project>

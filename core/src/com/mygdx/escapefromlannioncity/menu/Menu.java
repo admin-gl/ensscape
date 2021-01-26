@@ -5,8 +5,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFontCache;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
@@ -40,9 +43,16 @@ public class Menu implements Screen {
 
     private final ChangingCursor cursor;
 
+    private final BitmapFontCache text;
+    private long timeOfSave;
+
     public Menu(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;
+
+        this.text = game.mainFont.newFontCache();
+        text.setText("sauvegarde effectuee", 0, Gdx.graphics.getHeight()/10f, Gdx.graphics.getWidth(), Align.center ,true);
+        timeOfSave = 2000;
 
         this.cursor = new ChangingCursor(pGame);
 
@@ -56,15 +66,15 @@ public class Menu implements Screen {
 
         background = new Sprite(menuing);
 
-        reprendre = new GameObject(Gdx.files.internal("image/Menu/Reprendre GL.png"),128, 132, 65, 14, "");
-        sauvegarder = new GameObject(Gdx.files.internal("image/Menu/Sauvegarde GL.png"),128, 106, 65, 14,"");
-        afficherScore = new GameObject(Gdx.files.internal("image/Menu/Score GL.png"),128, 80, 65, 14,"");
-        quitter = new GameObject(Gdx.files.internal("image/Menu/Quitter GL.png"),128, 54, 65, 14,"");
-        quitterLeJeu = new GameObject(Gdx.files.internal("image/Menu/Quitter le jeu GL.png"),128, 28, 65, 14,"");
+        reprendre = new GameObject(Gdx.files.internal("image/Menu/Reprendre GL.png"),64, 98, 65, 14, "");
+        sauvegarder = new GameObject(Gdx.files.internal("image/Menu/Sauvegarde GL.png"),64, 72, 65, 14,"");
+        afficherScore = new GameObject(Gdx.files.internal("image/Menu/Score GL.png"),64, 46, 65, 14,"");
+        quitter = new GameObject(Gdx.files.internal("image/Menu/Quitter GL.png"),192, 72, 65, 14,"");
+        quitterLeJeu = new GameObject(Gdx.files.internal("image/Menu/Quitter le jeu GL.png"),192, 46, 65, 14,"");
 
-        imageVolume = new GameObject(Gdx.files.internal("image/Menu/Volume.png"),7, 106,14 , 14,"");
-        sliderVolume = new GameObject(Gdx.files.internal("image/Menu/slider_Volume.png"),40, 106,50 , 14,"");
-        setterVolume = new GameObject(Gdx.files.internal("image/Menu/Selecteur_Volume.png"),15+game.volume*50, 106,3 , 4 ,"");
+        imageVolume = new GameObject(Gdx.files.internal("image/Menu/Volume.png"),167, 98,14 , 14,"");
+        sliderVolume = new GameObject(Gdx.files.internal("image/Menu/slider_Volume.png"),199, 98,50 , 14,"");
+        setterVolume = new GameObject(Gdx.files.internal("image/Menu/Selecteur_Volume.png"),174+game.volume*50, 98,3 , 4 ,"");
 
         afficherScore.resize();
         sauvegarder.resize();
@@ -74,17 +84,6 @@ public class Menu implements Screen {
         setterVolume.resize();
         sliderVolume.resize();
         imageVolume.resize();
-
-    }
-
-    public void goGoGadgettoMenu(Vector2 pTouched, ButtonOpenMenu pButton) {
-
-        if (pButton.isMyButton(pTouched)) {
-            //pScreen.hide();
-            /*this.render(delta);*/
-            game.setScreen(this);
-
-        }
 
     }
 
@@ -113,6 +112,11 @@ public class Menu implements Screen {
         imageVolume.drawFix(game.batch);
         setterVolume.drawFix(game.batch);
 
+        if(TimeUtils.timeSinceMillis(timeOfSave) < 2000){
+            text.draw(game.batch);
+        }
+
+
         game.batch.end();
 
         /* Check pour un clic gauche de la souris */
@@ -122,37 +126,32 @@ public class Menu implements Screen {
             touched.set(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(touched);
                 if (afficherScore.contains(touched)) {
-                    System.out.println("J'affiche le score");
                     GetScore.StoreScore();
                     AffScore.AffScore();
 
                 }
 
                 if (sauvegarder.contains(touched)) {
-                    System.out.println("Je sauvegarde");
                     if(game.menuEtTableau[1].getClass().toString().matches(".*AmphiEnssat")) {
                         SAmphiEnssat.Enregistrer(game.menuEtTableau[1]);
                     }else if(game.menuEtTableau[1].getClass().toString().matches(".*ParcStAnne")){
                         SParcStAnne.Enregistrer(game.menuEtTableau[1]);
                     }else if(game.menuEtTableau[1].getClass().toString().matches(".*Warp")){
-                        System.out.println("here");
                         SWarp.Enregistrer(game.menuEtTableau[1]);
                     }
+                    timeOfSave = TimeUtils.millis();
                 }
 
                 if (reprendre.contains(touched)) {
-                    System.out.println("Reprenons le jeu");
                     game.setScreen(game.menuEtTableau[1]);
                 }
 
                 if (quitter.contains(touched)) {
-                    System.out.println("Retournons au menu principal");
                     game.menuEtTableau[1].dispose();
                     game.setScreen(game.menuEtTableau[4]);
                 }
 
                 if (quitterLeJeu.contains(touched)) {
-                    System.out.println("Ciao bye bye");
                     game.dispose();
                 }
 

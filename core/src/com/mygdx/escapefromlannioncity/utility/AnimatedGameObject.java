@@ -70,7 +70,7 @@ public class AnimatedGameObject extends GameObject{
      * */
     public void changeStat(boolean plus){
 
-        if(plus) {
+        if(plus || stat == 0) {
             increment += object.getFrameDuration();
             stat += 1;
         } else {

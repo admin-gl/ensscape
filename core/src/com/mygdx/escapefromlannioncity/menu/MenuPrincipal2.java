@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -18,15 +19,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
-import com.mygdx.escapefromlannioncity.identify.Login;
-import com.mygdx.escapefromlannioncity.identify.Pseudo;
-import com.mygdx.escapefromlannioncity.identify.Signup;
 import com.mygdx.escapefromlannioncity.sauvegarde.SAmphiEnssat;
 import com.mygdx.escapefromlannioncity.sauvegarde.SParcStAnne;
 import com.mygdx.escapefromlannioncity.sauvegarde.SWarp;
 import com.mygdx.escapefromlannioncity.score.AffScore;
 import com.mygdx.escapefromlannioncity.screens.AmphiEnssat;
 import com.mygdx.escapefromlannioncity.siteweb.GetScore;
+import com.mygdx.escapefromlannioncity.utility.AnimatedGameObject;
+import com.mygdx.escapefromlannioncity.utility.GameObject;
 
 public class MenuPrincipal2 implements Screen {
     public Music musique;
@@ -46,6 +46,13 @@ public class MenuPrincipal2 implements Screen {
     private final TextButton button2;
     private final TextButton button3;
     private final TextButton button4;
+
+    private final TextButton tutoriel;
+    private boolean isTutoOpen;
+    private final GameObject quitTuto;
+    private final AnimatedGameObject tuto;
+    private final GameObject leftarrow;
+    private final GameObject rightarrow;
 
 
 
@@ -98,7 +105,8 @@ public class MenuPrincipal2 implements Screen {
         table.row();
         table.add(button4).center().minWidth(500).minHeight(75);
 
-
+        this.tutoriel = new TextButton("TUTORIEL", style);
+        tutoriel.setPosition(10,10);
 
         // on la positionne
         table.setFillParent(true);
@@ -106,6 +114,25 @@ public class MenuPrincipal2 implements Screen {
 
         // on ajoute la table au stage
         stage.addActor(table);
+        stage.addActor(tutoriel);
+
+        isTutoOpen = false;
+        quitTuto = new GameObject(Gdx.files.internal("image/Utilitaire/quitZoom.png"), 223, 125, 6, 6, "");
+        leftarrow = new GameObject(Gdx.files.internal("image/Utilitaire/quitZoom.png"), 35.5f, 23, 5, 10, "");
+        rightarrow = new GameObject(Gdx.files.internal("image/Utilitaire/quitZoom.png"), 219.5f, 23, 5, 10, "");
+
+        quitTuto.resize();
+        leftarrow.resize();
+        rightarrow.resize();
+
+        Texture[] pagesTuto = new Texture[2];
+        for (int i=0;i<2;i++) {
+            pagesTuto[i] = new Texture(Gdx.files.internal("animation/Utilitaire/Tutoriel/"+i+".png"));
+        }
+        tuto = new AnimatedGameObject(pagesTuto);
+        tuto.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        tuto.setCenterPos(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f);
+        tuto.setPlayMode(Animation.PlayMode.LOOP);
 
     }
 
@@ -134,6 +161,9 @@ public class MenuPrincipal2 implements Screen {
         // on affiche le stage et lui permet d'agir
         stage.draw();
         stage.act();
+        if(isTutoOpen){
+            tuto.drawFix(game.batch);
+        }
 
 
         game.batch.end();
@@ -152,41 +182,59 @@ public class MenuPrincipal2 implements Screen {
                 game.setScreen(game.menuEtTableau[1]);
 
             }
-            if(button1.isPressed()){
-                game.inventory.clear();
-                game.menuEtTableau[1].dispose();
-                // REPRENDRE PARTIE
-                int res =SWarp.isPartie(game.isLoggedin,game.pseudo);
-                if(res==0){
-                    System.out.println("no partie for this user");
-                }else if(res==1){
-                    game.menuEtTableau[1] = SAmphiEnssat.Ouvrir(game);
-                    game.setScreen(game.menuEtTableau[1]);
-                }else if(res==2){
-                    game.menuEtTableau[1] = SParcStAnne.Ouvrir(game);
-                    game.setScreen(game.menuEtTableau[1]);
-                }else if(res==3){
-                    game.menuEtTableau[1] = SWarp.Ouvrir(game);
-                    game.setScreen(game.menuEtTableau[1]);
+            if(!isTutoOpen){
+                if(button1.isPressed()){
+                    game.inventory.clear();
+                    if(!game.menuEtTableau[1].getClass().toString().matches(".*ReviewScore")) {
+                        game.menuEtTableau[1].dispose();
+                    }
+                    // REPRENDRE PARTIE
+                    int res =SWarp.isPartie(game.isLoggedin,game.pseudo);
+                    if(res==0){
+                        System.out.println("no partie for this user");
+                    }else if(res==1){
+                        game.menuEtTableau[1] = SAmphiEnssat.Ouvrir(game);
+                        game.setScreen(game.menuEtTableau[1]);
+                    }else if(res==2){
+                        game.menuEtTableau[1] = SParcStAnne.Ouvrir(game);
+                        game.setScreen(game.menuEtTableau[1]);
+                    }else if(res==3){
+                        game.menuEtTableau[1] = SWarp.Ouvrir(game);
+                        game.setScreen(game.menuEtTableau[1]);
+                    }
                 }
-            }
-            if(button2.isPressed()){
-                //Score
-                System.out.println(GetScore.StoreScore());
-                AffScore.AffScore();
+                if(button2.isPressed()){
+                    //Score
+                    System.out.println(GetScore.StoreScore());
+                    AffScore.AffScore();
 
-            }
-            if(button3.isPressed()){
-                //return accueil
-                game.isLoggedin = 0;
-                game.setScreen(game.menuEtTableau[2]);
+                }
+                if(button3.isPressed()){
+                    //return accueil
+                    game.isLoggedin = 0;
+                    game.setScreen(game.menuEtTableau[2]);
 
-            }
-            if(button4.isPressed()){
-                //quitter
-                System.out.println("Ciao bye bye");
-                game.dispose();
+                }
+                if(button4.isPressed()){
+                    //quitter
+                    System.out.println("Ciao bye bye");
+                    game.dispose();
 
+                }
+                if(tutoriel.isPressed()){
+                    isTutoOpen = true;
+                }
+            } else {
+                if(leftarrow.contains(touched)){
+                    tuto.changeStat(false);
+                } else if(rightarrow.contains(touched)){
+                    tuto.changeStat(true);
+                } else if(quitTuto.contains(touched)){
+                    isTutoOpen = false;
+                    if(tuto.getState() % 2 == 1){
+                        tuto.changeStat(true);
+                    }
+                }
             }
         }
 
@@ -224,5 +272,8 @@ public class MenuPrincipal2 implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        tuto.dispose();
+        leftarrow.dispose();
+        rightarrow.dispose();
     }
 }
