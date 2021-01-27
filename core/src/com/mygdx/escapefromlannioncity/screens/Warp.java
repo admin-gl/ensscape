@@ -101,7 +101,7 @@ public class Warp extends UI {
 
 
     public Warp(EscapeFromLannionCity game, String timeTotal,int bonus, int usedHint) {
-        super(game, "music/enigme_3.wav", new String[]{"1. La bouteille biere contient un objet singulier ...\n",
+        super(game, "music/enigme_3.wav", new String[]{"1. La bouteille de biere contient un objet singulier ...\n",
                 "2. La photo du space-invader semble louche ...\n",
                 "3. Les chevalets de la salle ont ete repeint tres recemment. "}
                 ,timeTotal,bonus,usedHint);
