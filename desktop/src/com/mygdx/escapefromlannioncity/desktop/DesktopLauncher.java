@@ -1,6 +1,7 @@
 package com.mygdx.escapefromlannioncity.desktop;
 
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -26,10 +27,15 @@ public class DesktopLauncher {
 			config.height = screenSize.height-54;
 			config.resizable = false;
 			config.fullscreen = false;
+			if(IS_UNIX){
+				config.addIcon("icon32.png", Files.FileType.Internal);
+			}
 		} else {
-			config.width = 256;
-			config.height = 144;
-			config.fullscreen = true;
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			config.width = screenSize.width;
+			config.height = screenSize.height-54;
+			config.resizable = false;
+			config.fullscreen = false;
 		}
 
 		new LwjglApplication(new EscapeFromLannionCity(), config);
