@@ -169,7 +169,7 @@ public class Signup implements Screen{
                     //si le joueur appuie sur s'inscrire
 
                     // il faut que tous les champs soient remplis
-                    if(this.pseudoText.getText().equals("") || this.nameText.getText().equals("") ||
+                    if(this.pseudoText.getText().equals("") || this.pseudoText.getText().equals("") ||
                             this.MdpText.getText().equals("")){
                         this.message.setText("Tous les champs doivent etre remplis !");
 
