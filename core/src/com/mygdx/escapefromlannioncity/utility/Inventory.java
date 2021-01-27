@@ -58,10 +58,12 @@ public class Inventory extends GameObject{
      * @param batch le SpriteBatch dans lequel on doit afficher le GameObject
      */
     public void zoom(int i, SpriteBatch batch) {
-        GameObject object = container.get(i);
-        object.setSize(object.getWidth()*4, object.getHeight()*4);
-        object.setCenterPos(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/4f);
-        drawFix(batch);
+        if(container.toArray().length > i) {
+            GameObject object = container.get(i);
+            object.setSize(object.getWidth() * 4, object.getHeight() * 4);
+            object.setCenterPos(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 4f);
+            drawFix(batch);
+        }
     }
 
     /**

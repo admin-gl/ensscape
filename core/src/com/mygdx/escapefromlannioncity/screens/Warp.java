@@ -101,9 +101,9 @@ public class Warp extends UI {
 
 
     public Warp(EscapeFromLannionCity game, String timeTotal,int bonus, int usedHint) {
-        super(game, "music/enigme_3.wav", new String[]{"1. La bouteille bleue contient un objet singulier ...\n",
+        super(game, "music/enigme_3.wav", new String[]{"1. La bouteille biere contient un objet singulier ...\n",
                 "2. La photo du space-invader semble louche ...\n",
-                "3. Les chevalets de la salle ont été repeint tres recemment. "}
+                "3. Les chevalets de la salle ont ete repeint tres recemment. "}
                 ,timeTotal,bonus,usedHint);
         // init textures zone comptoir
         principal = new Texture(Gdx.files.internal("image/Warp/comptoir.png"));
@@ -644,7 +644,7 @@ public class Warp extends UI {
                         isChev1Bross = true;
                         background.setRegion(zoomChev1Gratt);
                     } else if (!isBrossePicked && chev1.contains(touched)) {
-                        flavorText.setText("La peinture s'écaille...");
+                        flavorText.setText("La peinture s'ecaille...");
                     } else if (zoneQuitter.contains(touched)) {
                         if (!isChev1Bross && !isChev2Bross) {
                             background.setRegion(salleMain);
@@ -661,7 +661,7 @@ public class Warp extends UI {
                     if (isBrossePicked && chev2.contains(touched) && !isChev2Bross) {
                         flavorText.setText("Un chiffre etait cache derriere !");
                         isChev2Bross = true;
-                        background.setRegion(zoomChev1Gratt);
+                        background.setRegion(zoomChev2Gratt);
                     } else if (!isBrossePicked && chev2.contains(touched)) {
                         flavorText.setText("La peinture s'ecaille...");
                     } else if (zoneQuitter.contains(touched)) {

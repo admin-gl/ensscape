@@ -293,7 +293,7 @@ public class ParcStAnne extends UI {
 
                 } else if (background.getTexture().toString().matches("image/ParcStAnne/sansFerailleParc.*")) {
                     if (journalDePeche.contains(touched)) {
-                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement convaincu de cela mais je vais le garder en memoire.");
                     } else if (zoneFil.contains(touched)) {
                         flavorText.setText("Une ficelle... Elle n'est pas assez solide pour me soutenir mais pourrait m'etre utile.");
                         game.inventory.add(ficelle);
@@ -413,7 +413,7 @@ public class ParcStAnne extends UI {
                         } else {
                             flavorText.setText("Ce lac est magnifique, peut etre qu'il y a des poissons dedans.");
                         }
-                    } else if (zoneBaton.contains(touched)) {
+                    } else if (zoneBaton.contains(touched) && !isBatonPicked) {
                         game.inventory.add(baton);
                         isBatonPicked = true;
                         background.setRegion(principalBatonless);
