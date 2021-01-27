@@ -190,13 +190,13 @@ public class Signup implements Screen{
 
                         } else if (res == 0) { //ok
                             if(game.isLoggedin==0){
-                                game.pseudo = this.nameText.getText();
+                                game.pseudo = this.pseudoText.getText();
                                 game.isLoggedin = 1;
                                 // on passe à l'écran suivant
                                 game.setScreen(game.menuEtTableau[4]);
                                 this.dispose();
                             }else {
-                                game.pseudo = this.nameText.getText();
+                                game.pseudo = this.pseudoText.getText();
                                 game.isLoggedin = 1;
                                 // on passe à l'écran suivant
                                 game.setScreen(game.menuEtTableau[1]);
