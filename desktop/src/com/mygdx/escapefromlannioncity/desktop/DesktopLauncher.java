@@ -31,11 +31,9 @@ public class DesktopLauncher {
 				config.addIcon("icon32.png", Files.FileType.Internal);
 			}
 		} else {
-			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			config.width = screenSize.width;
-			config.height = screenSize.height-54;
-			config.resizable = false;
-			config.fullscreen = false;
+			config.width = 256;
+			config.height = 144;
+			config.fullscreen = true;
 		}
 
 		new LwjglApplication(new EscapeFromLannionCity(), config);

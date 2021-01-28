@@ -241,7 +241,7 @@ public class ParcStAnne extends UI {
 
                 if (background.getTexture().toString().matches("image/ParcStAnne/parcStAnneChap.*")) {
                     if (panneau.contains(touched)) {
-                        flavorText.setText("\"Acces interdit, renovation de la chapelle en cours\"\nInteressant... Un cadena a chiffre est la seule barriere entre moi et l'interieur de cette chapelle.");
+                        flavorText.setText("\"Acces interdit, renovation de la chapelle en cours\"\nInteressant... Un cadenas a chiffre est la seule barriere entre moi et l'interieur de cette chapelle.");
                     } else if (porte.contains(touched)) {
                         if (isOpened) {
                             if (game.inventory.hasIn(echelle)) {
@@ -310,7 +310,7 @@ public class ParcStAnne extends UI {
 
                 } else if (background.getTexture().toString().matches("image/ParcStAnne/sansFilBanc.*")) {
                     if (journalDePeche.contains(touched)) {
-                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement convaincu de cela mais je vais le garder en memoire.");
                     } else if (zoneFeraille.contains(touched)) {
                         flavorText.setText("Un vieil opercule de canette. Je le prend pour ma collection !");
                         game.inventory.add(ferraille);
@@ -327,7 +327,7 @@ public class ParcStAnne extends UI {
 
                 } else if (background.getTexture().toString().matches("image/ParcStAnne/sansobjetbanc.*")) {
                     if (journalDePeche.contains(touched)) {
-                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement vendu sur ce point mais je vais le garder en memoire.");
+                        flavorText.setText("\"La peche est un art de plein air et de ce fait, vous pouvez utiliser tout ce qui vous entoure pour le pratiquer !\"\nJe ne suis pas completement convaincu par cela mais je vais le garder en memoire.");
                     } else if (zoneQuitter.contains(touched)) {
                         if (isBatonPicked) {
                             background.setRegion(principalBatonless);
@@ -409,7 +409,7 @@ public class ParcStAnne extends UI {
                         }
                     } else if (lac.contains(touched)) {
                         if (game.inventory.hasIn(canneAPeche)) {
-                            flavorText.setText("...\n...\n... Ce n'est pas le mement...");
+                            flavorText.setText("...\n...\n... Ce n'est pas le moment...");
                         } else {
                             flavorText.setText("Ce lac est magnifique, peut etre qu'il y a des poissons dedans.");
                         }

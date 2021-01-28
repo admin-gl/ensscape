@@ -46,7 +46,7 @@ public class ReviewScore implements Screen {
     public ReviewScore(final EscapeFromLannionCity pGame, String timeTotal, int bonus, int usedHint) {
 
         this.game = pGame;
-        Texture menuing = new Texture(Gdx.files.internal("image/Utilitaire/blacksquare.jpg"));
+        Texture menuing = new Texture(Gdx.files.internal("image/Utilitaire/blacksquare.png"));
 
         // place une camera dans la vue actuelle de la fenêtre
         OrthographicCamera camera = new OrthographicCamera();

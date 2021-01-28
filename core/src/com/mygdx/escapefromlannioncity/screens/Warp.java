@@ -326,12 +326,12 @@ public class Warp extends UI {
                         zoneDroite.hide();
                         zoneGauche.hide();
                     } else if (zoneDecapsuleur.contains(touched) && !isDecapsuleurPicked && !isBrossePicked) {
-                        flavorText.setText("Ceci pourrait m'aider à m'ouvrir la bouteille.\n");
+                        flavorText.setText("Ceci pourrait m'aider a m'ouvrir la bouteille.\n");
                         game.inventory.add(decapsuleur);
                         isDecapsuleurPicked = true;
                         background.setRegion(principalDecapLess);
                     } else if (zoneDecapsuleur.contains(touched) && !isDecapsuleurPicked && isBrossePicked) {
-                        flavorText.setText("Ceci pourrait m'aider à m'ouvrir la bouteille.\n");
+                        flavorText.setText("Ceci pourrait m'aider a m'ouvrir la bouteille.\n");
                         game.inventory.add(decapsuleur);
                         isDecapsuleurPicked = true;
                         background.setRegion(principalBrDecapLess);
