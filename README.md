@@ -4,7 +4,7 @@ Projet de l'entreprise Enss'cap
 
 Réalisé par l'entreprise Void Entertainment
 
-Point & click ludique dans la ville de Lannion
+Jeu point & click ludique dans la ville de Lannion
 
 
 
