@@ -31,6 +31,7 @@ public class DesktopLauncher {
 				config.addIcon("icon32.png", Files.FileType.Internal);
 			}
 		} else {
+			config.addIcon("icon32.png", Files.FileType.Internal);
 			config.width = 256;
 			config.height = 144;
 			config.fullscreen = true;
