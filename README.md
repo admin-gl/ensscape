@@ -29,3 +29,13 @@ Mdp : U5jj@6-sNv
 repo : https://github.com/Void-Entertainment/EscapeFromLannion
 
 site web : https://escapefromlannion.netlify.app/
+
+
+## Distribution 
+
+Page itch.io : https://void-entertainment.itch.io/escape-from-lannion-city
+
+Mdp : escape-fr0m-l@nnion
+
+Nota : seule la version linux/macOS sous le formar java archive est à jour pour les derniers bugs connus. 
+
