@@ -1,20 +1,18 @@
 # Escape from Lannion City
 
-Projet de l'entreprise Enss'cap
+Projet de l'entreprise Enss'cape, réalisé par l'entreprise Void Entertainment.
 
-Réalisé par l'entreprise Void Entertainment
-
-Jeu point & click ludique dans la ville de Lannion
+Jeu point & click ludique dans la ville de Lannion.
 
 
 
 ## Aspect technique
 
-Projet java réalisé avec Gradle et Libgdx
+Projet java réalisé avec Gradle et Libgdx.
 
-Commande pour produire le jar : gradlew desktop:run
+Commande pour produire le jar : `gradlew desktop:run`
 
-Le jar sera généré dans desktop/build/libs du projet
+Le jar sera généré dans `desktop/build/libs` du projet
 
 
 Sous Linux, le projet a été testé pour les versions de java : adoptopenjdk-15-hotspot-amd64, jdk-11.0.2, java-8-openjdk-amd64.  
