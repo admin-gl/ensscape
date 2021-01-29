@@ -23,8 +23,9 @@ Sous Linux, le projet a été testé pour les versions de java : adoptopenjdk-15
 ## Site Web
 
 Compte pour acceder au repo : void.softcorp@gmail.com
+
 Mdp : U5jj@6-sNv
 
 repo : https://github.com/Void-Entertainment/EscapeFromLannion
 
-site web : escapefromlannion.netlify.app/
+site web : https://escapefromlannion.netlify.app/
