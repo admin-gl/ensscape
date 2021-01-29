@@ -33,6 +33,16 @@ task dist(type: Jar) {
     with jar
 }
 
+dependencies {
+    testImplementation 'junit:junit:4.13'
+}
+
+test {
+    useJUnit()
+
+    maxHeapSize = '1G'
+}
+
 
 dist.dependsOn classes
 
