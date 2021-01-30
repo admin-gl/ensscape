@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe de test séparé de la gestion et l'enregistrement des scores, ainsi que son ouverture.
+ */
 public class TestMain {
     public static void main(String[] args) throws Exception{
         Score j1 = new Score("polpo","00:09",2,2, LocalDate.now());

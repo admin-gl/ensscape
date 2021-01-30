@@ -11,6 +11,9 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
 
+/**
+ * Ecran pour l'enigme du Warp
+ */
 public class Warp extends UI {
 
     //Background textures
@@ -684,7 +687,7 @@ public class Warp extends UI {
     }
 
 
-    /* Getter et setter */
+    /* Getter et setter pour la synchronisation des etats*/
     public boolean hasClef(){
         if(game.inventory.hasIn(clefs)){return true;}
         else{return false;}
@@ -820,6 +823,10 @@ public class Warp extends UI {
     public void setTableauAlreadyClicked(boolean tableauAlreadyClicked) {
         isTableauAlreadyClicked = tableauAlreadyClicked;
     }
+
+    /**
+     * Met toutes les images de fonds dans les etats qu'elles doivent avoir
+     */
     public void setBackground(){
         if (!isChev1Bross && !isChev2Bross) {
             background.setRegion(salleMain);

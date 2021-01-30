@@ -22,6 +22,11 @@ import com.mygdx.escapefromlannioncity.menu.MenuPrincipal;
 
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
+
+
+/**
+ * Ecran du renseignement du pseudo pour jouer
+ */
 public class Pseudo implements Screen {
 
     public Music musique;
@@ -42,8 +47,10 @@ public class Pseudo implements Screen {
     private final TextButton retour;
 
 
-
-
+    /**
+     * Ecran de renseignement du pseudo pour jouer
+     * @param pGame partie en cours
+     */
     public Pseudo(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;
@@ -166,12 +173,14 @@ public class Pseudo implements Screen {
                     //sinon on va à l'écran suivant sans être connecté
                     }else {
                         if(game.isLoggedin==0){
+                            //si appelé depuis l'accueil
                             game.pseudo = this.nameText.getText();
                             game.isLoggedin = 2;
                             // on passe à l'écran suivant
                             game.setScreen(game.menuEtTableau[4]);
                             this.dispose();
                         }else {
+                            //si appelé depuis le tableau des scores
                             game.pseudo = this.nameText.getText();
                             game.isLoggedin = 2;
                             // on passe à l'écran suivant

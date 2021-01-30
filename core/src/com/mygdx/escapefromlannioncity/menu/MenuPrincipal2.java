@@ -28,6 +28,10 @@ import com.mygdx.escapefromlannioncity.siteweb.GetScore;
 import com.mygdx.escapefromlannioncity.utility.AnimatedGameObject;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
 
+
+/**
+ * Menu principal où le joueur peut commencer une nouvelle partie, continuer,...
+ */
 public class MenuPrincipal2 implements Screen {
     public Music musique;
 
@@ -55,7 +59,10 @@ public class MenuPrincipal2 implements Screen {
     private final GameObject rightarrow;
 
 
-
+    /**
+     * Menu principal où le joueur peut commencer une nouvelle partie, continuer,...
+     * @param pGame jeu en cours
+     */
     public MenuPrincipal2(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;

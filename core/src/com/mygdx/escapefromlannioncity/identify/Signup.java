@@ -43,6 +43,10 @@ public class Signup implements Screen{
     private final TextButton retour;
 
 
+    /**
+     * Ecran d'insciprtion du joueur
+     * @param pGame jeu en cours
+     */
     public Signup(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;
@@ -190,12 +194,14 @@ public class Signup implements Screen{
 
                         } else if (res == 0) { //ok
                             if(game.isLoggedin==0){
+                                //si appelé depuis l'accueil
                                 game.pseudo = this.pseudoText.getText();
                                 game.isLoggedin = 1;
                                 // on passe à l'écran suivant
                                 game.setScreen(game.menuEtTableau[4]);
                                 this.dispose();
                             }else {
+                                //si appelé depuis le tableau des scores
                                 game.pseudo = this.pseudoText.getText();
                                 game.isLoggedin = 1;
                                 // on passe à l'écran suivant

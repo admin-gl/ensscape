@@ -10,6 +10,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
+/**
+ * Classe de sauvegarde de l'Amphi, qui est sérialisé pour être stockée sur
+ * l'ordinateur dans le dossier Parties du dossier EscapeFomLannion
+ * du dossier personnel de l'utilisateur
+ */
 public class SAmphiEnssat implements Serializable {
     int[] interrupteur = new int[11];
     int[] number = new int[4];
@@ -31,13 +37,13 @@ public class SAmphiEnssat implements Serializable {
      * @param timeFromBegin temps depuis que l'écran actif est affiché
      * @param bonus  --commun à tous les écrans bonus que l'utilisateur a gagné
      * @param usedHint  -- commun à tous les écrans nombre d'indice utilisés par le joueur
-     * @param lights
-     * @param carteValide
-     * @param porteVerr
-     * @param hint2
-     * @param carte
-     * @param interrupteur
-     * @param number
+     * @param lights  information des lumières allumées ou non
+     * @param carteValide  information de la carte activée ou non
+     * @param porteVerr  si la porte est verrouillée ounon
+     * @param hint2   si l'avancement dans l'enigme est assez grand pour afficher cet indice
+     * @param carte   si le joueur a rammassé la carte
+     * @param interrupteur   l'etat des interrupteurs
+     * @param number   l'état des chiffres du code de l'ordinateur
      */
     public SAmphiEnssat(String timeTotal, String timeFromBegin, int bonus, int usedHint, boolean lights,
             boolean carteValide, boolean porteVerr, boolean hint2, boolean carte, int[] interrupteur,  int[] number) {
@@ -62,6 +68,16 @@ public class SAmphiEnssat implements Serializable {
     /**
      * Stocke sous forme d'un fichier .txt les informations importantes à la reconstruction
      * d'une partie sauvegarder dans la pièce où la sauvegarde à lieu, ici l'amphitheatre.
+     *
+     * Dans le dossier Parties, les sauvegardes sont réparties entre deux sous dossier :
+     * 1 pour les joueurs connecté, 2 pour ceux non connecté.
+     *
+     * Un fichier a pour nom le pseudo du joueur, et l'initial du lieu enregistrer.
+     *
+     * Avant d'enregistrer un lieu pour un pseudo, on supprime tout autre enregistrement du
+     * dossier pour le même pseudo, pour ne pas avoir plusieurs parties enregistrées pour un
+     * seul pseudo.
+     *
      * @param Amp la classe de la scene à enregistrer, qui contient qussi des informations sur l'utilisateur pour qui on enregistre la partie
      */
     public static void Enregistrer(Screen Amp){
@@ -117,7 +133,9 @@ public class SAmphiEnssat implements Serializable {
 
     /**
      * Ouvre un fichier de sauvegarde d'une partie depuis un fichier .txt stocké dans Parties, et retourne la classe AmphEnssat.java correspondante avec
-     * les paramètres et écrans correspondants au stockage.
+     * les paramètres et écrans correspondants au stockage, on retourne un lieu nouvellement crée
+     * si on n'a pas trouvé de fichier associé au pseudo.
+     *
      * @param game le jeu dans lequel on se trouve
      * @return AmphiEnssat Screen de la partie enregistrée
      */

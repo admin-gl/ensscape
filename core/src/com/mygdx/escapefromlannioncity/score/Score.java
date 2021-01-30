@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Classe qui calcul les scores, et qui peut etre convertie en JSON
+ * pour les stockages et echanges.
+ */
 public class Score implements Serializable {
     /**
      * Les champs d'une ligne du tableau de score.
@@ -90,7 +94,10 @@ public class Score implements Serializable {
         this.date = date;
     }
 
-
+    /**
+     * Convertion de l'objet en JSON
+     * @return le json de l'objet
+     */
     public String toJson() {
         JSONObject json = new JSONObject();
         json.put("score", this.score);
@@ -101,7 +108,11 @@ public class Score implements Serializable {
     }
 
 
-
+    /**
+     * Convertie une liste de score en list JSON des scores sous forme de String JSON
+     * @param table liste des score à convertir
+     * @return chaine de caratère correspondant à la list convertie
+     */
     public static String ListtoJson(List<Score> table) {
         try {
             JSONArray list = new JSONArray();
@@ -119,6 +130,15 @@ public class Score implements Serializable {
     }
     /**
      * Serialize sous json une liste de score d'un meme ou de plusieurs joueurs.
+     *
+     * Localement, deux fichier sont crées : un fichier json pour la lecture simple
+     * par l'application, et un fichier js contenant la meme liste json, mais avec le nom
+     * d'un variable pour y acceder plus facilement pour parrer au probleme de securité quand on tente
+     * de lire un json local
+     *
+     * Ces fichiers sont crées dans le dossier Score du dossier EscapeFomLannion
+     * qui est crée dans le répertoire des dossiers personnels de l'utilisateur
+     *
      * @param table liste des scores d'un ou plusieurs joueurs
      * @param name nom : du joueur si les scores personnels du joueurs ou Score pour le score général de tous
      */

@@ -5,6 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
 
+/**
+ * Classe qui sert à l'affichage et l'interraction avec le bouton d'ouverture du
+ * menu depuis les écran de jeu comme l'Amphi, le ParcStAnne ou le Warp
+ */
 public class ButtonOpenMenu extends GameObject {
 
     /* Constructeur */

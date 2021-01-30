@@ -23,6 +23,10 @@ import com.mygdx.escapefromlannioncity.siteweb.GetJoueur;
 
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
+
+/**
+ * Ecran sur lequel le joueur peut se conencter à un compte.
+ */
 public class Login implements Screen {
 
     public Music musique;
@@ -42,6 +46,10 @@ public class Login implements Screen {
     private final TextButton retour;
 
 
+    /**
+     * Constructeur de l'écran
+     * @param pGame jeu en cours
+     */
     public Login(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;
@@ -179,13 +187,16 @@ public class Login implements Screen {
                             this.message.setText("Email ou mot de passe inconnu !");
 
                         } else {
+                            //si réussie
                             if(game.isLoggedin==0){
+                                //si on se log depuis l'écran d'accueil
                                 game.pseudo = res;
                                 game.isLoggedin = 1;
                                 // on passe à l'écran suivant
                                 game.setScreen(game.menuEtTableau[4]);
                                 this.dispose();
                             }else {
+                                //si se log depuis le tableau des scores
                                 game.pseudo = res;
                                 game.isLoggedin = 1;
                                 // on passe à l'écran suivant

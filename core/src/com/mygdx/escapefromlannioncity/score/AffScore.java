@@ -10,7 +10,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Classe qui ouvre un navigateur pour afficher les scores dans un fichier html.
+ * Nous avons choisie cette méthode d'affichage des scores car la librairie libGDX n'offre
+ * pas de façon simple de construire des tableaux conséquents de manière simple.
+ */
 public class AffScore {
+    /**
+     * Crée le fichier index.html s'il n'existe pas, et ouvre le fichier
+     * dans le navigateur par defaut de l'ordinateur
+     * @return true s'il a réussie, false si une erreur s'est produit
+     */
     public static boolean AffScore(){
         try {
             Path path = Paths.get(Gdx.files.getExternalStoragePath() + "EscapeFromLannionCity/Score/");

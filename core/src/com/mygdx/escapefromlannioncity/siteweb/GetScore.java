@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 
 
 /**
- * Lis toutes les données de la base de donnée.
+ * Lis tous les scores de la base de donnée.
  */
 public class GetScore {
     /**

@@ -22,7 +22,9 @@ import com.mygdx.escapefromlannioncity.siteweb.GetScore;
 import com.mygdx.escapefromlannioncity.utility.ChangingCursor;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
 
-
+/**
+ * Ecran du menu en cours de jeu, appelé avec ButtonOpenMenu lors d'une partie en cours
+ */
 public class Menu implements Screen {
 
     private final EscapeFromLannionCity game;
@@ -45,6 +47,10 @@ public class Menu implements Screen {
     private final BitmapFontCache text;
     private long timeOfSave;
 
+    /**
+     * Constructeur du menu avec le jeu en cours
+     * @param pGame jeu en cours
+     */
     public Menu(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;
@@ -127,11 +133,15 @@ public class Menu implements Screen {
 
             if (afficherScore.contains(touched)) {
                 game.sfxButton.play(game.volume);
+                // Va chercher les scores en ligne au cas ou une mise à jour
+                //a eu lieu
                 GetScore.StoreScore();
+                //appelle l'écran d'affichage des scores
                 AffScore.AffScore();
 
             } else if (sauvegarder.contains(touched)) {
                 game.sfxButton.play(game.volume);
+                //sauvegarde selon l'endroit du jeu où on en est
                 if(game.menuEtTableau[1].getClass().toString().matches(".*AmphiEnssat")) {
                     SAmphiEnssat.Enregistrer(game.menuEtTableau[1]);
                 }else if(game.menuEtTableau[1].getClass().toString().matches(".*ParcStAnne")){
@@ -143,13 +153,16 @@ public class Menu implements Screen {
             } else if (reprendre.contains(touched)) {
                 game.sfxButton.play(game.volume);
                 game.setScreen(game.menuEtTableau[1]);
+
             } else if (quitter.contains(touched)) {
                 game.sfxButton.play(game.volume);
                 game.menuEtTableau[1].dispose();
                 game.setScreen(game.menuEtTableau[4]);
+
             } else if (quitterLeJeu.contains(touched)) {
                 game.sfxButton.play(game.volume);
                 game.dispose();
+
             } else if(sliderVolume.contains(touched) && sliderVolume.contains(setterVolume.getCenterPos())){
                 setterVolume.setCenterPos(touched.x, setterVolume.getCenterPos().y);
                 game.volume = ((setterVolume.getCenterPos().x)/setterVolume.getScaleX() - 15)/50;

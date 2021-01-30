@@ -12,6 +12,9 @@ import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 import com.mygdx.escapefromlannioncity.utility.AnimatedGameObject;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
 
+/**
+ * Ecran pour l'énigme du parcStAnne
+ */
 public class ParcStAnne extends UI {
 
     //Background textures
@@ -434,7 +437,9 @@ public class ParcStAnne extends UI {
         game.batch.end();
     }
 
-    /* Recupère l'etat du cadena */
+    /**
+     *  Recupère l'etat du cadena
+     */
     public void Convertir(int[] number) {
         int i = 0;
         while (i < 4) {
@@ -442,7 +447,9 @@ public class ParcStAnne extends UI {
             i++;
         }
     }
-    /* remlpi le cadena a ces valeurs */
+    /**
+     *  rempli le cadena a ces valeurs
+     */
     public void Synchronize(int[] number){
         for(int i=0;i< number.length;i++){
             if(number[i]!= zoneChiffres[i].getState()){
@@ -453,7 +460,7 @@ public class ParcStAnne extends UI {
         }
     }
 
-    /* Getter et setter */
+    /* Getter et setter pour la synchronisation des etats */
     public boolean hasEchelle(){
         if(game.inventory.hasIn(echelle)) {
             return true;
@@ -516,6 +523,9 @@ public class ParcStAnne extends UI {
         if(paperPicked && !this.game.inventory.hasIn(papierCode)){game.inventory.add(papierCode); }
         isPaperPicked = paperPicked;
     }
+    /**
+     * Met toutes les images de fonds dans les etats qu'elles doivent avoir
+     */
     public void setBackground(){
         if(isBatonPicked && isMetalPicked){
             background.setRegion(zoomBancVide);

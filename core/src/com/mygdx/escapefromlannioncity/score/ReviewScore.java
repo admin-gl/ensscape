@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,13 +18,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
-import com.mygdx.escapefromlannioncity.menu.ButtonOpenMenu;
 import com.mygdx.escapefromlannioncity.siteweb.AddScore;
-
 import java.time.LocalDate;
-
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
+
+/**
+ * Ecran qui affiche les scores en fin de partie, et propose de se connecter
+ * ou les ajouter au classement générale, et ajoute le score aux scores locaux
+ * de facon automatique quand on revient au menu principal.
+ */
 public class ReviewScore implements Screen {
     private final EscapeFromLannionCity game;
 
@@ -42,7 +44,14 @@ public class ReviewScore implements Screen {
     private final Label message;
     private final Label titleLabel;
 
-
+    /**
+     * Affiche et construit le score en fonction des informations de la partie donnée.
+     *
+     * @param pGame jeu en cours - état de connection et pseudo
+     * @param timeTotal temps de partie total
+     * @param bonus bonus gagnés
+     * @param usedHint indices utilisés
+     */
     public ReviewScore(final EscapeFromLannionCity pGame, String timeTotal, int bonus, int usedHint) {
 
         this.game = pGame;
@@ -68,6 +77,8 @@ public class ReviewScore implements Screen {
         style.over = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("image/Utilitaire/bouttontxtup.png"))));
         Label.LabelStyle rr=new Label.LabelStyle(nbb,WHITE);
 
+
+        // Création du score
         this.score = new Score(game.pseudo, timeTotal, bonus, usedHint, LocalDate.now());
         //éléments du stage
         this.titleLabel = new Label("Bravo "+score.getPseudo()+" !", rr);

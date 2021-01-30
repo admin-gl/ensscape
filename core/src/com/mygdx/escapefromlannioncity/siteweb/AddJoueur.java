@@ -13,6 +13,9 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Iterator;
 
+/**
+ * Ajoute un joueur à la base de donnée en ligne lors d'une insciption
+ */
 public class AddJoueur {
     /**
      * Vérifie si les informations à ajouter ne sont pas redondantes avec un joueur déjà existant

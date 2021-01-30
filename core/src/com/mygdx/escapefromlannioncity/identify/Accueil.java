@@ -26,7 +26,11 @@ import com.mygdx.escapefromlannioncity.menu.MenuPrincipal;
 
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
-
+/**
+ * Fenetre de départ du jeu où le joueur peut choisir s'il se connect,
+ * s'inscrit ou joue avec un pseudo, cette dernirer option n'étant pas proposée
+ * si cette fenetre est appelé depuis le tableau des scores (ReviewScore)
+ */
 public class Accueil implements Screen {
 
     public Music musique;
@@ -45,7 +49,10 @@ public class Accueil implements Screen {
     private final TextButton button1;
     private final TextButton button2;
 
-
+    /**
+     * Constructeur de l'écran avec le jeu en cours
+     * @param pGame jeu en cours
+     */
     public Accueil(final EscapeFromLannionCity pGame) {
 
         this.game = pGame;
@@ -100,16 +107,7 @@ public class Accueil implements Screen {
 
     }
 
-    public void goGoGadgettoMenu(Vector2 pTouched, ButtonOpenMenu pButton) {
 
-        if (pButton.isMyButton(pTouched)) {
-            //pScreen.hide();
-            /*this.render(delta);*/
-            game.setScreen(this);
-
-        }
-
-    }
 
     @Override
     public void show() {

@@ -10,13 +10,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
-import com.mygdx.escapefromlannioncity.sauvegarde.SAmphiEnssat;
 import com.mygdx.escapefromlannioncity.utility.AnimatedGameObject;
 import com.mygdx.escapefromlannioncity.utility.GameObject;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
+/**
+ * Ecran pour lnigme de l'amphitheatre 137C
+ */
 public class AmphiEnssat extends UI {
 
     // Background textures
@@ -397,6 +397,12 @@ public class AmphiEnssat extends UI {
         game.batch.end();
     }
 
+    /**
+     * Convertie l'etat des interrupteurs et code de l'ordinateur
+     * en liste d'entier
+     * @param interrupteur liste d'entier à modifier
+     * @param number liste d'entier à modifier
+     */
     public void Convertir(int[] interrupteur, int[] number) {
         int i = 0;
         while (i < 11) {
@@ -410,7 +416,12 @@ public class AmphiEnssat extends UI {
         }
     }
 
-
+    /**
+     * Remet les interrupteurs et le code du cadenas dans les états
+     * correpondants aux liste d'entiers passés en entrée
+     * @param interrupteur
+     * @param number
+     */
     public void Synchronize(int[] interrupteur, int[] number){
         for(int i=0;i< interrupteur.length;i++){
             if(interrupteur[i]!= Interrupteurs[i].getState()){
@@ -425,7 +436,8 @@ public class AmphiEnssat extends UI {
             }
         }
     }
-    /* Getter et Setter */
+
+    /* Getter et Setter  pour tous les état à enregistrer et remettre*/
     public boolean getCarte(){
         if(game.inventory.hasIn(carteEtu)){ return true;}
         else{ return false;}

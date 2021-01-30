@@ -19,6 +19,9 @@ import com.mygdx.escapefromlannioncity.EscapeFromLannionCity;
 
 import static java.lang.Math.max;
 
+/**
+ *
+ */
 public class MenuPrincipal implements Screen {
 
     public final Music musique;
@@ -42,6 +45,10 @@ public class MenuPrincipal implements Screen {
     private boolean fadein;
     private long debTrans;
 
+    /**
+     * Ecran qui permet et réalise les transitions avant d'afficher l'ecran d'accueil
+     * @param game jeu en cours
+     */
     public MenuPrincipal(EscapeFromLannionCity game){
         this.game = game;
 

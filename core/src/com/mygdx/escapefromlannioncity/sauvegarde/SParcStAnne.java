@@ -11,6 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Sauvegarde du ParcStAnne en serializant cette classe.
+ */
 public class SParcStAnne implements Serializable {
     int[] number = new int[4];
     boolean isOpened;
@@ -33,14 +36,14 @@ public class SParcStAnne implements Serializable {
      * @param timeFromBegin temps depuis que l'écran actif est affiché
      * @param bonus  --commun à tous les écrans bonus que l'utilisateur a gagné
      * @param usedHint  -- commun à tous les écrans nombre d'indice utilisés par le joueur
-     * @param isOpened
-     * @param isBatonPicked
-     * @param isStringPicked
-     * @param isMetalPicked
-     * @param isPaperPicked
-     * @param canne
-     * @param echelle
-     * @param number
+     * @param isOpened si la chapelle est ouverte
+     * @param isBatonPicked  si le baton est ramasse
+     * @param isStringPicked si la ficelle est ramassée
+     * @param isMetalPicked  si la cannette est ramassée
+     * @param isPaperPicked  si le papier du code est ramassé
+     * @param canne  si on a la canne à peche
+     * @param echelle  si on a l'échelle
+     * @param number  état des numéros du cadenas de la chapelle
      */
     public SParcStAnne(String timeTotal, String timeFromBegin, int bonus, int usedHint,
                        boolean isOpened, boolean isBatonPicked, boolean isStringPicked,
@@ -66,6 +69,15 @@ public class SParcStAnne implements Serializable {
     /**
      * Stocke sous forme d'un fichier .txt les informations importantes à la reconstruction
      * d'une partie sauvegarder dans la pièce où la sauvegarde à lieu, ici le parc st anne.
+     *
+     * Dans le dossier Parties, les sauvegardes sont réparties entre deux sous dossier :
+     * 1 pour les joueurs connecté, 2 pour ceux non connecté.
+     *
+     *  Un fichier a pour nom le pseudo du joueur, et l'initial du lieu enregistrer.
+     *
+     * Avant d'enregistrer un lieu pour un pseudo, on supprime tout autre enregistrement du
+     *  dossier pour le même pseudo, pour ne pas avoir plusieurs parties enregistrées pour un
+     *  seul pseudo.
      * @param Amp la classe de la scene à enregistrer, qui contient qussi des informations sur l'utilisateur pour qui on enregistre la partie
      */
     public static void Enregistrer(Screen Amp){

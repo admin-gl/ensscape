@@ -10,7 +10,9 @@ import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.Iterator;
 
-
+/**
+ * Demande la liste des joueurs au site web pour voir si celui rentré existe bien
+ */
 public class GetJoueur {
     /**
      * Prend les identifiants d'un joueur et retourne son pseudo si ces identifiants son bon, echoue sinon

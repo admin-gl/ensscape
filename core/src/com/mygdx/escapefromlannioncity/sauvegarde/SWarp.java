@@ -10,6 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
+/**
+ * Sauvegarde du Warp en serializant cette classe.
+ */
 public class SWarp implements Serializable {
     boolean isDecapsuleurPicked;
     boolean isPiecePicked;
@@ -37,19 +41,19 @@ public class SWarp implements Serializable {
      * @param timeFromBegin temps depuis que l'écran actif est affiché
      * @param bonus  --commun à tous les écrans bonus que l'utilisateur a gagné
      * @param usedHint  -- commun à tous les écrans nombre d'indice utilisés par le joueur
-     * @param isOpened
-     * @param isDecapsuleurPicked
-     * @param isBorneTurnedOn
-     * @param isPiecePicked
-     * @param isBorneAlreadyClicked
-     * @param areChevBross
-     * @param isBrossePicked
-     * @param isCoffreDiscoverd
-     * @param isChev1Bross
-     * @param isChev2Bross
-     * @param isBiereAlreadyClicked
-     * @param isTableauAlreadyClicked
-     * @param clef
+     * @param isOpened  si le coffre fort est ouvert
+     * @param isDecapsuleurPicked si le decapsuleur ramassé
+     * @param isBorneTurnedOn  si la borne est allumée
+     * @param isPiecePicked  si le jeton est ramassé
+     * @param isBorneAlreadyClicked  si on a déjà zoomé sur la borne d'arcade
+     * @param areChevBross  si les chevalets n'ont plus de peinture
+     * @param isBrossePicked si on a ramassé la brosse
+     * @param isCoffreDiscoverd  si le coffre a été découvert derriere le tableau
+     * @param isChev1Bross si on a brossé le 1er chevalet
+     * @param isChev2Bross le 2eme
+     * @param isBiereAlreadyClicked si on a déjà cliqué sur la biere
+     * @param isTableauAlreadyClicked  si on a déjà cliqué sur le tableau
+     * @param clef si on a la clef du warp
      */
     public SWarp(String timeTotal, String timeFromBegin, int bonus, int usedHint,
                        boolean isOpened, boolean isDecapsuleurPicked, boolean isBorneTurnedOn,
@@ -79,6 +83,16 @@ public class SWarp implements Serializable {
     /**
      * Stocke sous forme d'un fichier .txt les informations importantes à la reconstruction
      * d'une partie sauvegarder dans la pièce où la sauvegarde à lieu, ici le Warp.
+     *
+     * Dans le dossier Parties, les sauvegardes sont réparties entre deux sous dossier :
+     * 1 pour les joueurs connecté, 2 pour ceux non connecté.
+     *
+     *  Un fichier a pour nom le pseudo du joueur, et l'initial du lieu enregistrer.
+     *
+     * Avant d'enregistrer un lieu pour un pseudo, on supprime tout autre enregistrement du
+     *  dossier pour le même pseudo, pour ne pas avoir plusieurs parties enregistrées pour un
+     *  seul pseudo.
+     *
      * @param Amp la classe de la scene à enregistrer, qui contient qussi des informations sur l'utilisateur pour qui on enregistre la partie
      */
     public static void Enregistrer(Screen Amp){
